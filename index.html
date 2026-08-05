@@ -4,7 +4,6 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fffefd">
-  <link rel="preload" as="image" href="assets/garden-soiree-fineliner.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Parisienne&amp;display=swap" rel="stylesheet">
@@ -1069,16 +1068,15 @@
         min-height: 660px;
         padding: clamp(5.8rem, 10vw, 8.5rem) 1.5rem clamp(4.8rem, 8vw, 7rem);
         color: var(--garden-ink);
-        background-image:
-          linear-gradient(90deg, rgba(255,255,255,.99) 0%, rgba(255,255,255,.95) 37%, rgba(255,255,255,.65) 55%, rgba(255,255,255,.08) 78%),
-          url("assets/garden-soiree-fineliner.webp");
-        background-position: center, center;
-        background-repeat: no-repeat;
-        background-size: cover;
+        background:
+          radial-gradient(circle at 82% 16%, rgba(255,249,223,.72), transparent 18rem),
+          radial-gradient(circle at 15% 84%, rgba(250,231,237,.56), transparent 20rem),
+          repeating-linear-gradient(0deg, rgba(47,41,50,.025) 0 1px, transparent 1px 5px),
+          var(--garden-paper);
       }
       .hero::before,
       .hero::after { display: none; }
-      .hero-inner { max-width: 1180px; }
+      .hero-inner { max-width: 960px; text-align: center; }
       .eyebrow {
         margin-bottom: 1.1rem;
         color: var(--garden-berry);
@@ -1088,6 +1086,7 @@
       }
       h1 {
         max-width: 820px;
+        margin-inline: auto;
         color: var(--garden-ink);
         font-family: "Cormorant Garamond", "Iowan Old Style", Baskerville, serif;
         font-size: clamp(4.4rem, 9vw, 8.6rem);
@@ -1118,11 +1117,11 @@
       }
       .hero-copy {
         max-width: 610px;
-        margin-top: 2rem;
+        margin: 2rem auto 0;
         color: #514754;
         font: 600 clamp(1rem, 2vw, 1.16rem)/1.65 "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
-      .hero-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 620px; margin-top: 2.35rem; }
+      .hero-stats { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); max-width: 620px; margin: 2.35rem auto 0; }
       .stat {
         border-color: rgba(150, 58, 91, .18);
         border-radius: 20px;
@@ -1165,17 +1164,7 @@
       }
       .playlist-section::after,
       .timeline-section::after {
-        content: "";
-        position: absolute;
-        right: -95px;
-        bottom: -80px;
-        z-index: 0;
-        width: 650px;
-        height: 310px;
-        background: url("assets/garden-soiree-fineliner.webp") right bottom / 720px auto no-repeat;
-        mix-blend-mode: multiply;
-        opacity: .038;
-        pointer-events: none;
+        display: none;
       }
       .playlist-section > *,
       .timeline-section > * { position: relative; z-index: 1; }
@@ -1274,16 +1263,13 @@
         font-weight: 500;
       }
       footer {
-        min-height: 300px;
-        padding: 6.5rem 1rem 3rem;
+        min-height: 180px;
+        padding: 4rem 1rem 3rem;
         border-top-color: #eadde3;
         color: #5b4d58;
-        background-image:
-          linear-gradient(rgba(255,255,255,.72), rgba(255,255,255,.82)),
-          url("assets/garden-soiree-fineliner.webp");
-        background-position: center, center bottom;
-        background-repeat: no-repeat;
-        background-size: cover;
+        background:
+          repeating-linear-gradient(0deg, rgba(47,41,50,.025) 0 1px, transparent 1px 5px),
+          var(--garden-paper);
       }
       footer strong {
         color: var(--garden-berry);
@@ -1475,13 +1461,13 @@
 
     @media screen and (max-width: 760px) {
       .hero {
-        min-height: 760px;
+        min-height: 680px;
         padding: 4.6rem 1rem 3.2rem;
-        background-image:
-          linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.93) 55%, rgba(255,255,255,.64) 82%, rgba(255,255,255,.2) 100%),
-          url("assets/garden-soiree-fineliner.webp");
-        background-position: center, right bottom;
-        background-size: auto, auto 66%;
+        background:
+          radial-gradient(circle at 80% 18%, rgba(255,249,223,.62), transparent 14rem),
+          radial-gradient(circle at 14% 82%, rgba(250,231,237,.5), transparent 16rem),
+          repeating-linear-gradient(0deg, rgba(47,41,50,.025) 0 1px, transparent 1px 5px),
+          var(--garden-paper);
       }
       h1 { max-width: 100%; font-size: clamp(4rem, 18vw, 5.3rem); line-height: .8; }
       h1 span { font-size: .7em; }
@@ -1495,11 +1481,11 @@
       .section-heading h2,
       .timeline-heading h2 { font-size: 2.55rem; }
       .table-wrap tr.search-item { border-radius: 22px 18px 24px 19px / 18px 24px 17px 23px; }
-      footer { min-height: 260px; padding-top: 5.2rem; background-position: center, 68% bottom; }
+      footer { min-height: 180px; padding-top: 4rem; }
     }
 
     @media screen and (max-width: 390px) {
-      .hero { min-height: 820px; background-size: auto, auto 58%; background-position: center, right bottom; }
+      .hero { min-height: 680px; }
       .hero-stats { grid-template-columns: 1fr; }
       h1 { font-size: 4rem; }
     }
