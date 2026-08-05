@@ -413,6 +413,14 @@
         line-height: 1.55;
       }
 
+      .icon {
+        display: block;
+        flex: 0 0 auto;
+        width: 1.15rem;
+        height: 1.15rem;
+        overflow: visible;
+      }
+
       h1, h2, h3,
       .stat strong,
       .timeline-phase strong,
@@ -504,6 +512,10 @@
         border: 0;
       }
       .stat {
+        display: grid;
+        grid-template-columns: 2.45rem minmax(0, 1fr);
+        grid-template-rows: auto auto;
+        align-items: center;
         min-width: 150px;
         padding: .9rem 1rem;
         border: 1px solid rgba(23, 27, 24, .14);
@@ -514,8 +526,20 @@
         text-align: left;
       }
       .stat + .stat { padding-left: 1rem; border-left: 1px solid rgba(23, 27, 24, .14); }
-      .stat strong { color: var(--ink); font-size: 1.1rem; font-weight: 850; }
-      .stat span { color: #555e56; font-size: .73rem; font-weight: 750; }
+      .stat-icon {
+        grid-row: 1 / span 2;
+        width: 2rem;
+        height: 2rem;
+        padding: .42rem;
+        border-radius: 10px;
+        color: #fff;
+        background: #7b3146;
+      }
+      .stat:nth-child(2) .stat-icon { background: #57405d; }
+      .stat:nth-child(3) .stat-icon { background: #3f5a46; }
+      .stat:nth-child(4) .stat-icon { background: #75541e; }
+      .stat strong { grid-column: 2; color: var(--ink); font-size: 1.1rem; font-weight: 850; }
+      .stat span { grid-column: 2; color: #555e56; font-size: .73rem; font-weight: 750; }
 
       .toolbar {
         padding: .8rem 1rem;
@@ -524,10 +548,20 @@
         backdrop-filter: blur(18px);
       }
       .toolbar-inner { gap: .75rem; }
-      .search-wrap span { left: 1.05rem; top: 50%; color: #4f5850; transform: translateY(-50%); }
+      .search-wrap > span {
+        display: grid;
+        place-items: center;
+        left: .35rem;
+        top: 50%;
+        width: 44px;
+        height: 44px;
+        color: #394039;
+        transform: translateY(-50%);
+      }
+      .search-wrap > span .icon { width: 1.2rem; height: 1.2rem; }
       #search {
         min-height: 52px;
-        padding: .75rem 3rem .75rem 2.7rem;
+        padding: .75rem 3rem .75rem 3.15rem;
         border: 2px solid #bcc7bc;
         border-radius: 16px;
         color: var(--ink);
@@ -546,6 +580,7 @@
         font-size: 1.35rem;
       }
       #clear-search:hover { background: #e9ede8; }
+      #clear-search .icon { width: 1.15rem; height: 1.15rem; margin: auto; }
       .filters { gap: .45rem; }
       .filter-btn {
         --filter: #303a32;
@@ -558,7 +593,15 @@
         font-size: .8rem;
         font-weight: 800;
       }
-      .filter-btn::before { width: .55rem; height: .55rem; margin-right: .45rem; }
+      .filter-btn::before { display: none; }
+      .filter-btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        gap: .48rem;
+      }
+      .filter-btn .icon { width: 1.05rem; height: 1.05rem; color: var(--filter); stroke-width: 2.2; }
+      .filter-btn.active .icon { color: white; }
       .filter-btn:hover { border-color: var(--filter); background: #f4f6f2; }
       .filter-btn.active { border-color: var(--filter); color: white; background: var(--filter); }
       .filter-btn[data-filter="key-songs"] { --filter: #7b3146; }
@@ -594,14 +637,21 @@
         padding: .35rem 0 1.5rem;
         border-bottom: 2px solid var(--section-tint);
       }
-      .section-heading::before {
-        content: "";
-        align-self: stretch;
-        flex: 0 0 9px;
-        min-height: 72px;
-        border-radius: 99px;
+      .section-heading::before { display: none; }
+      .section-icon,
+      .timeline-title-icon {
+        display: grid;
+        place-items: center;
+        flex: 0 0 3.25rem;
+        width: 3.25rem;
+        height: 3.25rem;
+        border-radius: 16px;
+        color: white;
         background: var(--section-accent);
+        box-shadow: 0 8px 18px color-mix(in srgb, var(--section-accent) 24%, transparent);
       }
+      .section-icon .icon,
+      .timeline-title-icon .icon { width: 1.55rem; height: 1.55rem; stroke-width: 2; }
       .section-heading > div { flex: 1; }
       .section-kicker,
       .section-heading .section-kicker {
@@ -645,7 +695,8 @@
       .moment { color: #4d564e; font-size: .73rem; }
       .artist { color: var(--section-accent); }
       .cue-note { border-top-color: #cbd4c9; color: #505951; }
-      .status { padding: .38rem .55rem; border-radius: 9px; }
+      .status { display: inline-flex; align-items: center; gap: .34rem; padding: .38rem .55rem; border-radius: 9px; }
+      .status-icon { width: .86rem; height: .86rem; stroke-width: 2.4; }
       .status.confirmed { color: #fff; background: #3f5a46; }
       .status.tbc { color: #fff; background: #75541e; }
       .status.live { color: #fff; background: #3f5a46; }
@@ -668,6 +719,10 @@
 
       .event-callouts { gap: .85rem; }
       .event-callout {
+        display: grid;
+        grid-template-columns: 2.75rem minmax(0, 1fr) auto;
+        align-items: center;
+        gap: .85rem;
         padding: 1.15rem;
         border: 0;
         border-radius: 18px;
@@ -676,6 +731,17 @@
       }
       .event-callout p { color: var(--section-accent); }
       .event-callout h3 { color: var(--ink); font-size: 1.25rem; font-weight: 850; }
+      .event-icon {
+        display: grid;
+        place-items: center;
+        width: 2.75rem;
+        height: 2.75rem;
+        border-radius: 13px;
+        color: white;
+        background: var(--section-accent);
+      }
+      .event-icon .icon { width: 1.35rem; height: 1.35rem; }
+      .event-track { margin-left: auto; }
       .event-track span { color: #4d564e; }
 
       /* The numbered music cards are the primary mobile and desktop reading pattern. */
@@ -763,7 +829,8 @@
         text-align: left;
         text-transform: uppercase;
       }
-      .section-signoff { color: var(--section-accent); font-family: inherit; font-weight: 750; }
+      .section-signoff { display: flex; align-items: center; justify-content: center; gap: .55rem; color: var(--section-accent); font-family: inherit; font-weight: 750; }
+      .signoff-icon { width: 1rem; height: 1rem; }
 
       .timeline-section {
         margin-bottom: 2rem;
@@ -772,6 +839,8 @@
         background: rgba(255, 255, 255, .93);
       }
       .timeline-heading { align-items: center; border-bottom: 2px solid #f4dfe5; }
+      .timeline-title-icon { --section-accent: #7b3146; }
+      .timeline-heading > div { flex: 1; }
       .timeline-heading .section-kicker { color: #7b3146; }
       .timeline-heading h2 { color: var(--ink); font-weight: 850; letter-spacing: -.055em; }
       .timeline-heading p:not(.section-kicker) { color: #505951; }
@@ -796,7 +865,8 @@
       .phase-entrances { --phase: #7b3146; --phase-tint: #f8e7ed; }
       .phase-speeches { --phase: #57405d; --phase-tint: #eee7f1; }
       .phase-dancing { --phase: #355877; --phase-tint: #e6eef5; }
-      .timeline-phase h3 { color: var(--phase); font-weight: 900; }
+      .timeline-phase h3 { display: flex; align-items: center; gap: .48rem; color: var(--phase); font-weight: 900; }
+      .phase-icon { width: 1.05rem; height: 1.05rem; stroke-width: 2.3; }
       .timeline-phase li {
         grid-template-columns: 2.45rem 1fr;
         gap: .75rem;
@@ -821,6 +891,7 @@
       .timeline-phase p { color: #4d564e; }
       .timeline-phase strong { color: var(--ink); font-size: 1rem; font-weight: 850; }
       .timeline-phase span { color: #465047; }
+      .timeline-phase .timeline-number { color: #fff; }
       .timeline-phase small { color: #505951; }
       .timeline-tbc strong { color: #75541e; font-style: normal; }
       .timeline-phase li.timeline-critical {
@@ -837,6 +908,7 @@
       .empty-state { border-color: #8a7b60; border-radius: 20px; color: #4d564e; background: white; }
       footer { border-top: 1px solid #d5c4c8; color: #5b5053; background: #f6e9ed; }
       footer strong { color: var(--ink); font-weight: 850; }
+      .footer-icon { width: 1.6rem; height: 1.6rem; margin: 0 auto .65rem; color: #7b3146; }
     }
 
     @media screen and (max-width: 920px) {
@@ -865,8 +937,8 @@
       .results-line { padding-inline: .25rem; text-align: left; }
       .playlist-section,
       .timeline-section { padding: 1rem; border-radius: 24px; }
-      .section-heading { display: grid; grid-template-columns: 8px minmax(0, 1fr); gap: 0 .85rem; align-items: start; }
-      .section-heading::before { grid-row: 1 / span 2; min-height: 100%; }
+      .section-heading { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 0 .85rem; align-items: start; }
+      .section-icon { grid-row: 1 / span 2; width: 3rem; height: 3rem; border-radius: 14px; }
       .section-heading > div { min-width: 0; }
       .section-heading h2 { font-size: 2.35rem; }
       .count-pill { grid-column: 2; justify-self: start; margin-top: .8rem; }
@@ -874,8 +946,8 @@
       .cue-card { min-height: 0; }
       .cue-top { align-items: start; flex-direction: column; }
       .critical-cue { padding: 1rem; }
-      .event-callout { display: block; }
-      .event-track { margin-top: .8rem; text-align: left; }
+      .event-callout { grid-template-columns: 2.75rem minmax(0, 1fr); align-items: start; }
+      .event-track { grid-column: 2; margin: .15rem 0 0; text-align: left; }
 
       .table-wrap tbody,
       .table-wrap tbody.dance-group { margin-bottom: .8rem; }
@@ -902,8 +974,11 @@
       }
       .group-heading th { margin-top: .4rem; border-left-width: 7px; }
 
-      .timeline-heading { display: block; }
+      .timeline-heading { display: grid; grid-template-columns: 3rem minmax(0, 1fr); gap: 0 .75rem; align-items: start; }
+      .timeline-title-icon { grid-row: 1 / span 2; width: 3rem; height: 3rem; border-radius: 14px; }
+      .timeline-heading > div { min-width: 0; }
       .timeline-heading h2 { font-size: 2.25rem; }
+      .timeline-heading .count-pill { grid-column: 2; justify-self: start; }
       .timeline-grid { grid-template-columns: 1fr; }
       .timeline-phase,
       .timeline-phase.phase-ceremony,
@@ -943,10 +1018,10 @@
       <h1>The Wedding Playlist</h1>
       <p class="hero-copy">From the first arrivals to the final song — every cue, dinner favourite and dance-floor anthem in one place.</p>
       <div class="hero-stats" aria-label="Playlist summary">
-        <div class="stat"><strong>195</strong><span>playlist tracks</span></div>
-        <div class="stat"><strong>17</strong><span>dance sections</span></div>
-        <div class="stat"><strong>12 of 15</strong><span>cues confirmed</span></div>
-        <div class="stat"><strong>1</strong><span>live bagpiper</span></div>
+        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg><strong>195</strong><span>playlist tracks</span></div>
+        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 9 5-9 5-9-5 9-5Z"></path><path d="m3 12 9 5 9-5M3 17l9 5 9-5"></path></svg><strong>17</strong><span>dance sections</span></div>
+        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg><strong>12 of 15</strong><span>cues confirmed</span></div>
+        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 5c3 0 5 2 5 5v7a4 4 0 0 1-8 0v-5c0-2 1-4 3-4h5M13 5V2M17 3v13M17 6h3"></path></svg><strong>1</strong><span>live bagpiper</span></div>
       </div>
     </div>
   </header>
@@ -954,18 +1029,18 @@
   <nav class="toolbar" aria-label="Playlist controls">
     <div class="toolbar-inner">
       <div class="search-wrap">
-        <span aria-hidden="true">⌕</span>
+        <span aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></span>
         <label for="search" class="skip-link">Search songs, artists or moments</label>
         <input id="search" type="search" placeholder="Search songs, artists or moments…" autocomplete="off">
-        <button id="clear-search" type="button" aria-label="Clear search" title="Clear search">×</button>
+        <button id="clear-search" type="button" aria-label="Clear search" title="Clear search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"></path></svg></button>
       </div>
       <div class="filters" role="group" aria-label="Filter by playlist section">
-        <button class="filter-btn active" type="button" data-filter="all">All</button>
-        <button class="filter-btn" type="button" data-filter="key-songs">Key Songs</button>
-        <button class="filter-btn" type="button" data-filter="pre-ceremony">Pre-Ceremony</button>
-        <button class="filter-btn" type="button" data-filter="canapes">Canapés</button>
-        <button class="filter-btn" type="button" data-filter="dinner">Dinner</button>
-        <button class="filter-btn" type="button" data-filter="reception">Dance Floor</button>
+        <button class="filter-btn active" type="button" data-filter="all"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg><span>All</span></button>
+        <button class="filter-btn" type="button" data-filter="key-songs"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>Key Songs</span></button>
+        <button class="filter-btn" type="button" data-filter="pre-ceremony"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="12" r="5.5"></circle><circle cx="15" cy="12" r="5.5"></circle><path d="m7.5 4.5 1.5-2 1.5 2"></path></svg><span>Pre-Ceremony</span></button>
+        <button class="filter-btn" type="button" data-filter="canapes"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3h10l-1.2 7.2a3.8 3.8 0 0 1-7.6 0L7 3Z"></path><path d="M12 14v7M8.5 21h7"></path></svg><span>Canapés</span></button>
+        <button class="filter-btn" type="button" data-filter="dinner"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 3v8M3.5 3v5a2.5 2.5 0 0 0 5 0V3M6 11v10M15 3v18M15 3c3 2 4 5 4 8h-4"></path></svg><span>Dinner</span></button>
+        <button class="filter-btn" type="button" data-filter="reception"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>Dance Floor</span></button>
       </div>
     </div>
   </nav>
@@ -975,6 +1050,7 @@
 
     <section class="timeline-section" id="timeline" aria-labelledby="timeline-title">
       <div class="timeline-heading">
+        <span class="timeline-title-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 5h.01M5 12h.01M5 19h.01M9 5h10M9 12h10M9 19h10"></path></svg></span>
         <div>
           <p class="section-kicker">Running order · key music cues</p>
           <h2 id="timeline-title">The Music Timeline</h2>
@@ -984,7 +1060,7 @@
       </div>
       <div class="timeline-grid">
       <section class="timeline-phase phase-ceremony">
-        <h3>Ceremony</h3>
+        <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="12" r="5.5"></circle><circle cx="15" cy="12" r="5.5"></circle><path d="m7.5 4.5 1.5-2 1.5 2"></path></svg><span>Ceremony</span></h3>
         <ol>
           <li>
             <span class="timeline-number">01</span>
@@ -1030,7 +1106,7 @@
           </li></ol>
       </section>
       <section class="timeline-phase phase-canapes">
-        <h3>Canapés · after photos</h3>
+        <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3h10l-1.2 7.2a3.8 3.8 0 0 1-7.6 0L7 3Z"></path><path d="M12 14v7M8.5 21h7"></path></svg><span>Canapés · after photos</span></h3>
         <ol>
           <li>
             <span class="timeline-number">05</span>
@@ -1055,7 +1131,7 @@
           </li></ol>
       </section>
       <section class="timeline-phase phase-entrances">
-        <h3>Reception entrances</h3>
+        <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3ZM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14ZM19 13l.7 1.8 1.8.7-1.8.7L19 18l-.7-1.8-1.8-.7 1.8-.7L19 13Z"></path></svg><span>Reception entrances</span></h3>
         <ol>
           <li>
             <span class="timeline-number">07</span>
@@ -1090,7 +1166,7 @@
           </li></ol>
       </section>
       <section class="timeline-phase phase-speeches">
-        <h3>Dinner · speeches</h3>
+        <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"></path></svg><span>Dinner · speeches</span></h3>
         <ol>
           <li>
             <span class="timeline-number">10</span>
@@ -1136,7 +1212,7 @@
           </li></ol>
       </section>
       <section class="timeline-phase phase-dancing">
-        <h3>Dances · open the floor</h3>
+        <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>Dances · open the floor</span></h3>
         <ol>
           <li>
             <span class="timeline-number">14</span>
@@ -1175,6 +1251,7 @@
 
     <section class="playlist-section" id="key-songs" data-section="key-songs">
       <div class="section-heading">
+        <span class="section-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></span>
         <div>
           <p class="section-kicker">The must-get-right moments</p>
           <h2>Key Songs</h2>
@@ -1187,7 +1264,7 @@
           data-search="groomsmen walk live bagpipes matthew (bagpiper) the groomsmen will walk down the aisle to matthew playing live bagpipes.">
           <div class="cue-top">
             <p class="moment">Groomsmen walk</p>
-            <span class="status live">Live performance</span>
+            <span class="status live"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg>Live performance</span>
           </div>
           <h3>Live bagpipes</h3><p class="artist">Matthew (bagpiper)</p>
           <p class="cue-note">The groomsmen will walk down the aisle to Matthew playing live bagpipes.</p>
@@ -1196,7 +1273,7 @@
           data-search="bridesmaids walk we’ve only just begun the carpenters bridesmaids’ aisle processional.">
           <div class="cue-top">
             <p class="moment">Bridesmaids walk</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>We’ve Only Just Begun</h3><p class="artist">The Carpenters</p>
           <p class="cue-note">Bridesmaids’ aisle processional.</p>
@@ -1205,7 +1282,7 @@
           data-search="bride’s walk archie, marry me alvvays do not start from the beginning. start at the first chorus, approximately 0:43. this timestamp is provisional until checked against the exact final audio file. rehearse the full mountain-aisle walk with the venue and dj, and confirm the remaining song is long enough.">
           <div class="cue-top">
             <p class="moment">Bride’s walk</p>
-            <span class="status critical">Critical DJ cue</span>
+            <span class="status critical"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.3 3.8 2.2 18a2 2 0 0 0 1.7 3h16.2a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0Z"></path><path d="M12 9v4M12 17h.01"></path></svg>Critical DJ cue</span>
           </div>
           <h3>Archie, Marry Me</h3><p class="artist">Alvvays</p>
           <div class="critical-cue"><strong>DJ MUST START AT 0:43 — FIRST CHORUS</strong><span>DO NOT START FROM THE BEGINNING. Start at the first chorus, approximately 0:43. This timestamp is provisional until checked against the exact final audio file. Rehearse the full mountain-aisle walk with the venue and DJ, and confirm the remaining song is long enough.</span></div>
@@ -1214,7 +1291,7 @@
           data-search="bouquet toss · during canapés, after the photos man! i feel like a woman! shania twain play for the bouquet toss once the photos are finished.">
           <div class="cue-top">
             <p class="moment">Bouquet toss · during canapés, after the photos</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>Man! I Feel Like a Woman!</h3><p class="artist">Shania Twain</p>
           <p class="cue-note">Play for the bouquet toss once the photos are finished.</p>
@@ -1223,7 +1300,7 @@
           data-search="garter toss · timing to confirm the stripper david rose &amp; his orchestra the unmistakable old-school striptease instrumental — deliberately cheesy and played for laughs. confirm when this will happen in the running order.">
           <div class="cue-top">
             <p class="moment">Garter toss · timing to confirm</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>The Stripper</h3><p class="artist">David Rose &amp; His Orchestra</p>
           <p class="cue-note">The unmistakable old-school striptease instrumental — deliberately cheesy and played for laughs. Confirm when this will happen in the running order.</p>
@@ -1232,7 +1309,7 @@
           data-search="bridal party entrance gimme! gimme! gimme! (a man after midnight) abba play for the bridal party entrance, before the bride and groom enter.">
           <div class="cue-top">
             <p class="moment">Bridal party entrance</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>Gimme! Gimme! Gimme! (A Man After Midnight)</h3><p class="artist">ABBA</p>
           <p class="cue-note">Play for the bridal party entrance, before the bride and groom enter.</p>
@@ -1241,7 +1318,7 @@
           data-search="bride &amp; groom entrance happy together the turtles start with the drum lead-in to “i can see me loving nobody but you” — cue at 0:39.">
           <div class="cue-top">
             <p class="moment">Bride &amp; groom entrance</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>Happy Together</h3><p class="artist">The Turtles</p>
           <p class="cue-note">Start with the drum lead-in to “I can see me loving nobody but you” — cue at 0:39.</p>
@@ -1250,7 +1327,7 @@
           data-search="mcs walk-up song still to be chosen. place this cue after the couple’s entrance and before the dinner speeches unless the running order changes.">
           <div class="cue-top">
             <p class="moment">MCs walk-up</p>
-            <span class="status tbc">To be confirmed</span>
+            <span class="status tbc"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>To be confirmed</span>
           </div>
           <h3 class="pending">Song to be confirmed</h3><p class="artist">&nbsp;</p>
           <p class="cue-note">Song still to be chosen. Place this cue after the couple’s entrance and before the dinner speeches unless the running order changes.</p>
@@ -1259,7 +1336,7 @@
           data-search="dad’s speech entrance the best day taylor swift start near the “i have an excellent father…” section and fade down as he reaches the mic.">
           <div class="cue-top">
             <p class="moment">Dad’s speech entrance</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>The Best Day</h3><p class="artist">Taylor Swift</p>
           <p class="cue-note">Start near the “I have an excellent father…” section and fade down as he reaches the mic.</p>
@@ -1268,7 +1345,7 @@
           data-search="maid of honour / sister’s speech entrance where you lead i will follow carole king &amp; louise goffin start at the chorus as she comes forward to give her speech.">
           <div class="cue-top">
             <p class="moment">Maid of honour / sister’s speech entrance</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>Where You Lead I Will Follow</h3><p class="artist">Carole King &amp; Louise Goffin</p>
           <p class="cue-note">Start at the chorus as she comes forward to give her speech.</p>
@@ -1277,7 +1354,7 @@
           data-search="seb’s speech entrance (groomsman) still deciding — leave this cue open for now.">
           <div class="cue-top">
             <p class="moment">Seb’s speech entrance (groomsman)</p>
-            <span class="status tbc">To be confirmed</span>
+            <span class="status tbc"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>To be confirmed</span>
           </div>
           <h3 class="pending">Song to be confirmed</h3><p class="artist">&nbsp;</p>
           <p class="cue-note">Still deciding — leave this cue open for now.</p>
@@ -1286,7 +1363,7 @@
           data-search="groom’s speech entrance still deciding — leave this cue open while the song is being chosen.">
           <div class="cue-top">
             <p class="moment">Groom’s speech entrance</p>
-            <span class="status tbc">To be confirmed</span>
+            <span class="status tbc"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>To be confirmed</span>
           </div>
           <h3 class="pending">Song to be confirmed</h3><p class="artist">&nbsp;</p>
           <p class="cue-note">Still deciding — leave this cue open while the song is being chosen.</p>
@@ -1295,7 +1372,7 @@
           data-search="first dance wouldn’t it be nice the beach boys">
           <div class="cue-top">
             <p class="moment">First dance</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>Wouldn’t It Be Nice</h3><p class="artist">The Beach Boys</p>
           
@@ -1304,7 +1381,7 @@
           data-search="father–daughter dance (they long to be) close to you the carpenters">
           <div class="cue-top">
             <p class="moment">Father–daughter dance</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>(They Long to Be) Close to You</h3><p class="artist">The Carpenters</p>
           
@@ -1313,18 +1390,19 @@
           data-search="open the dance floor · group photo cue y.m.c.a. village people the mcs ask everyone to come onto the dance floor for a group photo. once everyone is gathered and the photo is taken, keep them on the floor and launch the party.">
           <div class="cue-top">
             <p class="moment">Open the dance floor · group photo cue</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>Y.M.C.A.</h3><p class="artist">Village People</p>
           <p class="cue-note">The MCs ask everyone to come onto the dance floor for a group photo. Once everyone is gathered and the photo is taken, keep them on the floor and launch the party.</p>
         </article>
       </div>
-      <p class="section-signoff">❦ &nbsp; The moments that matter most &nbsp; ❧</p>
+      <p class="section-signoff"><svg class="icon signoff-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>The moments that matter most</span></p>
     </section>
 
     
       <section class="playlist-section" id="pre-ceremony" data-section="pre-ceremony">
         <div class="section-heading">
+          <span class="section-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="12" r="5.5"></circle><circle cx="15" cy="12" r="5.5"></circle><path d="m7.5 4.5 1.5-2 1.5 2"></path></svg></span>
           <div>
             <p class="section-kicker">Wedding soundtrack</p>
             <h2>Pre-Ceremony</h2>
@@ -1459,10 +1537,11 @@
               </tr></tbody>
           </table>
         </div>
-        <p class="section-signoff">❦ &nbsp; As the guests gather &nbsp; ❧</p>
+        <p class="section-signoff"><svg class="icon signoff-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>As the guests gather</span></p>
       </section>
       <section class="playlist-section" id="canapes" data-section="canapes">
         <div class="section-heading">
+          <span class="section-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3h10l-1.2 7.2a3.8 3.8 0 0 1-7.6 0L7 3Z"></path><path d="M12 14v7M8.5 21h7"></path></svg></span>
           <div>
             <p class="section-kicker">Wedding soundtrack</p>
             <h2>Canapés</h2>
@@ -1472,6 +1551,7 @@
         </div>
         <div class="event-callouts">
         <aside class="event-callout" aria-label="Bouquet toss cue">
+          <span class="event-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3ZM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14ZM19 13l.7 1.8 1.8.7-1.8.7L19 18l-.7-1.8-1.8-.7 1.8-.7L19 13Z"></path></svg></span>
           <div>
             <p>Event cue · after the photos</p>
             <h3>Bouquet toss</h3>
@@ -1482,6 +1562,7 @@
           </div>
         </aside>
         <aside class="event-callout" aria-label="Garter toss cue">
+          <span class="event-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg></span>
           <div>
             <p>Event cue · timing to confirm</p>
             <h3>Garter toss</h3>
@@ -1677,10 +1758,11 @@
               </tr></tbody>
           </table>
         </div>
-        <p class="section-signoff">❦ &nbsp; Drinks, sunshine &amp; golden hour &nbsp; ❧</p>
+        <p class="section-signoff"><svg class="icon signoff-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>Drinks, sunshine &amp; golden hour</span></p>
       </section>
       <section class="playlist-section" id="dinner" data-section="dinner">
         <div class="section-heading">
+          <span class="section-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 3v8M3.5 3v5a2.5 2.5 0 0 0 5 0V3M6 11v10M15 3v18M15 3c3 2 4 5 4 8h-4"></path></svg></span>
           <div>
             <p class="section-kicker">Wedding soundtrack</p>
             <h2>Dinner</h2>
@@ -1830,11 +1912,12 @@
               </tr></tbody>
           </table>
         </div>
-        <p class="section-signoff">❦ &nbsp; Sit back &amp; savour the evening &nbsp; ❧</p>
+        <p class="section-signoff"><svg class="icon signoff-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>Sit back &amp; savour the evening</span></p>
       </section>
 
     <section class="playlist-section" id="reception" data-section="reception">
       <div class="section-heading">
+        <span class="section-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg></span>
         <div>
           <p class="section-kicker">The dance floor</p>
           <h2>Reception · Dance Floor</h2>
@@ -2456,7 +2539,7 @@
             </tbody>
         </table>
       </div>
-      <p class="section-signoff">❦ &nbsp; Dance the night away &nbsp; ❧</p>
+      <p class="section-signoff"><svg class="icon signoff-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>Dance the night away</span></p>
     </section>
 
     <div class="empty-state" id="empty-state">
@@ -2465,6 +2548,7 @@
   </main>
 
   <footer>
+    <svg class="icon footer-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg>
     <strong>Here’s to a beautiful celebration.</strong>
     The Wedding Playlist · prepared for the couple, musicians and DJ
   </footer>
