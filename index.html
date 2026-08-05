@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="theme-color" content="#fffefd">
+  <meta name="theme-color" content="#f2ece5">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Parisienne&amp;display=swap" rel="stylesheet">
@@ -1513,23 +1513,28 @@
         --ui-space-12: 48px;
         --ui-space-16: 64px;
         --ui-space-20: 80px;
-        --ui-ink: #242025;
-        --ui-muted: #625d64;
-        --ui-line: #ded7df;
-        --ui-line-strong: #c9bec9;
-        --ui-paper: #fffdfc;
-        --ui-canvas: #f8f5f8;
-        --ui-plum: #604c75;
-        --ui-plum-soft: #f0ebf5;
-        --ui-rose: #9b3155;
-        --ui-rose-soft: #fae9ef;
-        --ui-sage: #3f654f;
-        --ui-sage-soft: #eaf3ed;
-        --ui-blue: #3c6380;
-        --ui-blue-soft: #eaf1f6;
-        --ui-yellow: #f7e8a9;
-        --ui-yellow-ink: #604900;
-        --ui-shadow: 0 16px 48px rgba(52, 40, 53, .08);
+        --ui-ink: #30313a;
+        --ui-muted: #64646b;
+        --ui-line: #ddd5d0;
+        --ui-line-strong: #c9c0bd;
+        --ui-paper: #fffdfa;
+        --ui-canvas: #f2ece5;
+        --ui-blush: #f8ebed;
+        --ui-rose-surface: #e9cbd0;
+        --ui-peach: #fae1d0;
+        --ui-sage-surface: #b0b9a7;
+        --ui-periwinkle: #6d7392;
+        --ui-plum: #555b78;
+        --ui-plum-soft: #eef0f5;
+        --ui-rose: #7b4a58;
+        --ui-rose-soft: #e9cbd0;
+        --ui-sage: #526450;
+        --ui-sage-soft: #edf1ea;
+        --ui-blue: #596080;
+        --ui-blue-soft: #eef0f5;
+        --ui-yellow: #fae1d0;
+        --ui-yellow-ink: #555b78;
+        --ui-shadow: 0 16px 48px rgba(70, 73, 92, .08);
       }
 
       html { scroll-padding-top: 96px; }
@@ -1546,7 +1551,7 @@
         font-family: "Cormorant Garamond", "Iowan Old Style", Baskerville, serif;
       }
       .icon { flex: 0 0 auto; }
-      :focus-visible { outline: 3px solid rgba(96, 76, 117, .28); outline-offset: 3px; }
+      :focus-visible { outline: 3px solid rgba(109, 115, 146, .3); outline-offset: 3px; }
 
       .hero {
         min-height: 0;
@@ -1555,7 +1560,7 @@
         border-bottom: 1px solid var(--ui-line);
         color: var(--ui-ink);
         background:
-          linear-gradient(125deg, rgba(250, 233, 239, .76), rgba(255, 253, 252, .92) 48%, rgba(234, 243, 237, .74)),
+          linear-gradient(125deg, rgba(248, 235, 237, .96), rgba(255, 253, 250, .94) 48%, rgba(176, 185, 167, .58)),
           var(--ui-paper);
         text-align: left;
       }
@@ -1566,7 +1571,7 @@
         right: max(-120px, calc((100vw - 1200px) / 2 - 120px));
         width: 460px;
         height: 460px;
-        border: 1px solid rgba(155, 49, 85, .2);
+        border: 1px solid rgba(109, 115, 146, .28);
         border-radius: 50%;
         color: transparent;
         transform: none;
@@ -1579,7 +1584,7 @@
         bottom: -170px;
         width: 340px;
         height: 340px;
-        border: 1px solid rgba(63, 101, 79, .18);
+        border: 1px solid rgba(176, 185, 167, .58);
         border-radius: 50%;
       }
       .hero-inner {
@@ -1621,7 +1626,7 @@
         line-height: 1.2;
         text-transform: uppercase;
       }
-      h1 em { color: var(--ui-plum); font-weight: 500; }
+      h1 em { color: var(--ui-periwinkle); font-weight: 500; }
       .hero-copy {
         grid-column: 1;
         max-width: 560px;
@@ -1663,7 +1668,7 @@
         margin-top: var(--ui-space-1);
         color: var(--ui-rose);
       }
-      .stat:nth-child(2) .icon { color: var(--ui-plum); }
+      .stat:nth-child(2) .icon { color: var(--ui-periwinkle); }
       .stat:nth-child(3) .icon { color: var(--ui-sage); }
       .stat:nth-child(4) .icon { color: var(--ui-blue); }
       .stat strong {
@@ -1704,7 +1709,7 @@
         background: var(--ui-paper);
         font-size: 14px;
       }
-      #search:focus { border-color: var(--ui-plum); box-shadow: 0 0 0 3px rgba(96, 76, 117, .14); }
+      #search:focus { border-color: var(--ui-periwinkle); box-shadow: 0 0 0 3px rgba(109, 115, 146, .16); }
       #clear-search {
         top: var(--ui-space-1);
         right: var(--ui-space-1);
@@ -1715,6 +1720,7 @@
       #clear-search:hover { background: var(--ui-plum-soft); }
       .filters { gap: var(--ui-space-2); }
       .filter-btn {
+        --filter: var(--ui-plum);
         display: inline-flex;
         min-height: 44px;
         align-items: center;
@@ -1729,6 +1735,11 @@
         font-size: 13px;
         font-weight: 600;
       }
+      .filter-btn[data-filter="key-songs"] { --filter: var(--ui-rose); }
+      .filter-btn[data-filter="pre-ceremony"] { --filter: var(--ui-plum); }
+      .filter-btn[data-filter="canapes"] { --filter: var(--ui-sage); }
+      .filter-btn[data-filter="dinner"] { --filter: var(--ui-rose); }
+      .filter-btn[data-filter="reception"] { --filter: var(--ui-blue); }
       .filter-btn::before { display: none; }
       .filter-btn .icon { width: 16px; height: 16px; color: var(--filter); }
       .filter-btn:hover { border-color: var(--filter); color: var(--ui-ink); background: color-mix(in srgb, var(--filter) 7%, white); }
@@ -1766,7 +1777,7 @@
       .playlist-section[data-section="key-songs"] { --section-accent: var(--ui-rose); --section-tint: var(--ui-rose-soft); }
       .playlist-section[data-section="pre-ceremony"] { --section-accent: var(--ui-plum); --section-tint: var(--ui-plum-soft); }
       .playlist-section[data-section="canapes"] { --section-accent: var(--ui-sage); --section-tint: var(--ui-sage-soft); }
-      .playlist-section[data-section="dinner"] { --section-accent: #715771; --section-tint: #f2edf3; }
+      .playlist-section[data-section="dinner"] { --section-accent: var(--ui-rose); --section-tint: var(--ui-peach); }
       .playlist-section[data-section="reception"] { --section-accent: var(--ui-blue); --section-tint: var(--ui-blue-soft); }
 
       .section-heading, .timeline-heading {
@@ -1838,15 +1849,15 @@
         box-shadow: none;
       }
       .cue-card::after { display: none; }
-      .cue-card.is-live { border-color: rgba(63, 101, 79, .35); background: var(--ui-sage-soft); }
-      .cue-card.is-tbc { border: 1px dashed rgba(96, 76, 117, .5); background: #fdfbfe; }
+      .cue-card.is-live { border-color: rgba(82, 100, 80, .35); background: var(--ui-sage-soft); }
+      .cue-card.is-tbc { border: 1px dashed rgba(109, 115, 146, .5); background: color-mix(in srgb, var(--ui-peach) 42%, white); }
       .cue-card.is-critical {
         min-height: 0;
         border: 2px solid var(--ui-rose);
         outline: 0;
         border-radius: 16px;
-        background: #fffafb;
-        box-shadow: 0 12px 32px rgba(155, 49, 85, .1);
+        background: color-mix(in srgb, var(--ui-blush) 60%, white);
+        box-shadow: 0 12px 32px rgba(123, 74, 88, .1);
       }
       .cue-top { gap: var(--ui-space-3); }
       .moment {
@@ -1869,9 +1880,9 @@
         line-height: 1;
       }
       .status .icon { width: 14px; height: 14px; }
-      .status.confirmed { border-color: rgba(63, 101, 79, .2); color: var(--ui-sage); background: var(--ui-sage-soft) !important; }
-      .status.live { border-color: rgba(96, 76, 117, .2); color: var(--ui-plum); background: var(--ui-plum-soft) !important; }
-      .status.tbc { border-color: rgba(96, 73, 0, .18); color: var(--ui-yellow-ink); background: var(--ui-yellow) !important; }
+      .status.confirmed { border-color: rgba(82, 100, 80, .22); color: var(--ui-sage); background: var(--ui-sage-soft) !important; }
+      .status.live { border-color: rgba(109, 115, 146, .24); color: var(--ui-plum); background: var(--ui-plum-soft) !important; }
+      .status.tbc { border-color: rgba(109, 115, 146, .24); color: var(--ui-yellow-ink); background: var(--ui-yellow) !important; }
       .status.critical { border-color: var(--ui-rose); color: white; background: var(--ui-rose) !important; }
       .cue-card h3 {
         margin: var(--ui-space-6) 0 var(--ui-space-1);
@@ -1897,16 +1908,16 @@
         border: 0;
         border-left: 4px solid var(--ui-rose);
         border-radius: 8px;
-        color: #4f2333;
+        color: var(--ui-ink);
         background: var(--ui-rose-soft);
       }
       .critical-cue strong {
         margin-bottom: var(--ui-space-2);
-        color: #7e1f40;
+        color: var(--ui-rose);
         font-size: 16px;
         letter-spacing: .04em;
       }
-      .critical-cue span { color: #4f2333; font-size: 14px; line-height: 1.55; }
+      .critical-cue span { color: var(--ui-ink); font-size: 14px; line-height: 1.55; }
 
       .timeline-title-icon { --section-accent: var(--ui-rose); --section-tint: var(--ui-rose-soft); }
       .timeline-grid {
@@ -1929,7 +1940,7 @@
       .phase-ceremony { --phase: var(--ui-plum); --phase-tint: var(--ui-plum-soft); }
       .phase-canapes { --phase: var(--ui-sage); --phase-tint: var(--ui-sage-soft); }
       .phase-entrances { --phase: var(--ui-rose); --phase-tint: var(--ui-rose-soft); }
-      .phase-speeches { --phase: #715771; --phase-tint: #f2edf3; }
+      .phase-speeches { --phase: var(--ui-rose); --phase-tint: var(--ui-peach); }
       .phase-dancing { --phase: var(--ui-blue); --phase-tint: var(--ui-blue-soft); }
       .timeline-phase h3 {
         margin: 0 0 var(--ui-space-4);
@@ -1998,8 +2009,8 @@
         border: 2px solid var(--ui-rose);
         outline: 0;
         border-radius: 12px;
-        background: #fff8fa;
-        box-shadow: 0 10px 28px rgba(155, 49, 85, .1);
+        background: color-mix(in srgb, var(--ui-blush) 64%, white);
+        box-shadow: 0 10px 28px rgba(123, 74, 88, .1);
       }
       .timeline-critical .timeline-number { color: var(--ui-rose); }
       .timeline-critical-label {
@@ -2014,7 +2025,7 @@
         letter-spacing: .05em;
         line-height: 1.35;
       }
-      .timeline-critical small { color: #542536; font-weight: 600; }
+      .timeline-critical small { color: var(--ui-ink); font-weight: 600; }
 
       .event-callouts { gap: var(--ui-space-4); }
       .event-callout {
