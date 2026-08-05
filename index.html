@@ -7,6 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Parisienne&amp;display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:opsz,wght@6..96,400;6..96,500;6..96,600;6..96,700&amp;display=swap" rel="stylesheet">
   <title>The Wedding Playlist</title>
   <style>
     :root {
@@ -2232,6 +2233,320 @@
       .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       h1 { font-size: 56px; }
       .playlist-section, .timeline-section { padding: var(--ui-space-4); }
+    }
+
+    /* Fashion editorial layer: high-contrast type, fine rules, and sharp geometry. */
+    @media screen {
+      .hero {
+        padding: var(--ui-space-16) var(--ui-space-6) var(--ui-space-10);
+        border-top: 8px solid var(--ui-ink);
+        border-bottom: 1px solid var(--ui-ink);
+        background: var(--ui-paper);
+      }
+      .hero::before, .hero::after { display: none; }
+      .hero-inner {
+        display: block;
+        max-width: 1200px;
+        text-align: center;
+      }
+      .eyebrow {
+        margin: 0 0 var(--ui-space-5);
+        color: var(--ui-rose);
+        font-size: 10px;
+        letter-spacing: .32em;
+        text-align: center;
+      }
+      h1 {
+        max-width: none;
+        margin: 0;
+        color: var(--ui-ink);
+        font-family: "Bodoni Moda", Didot, "Bodoni 72", serif;
+        font-size: clamp(76px, 11vw, 144px);
+        font-weight: 500;
+        letter-spacing: -.075em;
+        line-height: .76;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      h1 span {
+        margin-bottom: var(--ui-space-5);
+        color: var(--ui-ink);
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: .13em;
+        font-weight: 600;
+        letter-spacing: .4em;
+      }
+      h1 em {
+        color: var(--ui-periwinkle);
+        font-family: "Bodoni Moda", Didot, "Bodoni 72", serif;
+        font-style: normal;
+        font-weight: 500;
+      }
+      .hero-copy {
+        max-width: none;
+        margin: var(--ui-space-8) auto;
+        color: var(--ui-muted);
+        font-size: 13px;
+        letter-spacing: .08em;
+        text-align: center;
+        text-transform: uppercase;
+      }
+      .hero-stats {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        max-width: 980px;
+        margin: 0 auto;
+        overflow: visible;
+        border: 0;
+        border-top: 1px solid var(--ui-line-strong);
+        border-bottom: 1px solid var(--ui-line-strong);
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+      .stat, .stat + .stat {
+        display: grid;
+        grid-template-columns: 18px auto;
+        justify-content: center;
+        gap: 0 var(--ui-space-3);
+        padding: var(--ui-space-4) var(--ui-space-5);
+        border: 0;
+        border-right: 1px solid var(--ui-line);
+        background: transparent;
+      }
+      .stat:last-child { border-right: 0; }
+      .stat .icon { width: 16px; height: 16px; margin-top: 2px; }
+      .stat strong {
+        font-family: "Bodoni Moda", Didot, "Bodoni 72", serif;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .stat span { font-size: 9px; letter-spacing: .12em; }
+
+      .toolbar {
+        padding-top: var(--ui-space-2);
+        padding-bottom: var(--ui-space-2);
+        border-bottom: 1px solid var(--ui-ink);
+        background: rgba(255, 253, 250, .97);
+        box-shadow: none;
+      }
+      .filter-btn { font-size: 12px; letter-spacing: .025em; }
+
+      main { width: min(1240px, calc(100% - 40px)); padding-top: var(--ui-space-12); }
+      .results-line {
+        margin-bottom: var(--ui-space-4);
+        font-size: 10px;
+        font-weight: 600;
+        letter-spacing: .14em;
+        text-transform: uppercase;
+      }
+      .playlist-section, .timeline-section {
+        margin-bottom: var(--ui-space-12);
+        padding: var(--ui-space-12);
+        border: 1px solid var(--ui-line-strong);
+        border-radius: 0;
+        background: rgba(255, 253, 250, .96);
+        box-shadow: none;
+      }
+      .section-heading, .timeline-heading {
+        grid-template-columns: 28px minmax(0, 1fr) auto;
+        gap: 0 var(--ui-space-4);
+        margin-bottom: var(--ui-space-8);
+        padding-bottom: var(--ui-space-8);
+        border-bottom: 1px solid var(--ui-ink);
+      }
+      .section-icon, .timeline-title-icon {
+        width: 28px;
+        height: 28px;
+        border: 0;
+        border-radius: 0;
+        color: var(--section-accent, var(--ui-rose));
+        background: transparent;
+      }
+      .section-icon .icon, .timeline-title-icon .icon { width: 20px; height: 20px; }
+      .section-kicker, .section-heading .section-kicker, .timeline-heading .section-kicker {
+        margin-bottom: var(--ui-space-2);
+        font-size: 9px;
+        letter-spacing: .24em;
+      }
+      .section-heading h2, .timeline-heading h2 {
+        font-family: "Bodoni Moda", Didot, "Bodoni 72", serif;
+        font-size: clamp(44px, 5vw, 64px);
+        font-weight: 500;
+        letter-spacing: -.045em;
+        line-height: .88;
+      }
+      .section-heading p:not(.section-kicker), .timeline-heading p:not(.section-kicker) {
+        margin-top: var(--ui-space-3);
+        font-size: 13px;
+      }
+      .count-pill, .timeline-heading .count-pill {
+        padding: 0;
+        border: 0;
+        border-radius: 0;
+        color: var(--section-accent, var(--ui-rose));
+        background: transparent;
+        font-size: 9px;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+
+      .cue-grid { gap: 1px; background: var(--ui-line); }
+      .cue-card, .cue-card:nth-child(2n) {
+        min-height: 228px;
+        padding: var(--ui-space-8);
+        border: 0;
+        border-radius: 0;
+        background: var(--ui-paper);
+      }
+      .cue-card.is-live { border: 0; background: color-mix(in srgb, var(--ui-sage-surface) 24%, white); }
+      .cue-card.is-tbc { border: 0; background: color-mix(in srgb, var(--ui-peach) 36%, white); }
+      .cue-card.is-critical {
+        border: 0;
+        border-left: 4px solid var(--ui-rose);
+        border-radius: 0;
+        background: color-mix(in srgb, var(--ui-blush) 58%, white);
+      }
+      .moment { font-size: 9px; letter-spacing: .16em; }
+      .status {
+        min-height: 0;
+        padding: 0;
+        border: 0 !important;
+        border-radius: 0;
+        background: transparent !important;
+        font-size: 9px;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+      }
+      .status.confirmed { color: var(--ui-sage); }
+      .status.live { color: var(--ui-plum); }
+      .status.tbc { color: var(--ui-blue); }
+      .status.critical { color: var(--ui-rose); }
+      .cue-card h3 {
+        margin-top: var(--ui-space-8);
+        font-family: "Bodoni Moda", Didot, "Bodoni 72", serif;
+        font-size: 30px;
+        font-weight: 500;
+        line-height: 1.05;
+      }
+      .artist { font-size: 12px; letter-spacing: .04em; }
+      .cue-note { margin-top: var(--ui-space-6); font-size: 12px; }
+      .critical-cue {
+        padding: var(--ui-space-5);
+        border-radius: 0;
+        background: var(--ui-rose-soft);
+      }
+      .critical-cue strong { font-size: 14px; letter-spacing: .08em; }
+      .critical-cue span { font-size: 13px; }
+
+      .timeline-grid { gap: var(--ui-space-6); }
+      .timeline-phase, .timeline-phase.phase-ceremony, .timeline-phase.phase-canapes {
+        padding: var(--ui-space-8);
+        border: 1px solid var(--ui-line);
+        border-top: 4px solid var(--phase);
+        border-left-width: 1px;
+        border-radius: 0;
+        background: var(--ui-paper);
+      }
+      .timeline-phase h3 { margin-bottom: var(--ui-space-5); font-size: 10px; letter-spacing: .2em; }
+      .timeline-phase ol { gap: 1px; background: var(--ui-line); }
+      .timeline-phase li, .timeline-phase li:first-child {
+        padding: var(--ui-space-5);
+        border: 0;
+        border-radius: 0;
+        background: var(--ui-paper);
+      }
+      .timeline-phase .timeline-number {
+        font-family: "Bodoni Moda", Didot, "Bodoni 72", serif;
+        font-size: 18px;
+        font-weight: 600;
+      }
+      .timeline-phase p { font-size: 9px; letter-spacing: .12em; }
+      .timeline-phase strong {
+        font-family: "Bodoni Moda", Didot, "Bodoni 72", serif;
+        font-size: 19px;
+        font-weight: 500;
+      }
+      .timeline-phase li.timeline-critical {
+        border: 0;
+        border-left: 4px solid var(--ui-rose);
+        border-radius: 0;
+        background: color-mix(in srgb, var(--ui-blush) 58%, white);
+      }
+      .timeline-critical-label { border-radius: 0; font-size: 10px; letter-spacing: .1em; }
+
+      .event-callout {
+        border: 1px solid var(--ui-line);
+        border-radius: 0;
+        background: var(--ui-paper);
+      }
+      .event-icon, .playlist-section[data-section="canapes"] .event-icon {
+        border-radius: 0;
+        background: transparent;
+      }
+      .table-wrap { border-color: var(--ui-line-strong); border-radius: 0; }
+      .playlist-section thead th {
+        color: var(--ui-ink);
+        background: var(--section-tint);
+        font-size: 9px;
+        letter-spacing: .16em;
+      }
+      tbody td { padding-top: var(--ui-space-4); padding-bottom: var(--ui-space-4); }
+      tbody tr:nth-child(even):not(.group-heading) { background: transparent; }
+      tbody tr:hover:not(.group-heading) { background: color-mix(in srgb, var(--section-tint) 42%, white); }
+      .group-heading th {
+        border-left: 0;
+        border-radius: 0;
+        font-size: 10px;
+        letter-spacing: .12em;
+        text-transform: uppercase;
+      }
+      .section-signoff { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; }
+      footer { border-top: 1px solid var(--ui-ink); }
+      footer strong { font-family: "Bodoni Moda", Didot, "Bodoni 72", serif; font-size: 24px; }
+    }
+
+    @media screen and (max-width: 900px) {
+      .hero { padding-top: var(--ui-space-12); }
+      .hero-stats { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .stat:nth-child(2) { border-right: 0; }
+      .stat:nth-child(-n + 2) { border-bottom: 1px solid var(--ui-line); }
+      .section-heading, .timeline-heading { grid-template-columns: 24px minmax(0, 1fr) auto; }
+      .section-icon, .timeline-title-icon { width: 24px; height: 24px; }
+    }
+
+    @media screen and (max-width: 700px) {
+      .hero { padding: var(--ui-space-10) var(--ui-space-4) var(--ui-space-8); }
+      h1 { font-size: clamp(60px, 19vw, 80px); }
+      h1 span { margin-bottom: var(--ui-space-4); font-size: .15em; letter-spacing: .3em; }
+      .hero-copy { margin: var(--ui-space-6) auto; font-size: 10px; }
+      .stat, .stat + .stat { padding: var(--ui-space-4) var(--ui-space-2); }
+      main { width: min(100% - 24px, 1240px); padding-top: var(--ui-space-8); }
+      .playlist-section, .timeline-section {
+        margin-bottom: var(--ui-space-8);
+        padding: var(--ui-space-6);
+      }
+      .section-heading, .timeline-heading {
+        grid-template-columns: 22px minmax(0, 1fr);
+        margin-bottom: var(--ui-space-6);
+        padding-bottom: var(--ui-space-6);
+      }
+      .section-icon, .timeline-title-icon { width: 22px; height: 22px; margin-top: 2px; }
+      .section-icon .icon, .timeline-title-icon .icon { width: 17px; height: 17px; }
+      .section-heading h2, .timeline-heading h2 { font-size: 40px; }
+      .count-pill, .timeline-heading .count-pill { grid-column: 2; margin-top: var(--ui-space-3); }
+      .cue-grid { gap: 1px; }
+      .cue-card, .cue-card:nth-child(2n) { padding: var(--ui-space-6); border-radius: 0; }
+      .cue-card h3 { font-size: 27px; }
+      .timeline-phase, .timeline-phase.phase-ceremony, .timeline-phase.phase-canapes { padding: var(--ui-space-5); border-radius: 0; }
+      .timeline-phase li, .timeline-phase li:first-child { padding: var(--ui-space-4); border-radius: 0; }
+      .table-wrap tr.search-item, .table-wrap tr.search-item:nth-child(2n) {
+        margin-bottom: 1px;
+        border: 0;
+        border-radius: 0;
+        border-bottom: 1px solid var(--ui-line);
+      }
+      .group-heading th { border-radius: 0; }
     }
 
     @media (prefers-reduced-motion: reduce) {
