@@ -1001,23 +1001,65 @@
     /* Garden soirée art direction: watercolor atmosphere with accessible UI. */
     @media screen {
       :root {
-        --garden-ink: #2c2630;
-        --garden-berry: #963a5b;
-        --garden-blush: #f8e6ec;
-        --garden-violet: #67528e;
-        --garden-sage: #45634b;
+        --garden-ink: #2f2932;
+        --garden-berry: #a13d61;
+        --garden-cherry: #b74452;
+        --garden-rose: #dc7f9a;
+        --garden-blush: #fae7ed;
+        --garden-violet: #79659c;
+        --garden-lilac-pale: #f0edf7;
+        --garden-sage: #536c4f;
+        --garden-sage-pale: #edf3e9;
+        --garden-blackberry: #514052;
+        --garden-champagne: #f4e29d;
+        --garden-champagne-pale: #fff9df;
         --garden-paper: #fffefd;
       }
 
       body {
         color: var(--garden-ink);
         background:
-          radial-gradient(circle at 8% 2%, rgba(245, 207, 220, .48), transparent 24rem),
-          radial-gradient(circle at 92% 18%, rgba(207, 227, 208, .55), transparent 26rem),
-          repeating-linear-gradient(0deg, rgba(103, 82, 142, .018) 0 1px, transparent 1px 4px),
-          #fbfafc;
+          radial-gradient(circle at 8% 2%, rgba(250, 231, 237, .9), transparent 24rem),
+          radial-gradient(circle at 92% 18%, rgba(237, 243, 233, .9), transparent 26rem),
+          radial-gradient(circle at 78% 72%, rgba(255, 249, 223, .76), transparent 22rem),
+          repeating-linear-gradient(0deg, rgba(121, 101, 156, .018) 0 1px, transparent 1px 4px),
+          #fcfbfd;
         font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
       }
+
+      .stat-icon { background: var(--garden-berry); }
+      .stat:nth-child(2) .stat-icon { background: var(--garden-blackberry); }
+      .stat:nth-child(3) .stat-icon { background: var(--garden-sage); }
+      .stat:nth-child(4) .stat-icon { background: var(--garden-violet); }
+
+      .filter-btn { --filter: var(--garden-blackberry); }
+      .filter-btn[data-filter="key-songs"] { --filter: var(--garden-berry); }
+      .filter-btn[data-filter="pre-ceremony"] { --filter: var(--garden-violet); }
+      .filter-btn[data-filter="canapes"] { --filter: var(--garden-sage); }
+      .filter-btn[data-filter="dinner"] { --filter: var(--garden-blackberry); }
+      .filter-btn[data-filter="reception"] { --filter: var(--garden-cherry); }
+
+      .playlist-section[data-section="key-songs"] { --section-accent: var(--garden-berry); --section-tint: var(--garden-blush); }
+      .playlist-section[data-section="pre-ceremony"] { --section-accent: var(--garden-violet); --section-tint: var(--garden-lilac-pale); }
+      .playlist-section[data-section="canapes"] { --section-accent: var(--garden-sage); --section-tint: var(--garden-sage-pale); }
+      .playlist-section[data-section="dinner"] { --section-accent: var(--garden-blackberry); --section-tint: #f3edf3; }
+      .playlist-section[data-section="reception"] { --section-accent: var(--garden-cherry); --section-tint: #faecee; }
+
+      .timeline-title-icon { --section-accent: var(--garden-berry); }
+      .phase-ceremony { --phase: var(--garden-violet); --phase-tint: var(--garden-lilac-pale); }
+      .phase-canapes { --phase: var(--garden-sage); --phase-tint: var(--garden-sage-pale); }
+      .phase-entrances { --phase: var(--garden-berry); --phase-tint: var(--garden-blush); }
+      .phase-speeches { --phase: var(--garden-blackberry); --phase-tint: #f3edf3; }
+      .phase-dancing { --phase: var(--garden-cherry); --phase-tint: #faecee; }
+
+      .status.confirmed,
+      .status.live { background: var(--garden-sage); }
+      .status.tbc { background: var(--garden-violet); }
+      .status.critical { background: var(--garden-berry); }
+      .cue-card.is-critical { border-color: var(--garden-berry); background: #fff6f8; box-shadow: 0 14px 34px rgba(161, 61, 97, .14); }
+      .critical-cue { color: #4f2434; background: var(--garden-blush); }
+      .critical-cue strong { color: #821f43; }
+      .critical-cue span { color: #4f2434; }
 
       h1, h2, h3 {
         font-family: "Cormorant Garamond", "Iowan Old Style", Baskerville, serif;
@@ -1087,6 +1129,10 @@
         background: rgba(255,255,255,.88);
         box-shadow: 0 10px 28px rgba(78, 52, 73, .08);
       }
+      .stat:nth-child(1) { border-color: color-mix(in srgb, var(--garden-berry) 24%, white); }
+      .stat:nth-child(2) { border-color: color-mix(in srgb, var(--garden-blackberry) 24%, white); }
+      .stat:nth-child(3) { border-color: color-mix(in srgb, var(--garden-sage) 24%, white); }
+      .stat:nth-child(4) { border-color: color-mix(in srgb, var(--garden-violet) 24%, white); }
 
       .toolbar {
         border-bottom-color: #e8d8df;
@@ -1133,8 +1179,8 @@
       }
       .playlist-section > *,
       .timeline-section > * { position: relative; z-index: 1; }
-      .section-heading,
-      .timeline-heading { border-bottom-color: #eedfe5; }
+      .section-heading { border-bottom-color: var(--section-tint); }
+      .timeline-heading { border-bottom-color: var(--garden-blush); }
       .section-icon,
       .timeline-title-icon {
         border-radius: 50%;
@@ -1180,6 +1226,13 @@
         background: color-mix(in srgb, var(--section-tint) 84%, white);
       }
       .event-icon { border-radius: 50%; }
+      .playlist-section[data-section="canapes"] .event-callout {
+        background: linear-gradient(135deg, var(--garden-champagne-pale), var(--garden-sage-pale));
+      }
+      .playlist-section[data-section="canapes"] .event-icon {
+        color: #343b2e;
+        background: var(--garden-champagne);
+      }
 
       .table-wrap tr.search-item {
         border-color: #e1d9df;
