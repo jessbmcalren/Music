@@ -1869,11 +1869,12 @@
       .cue-card.is-tbc { border: 1px dashed rgba(109, 115, 146, .5); background: color-mix(in srgb, var(--ui-peach) 42%, white); }
       .cue-card.is-critical {
         min-height: 0;
-        border: 2px solid var(--ui-rose);
+        border: 1px solid var(--ui-line);
+        border-left: 4px solid var(--ui-rose);
         outline: 0;
-        border-radius: 16px;
+        border-radius: 14px;
         background: color-mix(in srgb, var(--ui-blush) 60%, white);
-        box-shadow: 0 12px 32px rgba(123, 74, 88, .1);
+        box-shadow: none;
       }
       .cue-top { gap: var(--ui-space-3); }
       .moment {
@@ -1922,7 +1923,6 @@
         margin: var(--ui-space-5) 0 0;
         padding: var(--ui-space-4);
         border: 0;
-        border-left: 4px solid var(--ui-rose);
         border-radius: 8px;
         color: var(--ui-ink);
         background: var(--ui-rose-soft);
@@ -2022,11 +2022,12 @@
         grid-column: 1 / -1;
         margin: 0;
         padding: var(--ui-space-5);
-        border: 2px solid var(--ui-rose);
+        border: 1px solid var(--ui-line);
+        border-left: 4px solid var(--ui-rose);
         outline: 0;
         border-radius: 12px;
         background: color-mix(in srgb, var(--ui-blush) 64%, white);
-        box-shadow: 0 10px 28px rgba(123, 74, 88, .1);
+        box-shadow: none;
       }
       .timeline-critical .timeline-number { color: var(--ui-rose); }
       .timeline-critical-label {
