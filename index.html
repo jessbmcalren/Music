@@ -569,6 +569,7 @@
         font-weight: 600;
       }
       #search::placeholder { color: #687168; opacity: 1; }
+      #search::-webkit-search-cancel-button { -webkit-appearance: none; appearance: none; }
       #search:focus { border-color: var(--ink); box-shadow: 0 0 0 4px rgba(23, 27, 24, .1); }
       #clear-search {
         top: 4px;
@@ -1020,7 +1021,7 @@
       <div class="hero-stats" aria-label="Playlist summary">
         <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg><strong>195</strong><span>playlist tracks</span></div>
         <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 9 5-9 5-9-5 9-5Z"></path><path d="m3 12 9 5 9-5M3 17l9 5 9-5"></path></svg><strong>17</strong><span>dance sections</span></div>
-        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg><strong>12 of 15</strong><span>cues confirmed</span></div>
+        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg><strong>12 of 16</strong><span>cues confirmed</span></div>
         <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 5c3 0 5 2 5 5v7a4 4 0 0 1-8 0v-5c0-2 1-4 3-4h5M13 5V2M17 3v13M17 6h3"></path></svg><strong>1</strong><span>live bagpiper</span></div>
       </div>
     </div>
@@ -1046,7 +1047,7 @@
   </nav>
 
   <main id="playlist">
-    <p class="results-line" id="results" aria-live="polite">Showing all 210 entries</p>
+    <p class="results-line" id="results" aria-live="polite">Showing all 211 entries</p>
 
     <section class="timeline-section" id="timeline" aria-labelledby="timeline-title">
       <div class="timeline-heading">
@@ -1056,7 +1057,7 @@
           <h2 id="timeline-title">The Music Timeline</h2>
           <p>A practical sequence for the venue, MCs, musicians and DJ. Exact clock times can be added once the venue schedule is confirmed.</p>
         </div>
-        <span class="count-pill">16 moments</span>
+        <span class="count-pill">17 moments</span>
       </div>
       <div class="timeline-grid">
       <section class="timeline-phase phase-ceremony">
@@ -1117,24 +1118,13 @@
               <span>Shania Twain</span>
 
             </div>
-          </li>
-          <li>
-            <span class="timeline-number">06</span>
-            <div>
-              <p>Garter toss</p>
-
-              <strong>The Stripper</strong>
-              <span>David Rose &amp; His Orchestra</span>
-              <small>Deliberately old-school and cheesy.</small>
-
-            </div>
           </li></ol>
       </section>
       <section class="timeline-phase phase-entrances">
         <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3ZM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14ZM19 13l.7 1.8 1.8.7-1.8.7L19 18l-.7-1.8-1.8-.7 1.8-.7L19 13Z"></path></svg><span>Reception entrances</span></h3>
         <ol>
           <li>
-            <span class="timeline-number">07</span>
+            <span class="timeline-number">06</span>
             <div>
               <p>Bridal party entrance</p>
 
@@ -1144,7 +1134,7 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">08</span>
+            <span class="timeline-number">07</span>
             <div>
               <p>Bride &amp; groom entrance</p>
 
@@ -1155,7 +1145,7 @@
             </div>
           </li>
           <li class="timeline-tbc">
-            <span class="timeline-number">09</span>
+            <span class="timeline-number">08</span>
             <div>
               <p>MCs walk up</p>
 
@@ -1169,7 +1159,7 @@
         <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"></path></svg><span>Dinner · speeches</span></h3>
         <ol>
           <li>
-            <span class="timeline-number">10</span>
+            <span class="timeline-number">09</span>
             <div>
               <p>Dad’s speech entrance</p>
 
@@ -1180,7 +1170,7 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">11</span>
+            <span class="timeline-number">10</span>
             <div>
               <p>Sister / maid of honour’s speech entrance</p>
 
@@ -1191,7 +1181,7 @@
             </div>
           </li>
           <li class="timeline-tbc">
-            <span class="timeline-number">12</span>
+            <span class="timeline-number">11</span>
             <div>
               <p>Seb’s speech entrance</p>
 
@@ -1201,7 +1191,7 @@
             </div>
           </li>
           <li class="timeline-tbc">
-            <span class="timeline-number">13</span>
+            <span class="timeline-number">12</span>
             <div>
               <p>Groom’s speech entrance</p>
 
@@ -1212,10 +1202,32 @@
           </li></ol>
       </section>
       <section class="timeline-phase phase-dancing">
-        <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>Dances · open the floor</span></h3>
+        <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>After speeches · dances</span></h3>
         <ol>
+          <li class="timeline-tbc">
+            <span class="timeline-number">13</span>
+            <div>
+              <p>Cake cutting</p>
+
+              <strong>Song to be confirmed</strong>
+              <span>Immediately after the speeches</span>
+              <small>Choose the cake-cutting track.</small>
+
+            </div>
+          </li>
           <li>
             <span class="timeline-number">14</span>
+            <div>
+              <p>Garter toss</p>
+
+              <strong>The Stripper</strong>
+              <span>David Rose &amp; His Orchestra</span>
+              <small>Then move directly into the first dance.</small>
+
+            </div>
+          </li>
+          <li>
+            <span class="timeline-number">15</span>
             <div>
               <p>First dance</p>
 
@@ -1225,7 +1237,7 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">15</span>
+            <span class="timeline-number">16</span>
             <div>
               <p>Father–daughter dance</p>
 
@@ -1235,7 +1247,7 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">16</span>
+            <span class="timeline-number">17</span>
             <div>
               <p>Group-photo ploy → open dance floor</p>
 
@@ -1257,7 +1269,7 @@
           <h2>Key Songs</h2>
           <p>Ceremony, entrance, speech and first-dance cues for the musicians and DJ.</p>
         </div>
-        <span class="count-pill">12 confirmed · 3 TBC</span>
+        <span class="count-pill">12 confirmed · 4 TBC</span>
       </div>
       <div class="cue-grid">
         <article class="cue-card search-item is-live"
@@ -1295,15 +1307,6 @@
           </div>
           <h3>Man! I Feel Like a Woman!</h3><p class="artist">Shania Twain</p>
           <p class="cue-note">Play for the bouquet toss once the photos are finished.</p>
-        </article>
-        <article class="cue-card search-item"
-          data-search="garter toss · timing to confirm the stripper david rose &amp; his orchestra the unmistakable old-school striptease instrumental — deliberately cheesy and played for laughs. confirm when this will happen in the running order.">
-          <div class="cue-top">
-            <p class="moment">Garter toss · timing to confirm</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
-          </div>
-          <h3>The Stripper</h3><p class="artist">David Rose &amp; His Orchestra</p>
-          <p class="cue-note">The unmistakable old-school striptease instrumental — deliberately cheesy and played for laughs. Confirm when this will happen in the running order.</p>
         </article>
         <article class="cue-card search-item"
           data-search="bridal party entrance gimme! gimme! gimme! (a man after midnight) abba play for the bridal party entrance, before the bride and groom enter.">
@@ -1367,6 +1370,24 @@
           </div>
           <h3 class="pending">Song to be confirmed</h3><p class="artist">&nbsp;</p>
           <p class="cue-note">Still deciding — leave this cue open while the song is being chosen.</p>
+        </article>
+        <article class="cue-card search-item is-tbc"
+          data-search="cake cutting · immediately after the speeches song to be chosen. this cue starts the post-speech sequence, followed by the garter toss, first dance and father–daughter dance.">
+          <div class="cue-top">
+            <p class="moment">Cake cutting · immediately after the speeches</p>
+            <span class="status tbc"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>To be confirmed</span>
+          </div>
+          <h3 class="pending">Song to be confirmed</h3><p class="artist">&nbsp;</p>
+          <p class="cue-note">Song to be chosen. This cue starts the post-speech sequence, followed by the garter toss, first dance and father–daughter dance.</p>
+        </article>
+        <article class="cue-card search-item"
+          data-search="garter toss · after cake cutting the stripper david rose &amp; his orchestra play immediately after the cake cutting and before the first dance. the unmistakable old-school striptease instrumental — deliberately cheesy and played for laughs.">
+          <div class="cue-top">
+            <p class="moment">Garter toss · after cake cutting</p>
+            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
+          </div>
+          <h3>The Stripper</h3><p class="artist">David Rose &amp; His Orchestra</p>
+          <p class="cue-note">Play immediately after the cake cutting and before the first dance. The unmistakable old-school striptease instrumental — deliberately cheesy and played for laughs.</p>
         </article>
         <article class="cue-card search-item"
           data-search="first dance wouldn’t it be nice the beach boys">
@@ -1559,17 +1580,6 @@
           <div class="event-track">
             <strong>Man! I Feel Like a Woman!</strong>
             <span>Shania Twain</span>
-          </div>
-        </aside>
-        <aside class="event-callout" aria-label="Garter toss cue">
-          <span class="event-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg></span>
-          <div>
-            <p>Event cue · timing to confirm</p>
-            <h3>Garter toss</h3>
-          </div>
-          <div class="event-track">
-            <strong>The Stripper</strong>
-            <span>David Rose &amp; His Orchestra</span>
           </div>
         </aside></div>
         <div class="table-wrap">
@@ -1770,7 +1780,29 @@
           </div>
           <span class="count-pill">27 songs</span>
         </div>
-        
+        <div class="event-callouts">
+        <aside class="event-callout" aria-label="Cake cutting cue">
+          <span class="event-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 10h16v10H4zM4 15h16M7 10V7h10v3M9 7V4M15 7V4"></path><path d="M8 4c0-1 .5-1.7 1-2 .5.3 1 1 1 2M14 4c0-1 .5-1.7 1-2 .5.3 1 1 1 2"></path></svg></span>
+          <div>
+            <p>Immediately after the speeches</p>
+            <h3>Cake cutting</h3>
+          </div>
+          <div class="event-track">
+            <strong>Song to be confirmed</strong>
+            <span>Choose the cake-cutting track</span>
+          </div>
+        </aside>
+        <aside class="event-callout" aria-label="Garter toss cue">
+          <span class="event-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg></span>
+          <div>
+            <p>Then · before the first dance</p>
+            <h3>Garter toss</h3>
+          </div>
+          <div class="event-track">
+            <strong>The Stripper</strong>
+            <span>David Rose &amp; His Orchestra</span>
+          </div>
+        </aside></div>
         <div class="table-wrap">
           <table>
             <thead><tr><th>No.</th><th>Song</th><th>Artist / Version</th></tr></thead>
@@ -2589,7 +2621,7 @@
 
         const label = query || active !== 'all'
           ? visibleTotal + ' ' + (visibleTotal === 1 ? 'match' : 'matches')
-          : 'Showing all 210 entries';
+          : 'Showing all 211 entries';
         results.textContent = label;
         empty.classList.toggle('visible', visibleTotal === 0);
         timeline.hidden = Boolean(query) || (active !== 'all' && active !== 'key-songs');
