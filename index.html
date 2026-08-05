@@ -1444,10 +1444,19 @@
         background: rgba(255,255,255,.8);
       }
       .timeline-phase .timeline-number {
-        border: 1.15px solid var(--phase);
-        border-radius: 51% 44% 49% 46% / 45% 52% 43% 50%;
+        display: block;
+        width: auto;
+        height: auto;
+        padding-top: .12rem;
+        border: 0;
+        border-radius: 0;
         color: var(--phase);
         background: transparent;
+        box-shadow: none;
+        font-size: 1rem;
+        font-weight: 700;
+        line-height: 1.25;
+        text-align: center;
       }
       .timeline-phase li.timeline-critical {
         border: 1.5px solid var(--garden-berry);
