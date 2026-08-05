@@ -4276,7 +4276,7 @@
           : 'Showing all 211 entries';
         results.textContent = label;
         empty.classList.toggle('visible', visibleTotal === 0);
-        timeline.hidden = Boolean(query) || (active !== 'all' && active !== 'key-songs');
+        timeline.hidden = Boolean(query) || active !== 'all';
         clear.hidden = search.value.length === 0;
       };
 
