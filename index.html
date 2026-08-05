@@ -4,7 +4,7 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#fffefd">
-  <link rel="preload" as="image" href="assets/garden-soiree-hero.webp" fetchpriority="high">
+  <link rel="preload" as="image" href="assets/garden-soiree-fineliner.webp" fetchpriority="high">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,500;1,600&amp;family=DM+Sans:opsz,wght@9..40,400;9..40,500;9..40,600;9..40,700&amp;family=Parisienne&amp;display=swap" rel="stylesheet">
@@ -1071,7 +1071,7 @@
         color: var(--garden-ink);
         background-image:
           linear-gradient(90deg, rgba(255,255,255,.99) 0%, rgba(255,255,255,.95) 37%, rgba(255,255,255,.65) 55%, rgba(255,255,255,.08) 78%),
-          url("assets/garden-soiree-hero.webp");
+          url("assets/garden-soiree-fineliner.webp");
         background-position: center, center;
         background-repeat: no-repeat;
         background-size: cover;
@@ -1172,7 +1172,7 @@
         z-index: 0;
         width: 650px;
         height: 310px;
-        background: url("assets/garden-soiree-hero.webp") right bottom / 720px auto no-repeat;
+        background: url("assets/garden-soiree-fineliner.webp") right bottom / 720px auto no-repeat;
         mix-blend-mode: multiply;
         opacity: .038;
         pointer-events: none;
@@ -1280,7 +1280,7 @@
         color: #5b4d58;
         background-image:
           linear-gradient(rgba(255,255,255,.72), rgba(255,255,255,.82)),
-          url("assets/garden-soiree-hero.webp");
+          url("assets/garden-soiree-fineliner.webp");
         background-position: center, center bottom;
         background-repeat: no-repeat;
         background-size: cover;
@@ -1298,6 +1298,179 @@
       .group-heading th {
         font-family: "Cormorant Garamond", "Iowan Old Style", Baskerville, serif;
       }
+
+      /* Fine-liner pen treatment. Interactive states and layout remain unchanged. */
+      .icon { stroke-width: 1.45; }
+
+      .stat {
+        border-width: 1.25px;
+        border-color: color-mix(in srgb, var(--garden-ink) 34%, white);
+        border-radius: 20px 17px 22px 18px / 18px 22px 17px 21px;
+        box-shadow: 2px 2px 0 rgba(47, 41, 50, .07);
+        backdrop-filter: none;
+      }
+      .stat-icon,
+      .stat:nth-child(1) .stat-icon,
+      .stat:nth-child(2) .stat-icon,
+      .stat:nth-child(3) .stat-icon,
+      .stat:nth-child(4) .stat-icon {
+        border: 1.25px solid currentColor;
+        border-radius: 52% 44% 49% 46% / 45% 52% 43% 51%;
+        background: transparent;
+      }
+      .stat:nth-child(1) .stat-icon { color: var(--garden-berry); }
+      .stat:nth-child(2) .stat-icon { color: var(--garden-blackberry); }
+      .stat:nth-child(3) .stat-icon { color: var(--garden-sage); }
+      .stat:nth-child(4) .stat-icon { color: var(--garden-violet); }
+
+      .toolbar {
+        border-top: 1px solid color-mix(in srgb, var(--garden-ink) 18%, white);
+        border-bottom: 1px solid color-mix(in srgb, var(--garden-ink) 32%, white);
+        box-shadow: none;
+      }
+      #search {
+        border: 1.25px solid color-mix(in srgb, var(--garden-ink) 58%, white);
+        border-radius: 18px 15px 20px 16px / 16px 20px 15px 19px;
+        box-shadow: 2px 2px 0 rgba(47, 41, 50, .055);
+      }
+      #search:focus {
+        border-color: var(--garden-blackberry);
+        box-shadow: 0 0 0 3px color-mix(in srgb, var(--garden-lilac-pale) 88%, white);
+      }
+      .filter-btn {
+        border: 1.2px solid color-mix(in srgb, var(--filter) 70%, white);
+        border-radius: 48% 44% 51% 46% / 44% 52% 43% 50%;
+        color: var(--filter);
+        background: rgba(255,255,255,.94);
+        box-shadow: 1.5px 1.5px 0 color-mix(in srgb, var(--filter) 12%, transparent);
+      }
+      .filter-btn:hover { color: var(--filter); background: color-mix(in srgb, var(--filter) 7%, white); }
+      .filter-btn.active {
+        border-color: var(--filter);
+        color: var(--filter);
+        background: color-mix(in srgb, var(--filter) 12%, white);
+        box-shadow: inset 0 -2px 0 var(--filter), 1.5px 1.5px 0 color-mix(in srgb, var(--filter) 15%, transparent);
+      }
+      .filter-btn.active .icon { color: var(--filter); }
+
+      .playlist-section,
+      .timeline-section {
+        border: 1.2px solid color-mix(in srgb, var(--garden-ink) 45%, white);
+        border-radius: 31px 26px 34px 28px / 27px 34px 26px 32px;
+        background:
+          linear-gradient(rgba(255,255,255,.975), rgba(255,255,255,.975)),
+          repeating-linear-gradient(0deg, rgba(47,41,50,.045) 0 1px, transparent 1px 5px),
+          var(--garden-paper);
+        box-shadow: 4px 4px 0 rgba(47, 41, 50, .065);
+      }
+      .section-icon,
+      .timeline-title-icon {
+        border: 1.35px solid var(--section-accent);
+        border-radius: 51% 44% 49% 46% / 45% 52% 43% 50%;
+        color: var(--section-accent);
+        background: transparent;
+        box-shadow: 2px 2px 0 var(--section-tint);
+      }
+      .section-icon .icon,
+      .timeline-title-icon .icon { color: inherit; }
+      .count-pill {
+        border: 1px solid var(--section-accent);
+        border-radius: 48% 44% 51% 46% / 44% 52% 43% 50%;
+        background: transparent;
+      }
+
+      .cue-card {
+        border: 1.15px solid color-mix(in srgb, var(--section-accent) 58%, white);
+        border-radius: 23px 19px 25px 20px / 19px 25px 18px 24px;
+        background: rgba(255,255,255,.92);
+        box-shadow: 2.5px 2.5px 0 var(--section-tint);
+      }
+      .cue-card:nth-child(2n) { border-radius: 19px 25px 20px 23px / 24px 19px 25px 20px; }
+      .cue-card.is-live { border: 1.25px solid var(--garden-sage); background: color-mix(in srgb, var(--garden-sage-pale) 55%, white); }
+      .cue-card.is-tbc { border: 1.25px dashed var(--garden-violet); background: color-mix(in srgb, var(--garden-lilac-pale) 45%, white); }
+      .cue-card.is-critical {
+        border: 1.6px solid var(--garden-berry);
+        outline: 1px solid color-mix(in srgb, var(--garden-berry) 55%, white);
+        outline-offset: 3px;
+        background: #fffafb;
+        box-shadow: 3px 3px 0 var(--garden-blush);
+      }
+      .status {
+        border: 1px solid currentColor;
+        border-radius: 49% 44% 51% 46% / 44% 52% 43% 50%;
+        background: transparent !important;
+      }
+      .status.confirmed,
+      .status.live { color: var(--garden-sage); }
+      .status.tbc { color: var(--garden-violet); }
+      .status.critical { color: var(--garden-berry); }
+      .critical-cue {
+        border: 1px solid var(--garden-berry);
+        border-left: 4px double var(--garden-berry);
+        border-radius: 15px 12px 17px 13px / 12px 17px 12px 16px;
+        background: color-mix(in srgb, var(--garden-blush) 62%, white);
+        box-shadow: none;
+      }
+
+      .event-callout {
+        border: 1.15px solid var(--section-accent);
+        border-radius: 21px 17px 23px 18px / 17px 23px 17px 22px;
+        box-shadow: 2px 2px 0 var(--section-tint);
+      }
+      .event-icon,
+      .playlist-section[data-section="canapes"] .event-icon {
+        border: 1.2px solid currentColor;
+        border-radius: 52% 44% 49% 46% / 45% 52% 43% 51%;
+        color: var(--section-accent);
+        background: transparent;
+      }
+
+      .table-wrap tr.search-item {
+        border: 1.15px solid color-mix(in srgb, var(--section-accent) 50%, white);
+        border-radius: 23px 18px 25px 20px / 18px 25px 18px 24px;
+        background: rgba(255,255,255,.94) !important;
+        box-shadow: 2.5px 2.5px 0 var(--section-tint);
+      }
+      .table-wrap tr.search-item:nth-child(2n) { border-radius: 19px 25px 20px 23px / 24px 19px 25px 20px; }
+      .table-wrap tr.search-item:hover { box-shadow: 4px 4px 0 var(--section-tint); }
+      .table-wrap td.track-number {
+        border-right: 1.25px solid var(--section-accent);
+        color: var(--section-accent) !important;
+        background: color-mix(in srgb, var(--section-tint) 68%, white) !important;
+      }
+      .group-heading th {
+        border: 1px solid var(--section-accent);
+        border-left-width: 5px;
+        border-radius: 15px 11px 17px 12px / 11px 17px 10px 16px;
+        background: transparent;
+      }
+
+      .timeline-phase {
+        border: 1.15px solid var(--phase);
+        border-top-width: 1.15px;
+        border-radius: 23px 18px 25px 20px / 18px 25px 18px 24px;
+        background: color-mix(in srgb, var(--phase-tint) 72%, white);
+        box-shadow: 3px 3px 0 color-mix(in srgb, var(--phase) 10%, transparent);
+      }
+      .timeline-phase li {
+        border: 1px solid color-mix(in srgb, var(--phase) 48%, white);
+        border-radius: 17px 13px 19px 14px / 13px 19px 12px 18px;
+        background: rgba(255,255,255,.8);
+      }
+      .timeline-phase .timeline-number {
+        border: 1.15px solid var(--phase);
+        border-radius: 51% 44% 49% 46% / 45% 52% 43% 50%;
+        color: var(--phase);
+        background: transparent;
+      }
+      .timeline-phase li.timeline-critical {
+        border: 1.5px solid var(--garden-berry);
+        outline: 1px solid color-mix(in srgb, var(--garden-berry) 45%, white);
+        outline-offset: 2px;
+        box-shadow: none;
+      }
+
+      footer { border-top: 1.25px solid color-mix(in srgb, var(--garden-ink) 45%, white); }
     }
 
     @media screen and (max-width: 760px) {
@@ -1306,7 +1479,7 @@
         padding: 4.6rem 1rem 3.2rem;
         background-image:
           linear-gradient(180deg, rgba(255,255,255,.98) 0%, rgba(255,255,255,.93) 55%, rgba(255,255,255,.64) 82%, rgba(255,255,255,.2) 100%),
-          url("assets/garden-soiree-hero.webp");
+          url("assets/garden-soiree-fineliner.webp");
         background-position: center, right bottom;
         background-size: auto, auto 66%;
       }
@@ -1316,12 +1489,12 @@
       .hero-copy { max-width: 34rem; margin-top: 1.7rem; }
       .hero-stats { margin-top: 2rem; }
       .playlist-section,
-      .timeline-section { border-radius: 28px; }
+      .timeline-section { border-radius: 27px 23px 29px 24px / 23px 29px 22px 28px; }
       .playlist-section::after,
       .timeline-section::after { width: 420px; height: 220px; opacity: .03; }
       .section-heading h2,
       .timeline-heading h2 { font-size: 2.55rem; }
-      .table-wrap tr.search-item { border-radius: 24px; }
+      .table-wrap tr.search-item { border-radius: 22px 18px 24px 19px / 18px 24px 17px 23px; }
       footer { min-height: 260px; padding-top: 5.2rem; background-position: center, 68% bottom; }
     }
 
