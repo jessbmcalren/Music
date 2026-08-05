@@ -144,10 +144,22 @@
     .status.live { color: #fff; background: var(--olive); }
     .status.confirmed { color: #4c5f42; background: var(--sage); }
     .status.tbc { color: #765e35; background: #f0e2c5; }
+    .status.critical { color: #fff; background: #a33f55; }
     .cue-card h3 { position: relative; z-index: 1; margin: 1.25rem 0 .2rem; color: var(--olive-dark); font-size: 1.45rem; font-weight: 400; line-height: 1.2; }
     .cue-card h3.pending { color: #9b9485; }
     .artist { position: relative; z-index: 1; margin: 0; color: var(--gold); font-weight: 700; }
     .cue-note { position: relative; z-index: 1; margin: 1rem 0 0; padding-top: .8rem; border-top: 1px solid var(--line); color: var(--muted); font-size: .83rem; }
+    .cue-card.is-critical {
+      grid-column: 1 / -1;
+      min-height: 0;
+      border: 2px solid #a33f55;
+      background: #fff7f8;
+      box-shadow: 0 12px 32px rgba(163, 63, 85, .12);
+    }
+    .critical-cue { position: relative; z-index: 1; margin: 1rem 0 0; padding: 1rem; border-left: 6px solid #a33f55; color: #49363a; background: #f7e4e8; }
+    .critical-cue strong, .critical-cue span { display: block; }
+    .critical-cue strong { margin-bottom: .4rem; color: #8e2940; font-size: .86rem; letter-spacing: .08em; text-transform: uppercase; }
+    .critical-cue span { font-size: .88rem; font-weight: 650; line-height: 1.55; }
 
     .table-wrap { overflow: hidden; border: 1px solid var(--line); border-radius: 16px; }
     table { width: 100%; border-collapse: collapse; }
@@ -307,6 +319,9 @@
     .timeline-phase span { margin-top: .13rem; color: #655c5e; font-size: .78rem; }
     .timeline-phase small { margin-top: .42rem; color: #887e80; font-size: .7rem; line-height: 1.4; }
     .timeline-tbc strong { color: #9b6d77; font-style: italic; }
+    .timeline-phase li.timeline-critical { margin: .7rem -.55rem; padding: .85rem .55rem; border: 2px solid #a33f55; background: #fff7f8; box-shadow: 0 8px 22px rgba(163, 63, 85, .1); }
+    .timeline-critical-label { display: inline-block; margin: .05rem 0 .55rem; padding: .32rem .48rem; color: #fff; background: #a33f55; font: 800 .62rem/1.2 -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; font-style: normal; letter-spacing: .07em; text-transform: uppercase; }
+    .timeline-critical small { color: #633f47; font-weight: 700; }
 
     .empty-state { display: none; margin: 3rem auto; padding: 2rem; border: 1px dashed var(--line); border-radius: 18px; color: var(--muted); background: rgba(255,253,248,.8); text-align: center; }
     .empty-state.visible { display: block; }
@@ -429,36 +444,42 @@
             <span class="timeline-number">01</span>
             <div>
               <p>Guests arrive</p>
+
               <strong>Pre-Ceremony playlist</strong>
               <span>24 soft romantic tracks</span>
-              
+
             </div>
           </li>
           <li>
             <span class="timeline-number">02</span>
             <div>
               <p>Groomsmen walk down the aisle</p>
+
               <strong>Live bagpipes</strong>
               <span>Matthew (bagpiper)</span>
-              
+
             </div>
           </li>
           <li>
             <span class="timeline-number">03</span>
             <div>
               <p>Bridesmaids walk down the aisle</p>
+
               <strong>We’ve Only Just Begun</strong>
               <span>The Carpenters</span>
-              
+
             </div>
           </li>
-          <li>
+          <li class="timeline-critical">
             <span class="timeline-number">04</span>
             <div>
               <p>Bride walks down the mountain aisle</p>
+              <em class="timeline-critical-label">Critical DJ cue · start at 0:43 · first chorus</em>
+
               <strong>Archie, Marry Me</strong>
               <span>Alvvays</span>
-              <small>Provisional first-chorus cue at approximately 0:43; test the full walk with the venue and DJ.</small>
+              <small>DO NOT START FROM THE BEGINNING. Start at the first chorus, approximately 0:43. Confirm the timestamp against the exact final audio file and rehearse the full mountain-aisle walk.</small>
+
             </div>
           </li></ol>
       </section>
@@ -469,18 +490,21 @@
             <span class="timeline-number">05</span>
             <div>
               <p>Bouquet toss</p>
+
               <strong>Man! I Feel Like a Woman!</strong>
               <span>Shania Twain</span>
-              
+
             </div>
           </li>
           <li>
             <span class="timeline-number">06</span>
             <div>
               <p>Garter toss</p>
+
               <strong>The Stripper</strong>
               <span>David Rose &amp; His Orchestra</span>
               <small>Deliberately old-school and cheesy.</small>
+
             </div>
           </li></ol>
       </section>
@@ -491,27 +515,31 @@
             <span class="timeline-number">07</span>
             <div>
               <p>Bridal party entrance</p>
+
               <strong>Gimme! Gimme! Gimme! (A Man After Midnight)</strong>
               <span>ABBA</span>
-              
+
             </div>
           </li>
           <li>
             <span class="timeline-number">08</span>
             <div>
               <p>Bride &amp; groom entrance</p>
+
               <strong>Happy Together</strong>
               <span>The Turtles</span>
               <small>Start with the drum lead-in; cue at 0:39.</small>
+
             </div>
           </li>
           <li class="timeline-tbc">
             <span class="timeline-number">09</span>
             <div>
               <p>MCs walk up</p>
+
               <strong>Song to be confirmed</strong>
               <span>After the couple’s entrance, before dinner speeches</span>
-              
+
             </div>
           </li></ol>
       </section>
@@ -522,36 +550,42 @@
             <span class="timeline-number">10</span>
             <div>
               <p>Dad’s speech entrance</p>
+
               <strong>The Best Day</strong>
               <span>Taylor Swift</span>
               <small>Start near the father section and fade down at the mic.</small>
+
             </div>
           </li>
           <li>
             <span class="timeline-number">11</span>
             <div>
               <p>Sister / maid of honour’s speech entrance</p>
+
               <strong>Where You Lead I Will Follow</strong>
               <span>Carole King &amp; Louise Goffin</span>
               <small>Start at the chorus.</small>
+
             </div>
           </li>
           <li class="timeline-tbc">
             <span class="timeline-number">12</span>
             <div>
               <p>Seb’s speech entrance</p>
+
               <strong>Still deciding</strong>
               <span>Groomsman</span>
-              
+
             </div>
           </li>
           <li class="timeline-tbc">
             <span class="timeline-number">13</span>
             <div>
               <p>Groom’s speech entrance</p>
+
               <strong>Still deciding</strong>
               <span>Leave this cue open</span>
-              
+
             </div>
           </li></ol>
       </section>
@@ -562,27 +596,31 @@
             <span class="timeline-number">14</span>
             <div>
               <p>First dance</p>
+
               <strong>Wouldn’t It Be Nice</strong>
               <span>The Beach Boys</span>
-              
+
             </div>
           </li>
           <li>
             <span class="timeline-number">15</span>
             <div>
               <p>Father–daughter dance</p>
+
               <strong>(They Long to Be) Close to You</strong>
               <span>The Carpenters</span>
-              
+
             </div>
           </li>
           <li>
             <span class="timeline-number">16</span>
             <div>
               <p>Group-photo ploy → open dance floor</p>
+
               <strong>Y.M.C.A.</strong>
               <span>Village People</span>
               <small>MCs call everyone onto the floor for the photo, then the dancing begins.</small>
+
             </div>
           </li></ol>
       </section>
@@ -617,14 +655,14 @@
           <h3>We’ve Only Just Begun</h3><p class="artist">The Carpenters</p>
           <p class="cue-note">Bridesmaids’ aisle processional.</p>
         </article>
-        <article class="cue-card search-item"
-          data-search="bride’s walk archie, marry me alvvays provisional cue: start at the first chorus, approximately 0:43. the aisle is a long walk down the mountain, so confirm the walking time with the venue and test it against the exact track version before finalising the cue.">
+        <article class="cue-card search-item is-critical"
+          data-search="bride’s walk archie, marry me alvvays do not start from the beginning. start at the first chorus, approximately 0:43. this timestamp is provisional until checked against the exact final audio file. rehearse the full mountain-aisle walk with the venue and dj, and confirm the remaining song is long enough.">
           <div class="cue-top">
             <p class="moment">Bride’s walk</p>
-            <span class="status confirmed">Confirmed</span>
+            <span class="status critical">Critical DJ cue</span>
           </div>
           <h3>Archie, Marry Me</h3><p class="artist">Alvvays</p>
-          <p class="cue-note">Provisional cue: start at the first chorus, approximately 0:43. The aisle is a long walk down the mountain, so confirm the walking time with the venue and test it against the exact track version before finalising the cue.</p>
+          <div class="critical-cue"><strong>DJ MUST START AT 0:43 — FIRST CHORUS</strong><span>DO NOT START FROM THE BEGINNING. Start at the first chorus, approximately 0:43. This timestamp is provisional until checked against the exact final audio file. Rehearse the full mountain-aisle walk with the venue and DJ, and confirm the remaining song is long enough.</span></div>
         </article>
         <article class="cue-card search-item"
           data-search="bouquet toss · during canapés, after the photos man! i feel like a woman! shania twain play for the bouquet toss once the photos are finished.">
