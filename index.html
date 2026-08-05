@@ -2549,6 +2549,103 @@
       .group-heading th { border-radius: 0; }
     }
 
+    /* Human editorial pass: fewer generated-looking UI conventions, more hierarchy. */
+    @media screen {
+      .stat .icon,
+      .filter-btn .icon,
+      .section-icon,
+      .timeline-title-icon,
+      .phase-icon,
+      .status .icon,
+      .event-icon,
+      .footer-icon,
+      .signoff-icon { display: none; }
+
+      .hero-stats { max-width: 900px; }
+      .stat, .stat + .stat {
+        display: flex;
+        align-items: baseline;
+        justify-content: center;
+        gap: var(--ui-space-2);
+        padding: 14px var(--ui-space-4);
+      }
+      .stat strong { font-size: 17px; }
+      .stat span { margin: 0; }
+
+      .filter-btn { padding-right: 2px; padding-left: 2px; }
+
+      .playlist-section, .timeline-section {
+        margin-bottom: 0;
+        padding: var(--ui-space-12) 0;
+        border: 0;
+        border-top: 1px solid var(--ui-ink);
+        background: transparent;
+      }
+      .timeline-section { border-top-width: 2px; }
+      .section-heading, .timeline-heading {
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 0 var(--ui-space-8);
+      }
+      .section-heading > div, .timeline-heading > div { grid-column: 1; }
+      .count-pill, .timeline-heading .count-pill {
+        grid-column: 2;
+        grid-row: 1 / span 2;
+        align-self: start;
+        padding-top: 3px;
+      }
+      .playlist-section:not([data-section="key-songs"]) .section-kicker { display: none; }
+      .section-signoff { display: none; }
+
+      .cue-card.is-critical {
+        grid-column: 1 / -1;
+        min-height: 0;
+      }
+
+      .timeline-grid {
+        gap: 0;
+        border-top: 1px solid var(--ui-line);
+        border-bottom: 1px solid var(--ui-line);
+      }
+      .timeline-phase, .timeline-phase.phase-ceremony, .timeline-phase.phase-canapes {
+        border: 0;
+        border-top: 4px solid var(--phase);
+      }
+      .timeline-phase + .timeline-phase { border-left: 1px solid var(--ui-line); }
+      .timeline-phase h3 { padding-left: 0; }
+
+      .event-callout {
+        border-right: 0;
+        border-left: 0;
+      }
+      .status { gap: 0; }
+      .status.critical { display: none; }
+    }
+
+    @media screen and (max-width: 700px) {
+      .stat, .stat + .stat {
+        flex-direction: column;
+        align-items: center;
+        gap: 2px;
+      }
+      .playlist-section, .timeline-section { padding: var(--ui-space-8) 0; }
+      .section-heading, .timeline-heading {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 0;
+      }
+      .count-pill, .timeline-heading .count-pill {
+        grid-column: 1;
+        grid-row: auto;
+        justify-self: start;
+        margin-top: var(--ui-space-3);
+        padding-top: 0;
+      }
+      .timeline-grid { border-bottom: 0; }
+      .timeline-phase + .timeline-phase {
+        border-left: 0;
+        border-top: 4px solid var(--phase);
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
