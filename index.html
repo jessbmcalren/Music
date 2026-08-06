@@ -3897,6 +3897,44 @@
       .timeline-phase li:first-child { min-width: 0; }
     }
 
+    /* Editorial critical cues: use hierarchy and fine rules, not decorative stripes. */
+    @media screen {
+      .timeline-phase li.timeline-critical,
+      .timeline-phase li.timeline-critical:hover {
+        border: 1px solid rgba(75, 86, 103, .12);
+        background: rgba(255, 255, 255, .82);
+        box-shadow: 0 8px 20px rgba(55, 53, 82, .05);
+      }
+      .timeline-critical .timeline-number { color: var(--g-rose); }
+      .timeline-critical-label {
+        display: block;
+        width: auto;
+        margin: 0 0 10px;
+        padding: 0 0 8px;
+        border-bottom: 1px solid rgba(204, 113, 139, .36);
+        border-radius: 0;
+        color: #a84361;
+        background: transparent;
+        font-size: 9px;
+        font-weight: 750;
+        letter-spacing: .11em;
+      }
+      .cue-card.is-critical {
+        border: 1px solid var(--g-line);
+        background: rgba(255, 255, 255, .82);
+        box-shadow: 0 12px 32px rgba(45, 43, 70, .06);
+      }
+      .critical-cue {
+        padding: 24px 0;
+        border: 0;
+        border-top: 1px solid rgba(204, 113, 139, .28);
+        border-bottom: 1px solid rgba(204, 113, 139, .28);
+        border-radius: 0;
+        background: transparent;
+        box-shadow: none;
+      }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
