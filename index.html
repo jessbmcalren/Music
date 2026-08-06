@@ -3874,6 +3874,29 @@
       }
     }
 
+    /* Timeline layout: wide phases with cards that never collapse into slivers. */
+    @media screen and (min-width: 761px) {
+      .timeline-grid {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+      }
+      .timeline-phase,
+      .timeline-phase.phase-ceremony,
+      .timeline-phase.phase-canapes {
+        min-width: 0;
+      }
+      .timeline-phase + .timeline-phase { border: 1px solid rgba(255,255,255,.76); }
+      .timeline-phase ol {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 10px;
+      }
+      .timeline-phase.phase-canapes ol {
+        grid-template-columns: minmax(0, 520px);
+      }
+      .timeline-phase li,
+      .timeline-phase li:first-child { min-width: 0; }
+    }
+
     @media (prefers-reduced-motion: reduce) {
       html { scroll-behavior: auto; }
       *, *::before, *::after { scroll-behavior: auto !important; transition: none !important; animation: none !important; }
