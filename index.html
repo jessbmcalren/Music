@@ -4026,8 +4026,7 @@
         <button id="clear-search" type="button" aria-label="Clear search" title="Clear search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"></path></svg></button>
       </div>
       <div class="filters" role="group" aria-label="Filter by playlist section">
-        <button class="filter-btn active" type="button" data-filter="all"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg><span>All</span></button>
-        <button class="filter-btn" type="button" data-filter="key-songs"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>Key Songs</span></button>
+        <button class="filter-btn active" type="button" data-filter="key-songs"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>Key Songs</span></button>
         <button class="filter-btn" type="button" data-filter="pre-ceremony"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="12" r="5.5"></circle><circle cx="15" cy="12" r="5.5"></circle><path d="m7.5 4.5 1.5-2 1.5 2"></path></svg><span>Pre-Ceremony</span></button>
         <button class="filter-btn" type="button" data-filter="canapes"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3h10l-1.2 7.2a3.8 3.8 0 0 1-7.6 0L7 3Z"></path><path d="M12 14v7M8.5 21h7"></path></svg><span>Canapés</span></button>
         <button class="filter-btn" type="button" data-filter="dinner"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 3v8M3.5 3v5a2.5 2.5 0 0 0 5 0V3M6 11v10M15 3v18M15 3c3 2 4 5 4 8h-4"></path></svg><span>Dinner</span></button>
@@ -5633,7 +5632,7 @@
       const timeline = document.getElementById('timeline');
       const sections = [...document.querySelectorAll('.playlist-section')];
       const buttons = [...document.querySelectorAll('.filter-btn')];
-      let active = 'all';
+      let active = 'key-songs';
 
       const apply = () => {
         const query = search.value.trim().toLocaleLowerCase('en');
