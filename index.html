@@ -3906,14 +3906,14 @@
         box-shadow: 0 8px 20px rgba(55, 53, 82, .05);
       }
       .timeline-critical .timeline-number { color: var(--g-rose); }
-      .timeline-critical-label {
+      .timeline-time-label {
         display: block;
         width: auto;
         margin: 0 0 10px;
         padding: 0 0 8px;
         border-bottom: 1px solid rgba(204, 113, 139, .36);
         border-radius: 0;
-        color: #a84361;
+        color: var(--g-lilac);
         background: transparent;
         font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
         font-size: 20px;
@@ -3922,6 +3922,10 @@
         letter-spacing: -.035em;
         line-height: 1;
         text-transform: none;
+      }
+      .timeline-critical .timeline-time-label {
+        color: #a84361;
+        border-bottom-color: rgba(204, 113, 139, .36);
       }
       .cue-card.is-critical {
         border: 1px solid var(--g-line);
@@ -3954,6 +3958,30 @@
       }
       .timeline-critical small b,
       .critical-instruction { font-weight: 700; }
+      .timed-cue {
+        display: grid;
+        gap: 10px;
+        margin-top: 26px;
+        padding: 20px 0;
+        border-top: 1px solid var(--g-line);
+        border-bottom: 1px solid var(--g-line);
+      }
+      .cue-time {
+        margin: 0;
+        color: var(--g-lilac);
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: clamp(32px, 4vw, 48px);
+        font-weight: 650;
+        letter-spacing: -.055em;
+        line-height: .95;
+      }
+      .cue-instruction {
+        color: var(--g-ink);
+        font-size: 14px;
+        font-weight: 700;
+        line-height: 1.45;
+      }
+      .timed-cue span { color: var(--g-muted); font-size: 12px; line-height: 1.55; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -4061,7 +4089,7 @@
             <span class="timeline-number">04</span>
             <div>
               <p>Bride walks down the mountain aisle</p>
-              <em class="timeline-critical-label">Approx. 0:42</em>
+              <em class="timeline-time-label timeline-critical-label">Approx. 0:42</em>
 
               <strong>Archie, Marry Me</strong>
               <span>Flyte</span>
@@ -4114,10 +4142,11 @@
             <span class="timeline-number">08</span>
             <div>
               <p>Bridal party entrance</p>
+              <em class="timeline-time-label">Approx. 0:54</em>
 
               <strong>Gimme! Gimme! Gimme! (A Man After Midnight)</strong>
-              <span>ABBA</span>
-              <small>Start at the first chorus, approximately 1:08–1:10 in the standard ABBA recording, as the bridal party begins walking in. Confirm the timestamp against the final audio file.</small>
+              <span>Amanda Seyfried, Ashley Lilley &amp; Rachel McDowall</span>
+              <small>Start when she sings “Is there a man out there?” Begin as the bridal party starts walking in.</small>
 
             </div>
           </li>
@@ -4320,13 +4349,13 @@
           <p class="cue-note">During canapés, once the photos are finished and the bouquet toss is announced, please start the song.</p>
         </article>
         <article class="cue-card search-item"
-          data-search="bridal party entrance gimme! gimme! gimme! (a man after midnight) abba dj: start at the first chorus, approximately 1:08–1:10 in the standard abba recording, on the first “gimme! gimme! gimme! (a man after midnight)” line. begin as the bridal party starts walking in. confirm the timestamp against the exact final audio file. once the bridal party is in place, prepare “happy together” for the couple’s entrance.">
+          data-search="bridal party entrance gimme! gimme! gimme! (a man after midnight) amanda seyfried, ashley lilley &amp; rachel mcdowall approx. 0:54 start when she sings “is there a man out there?” begin as the bridal party starts walking in. once they are in place, prepare “happy together” for the couple’s entrance.">
           <div class="cue-top">
             <p class="moment">Bridal party entrance</p>
             <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
-          <h3>Gimme! Gimme! Gimme! (A Man After Midnight)</h3><p class="artist">ABBA</p>
-          <p class="cue-note">DJ: Start at the first chorus, approximately 1:08–1:10 in the standard ABBA recording, on the first “Gimme! Gimme! Gimme! (A Man After Midnight)” line. Begin as the bridal party starts walking in. Confirm the timestamp against the exact final audio file. Once the bridal party is in place, prepare “Happy Together” for the couple’s entrance.</p>
+          <h3>Gimme! Gimme! Gimme! (A Man After Midnight)</h3><p class="artist">Amanda Seyfried, Ashley Lilley &amp; Rachel McDowall</p>
+          <div class="timed-cue"><h4 class="cue-time">Approx. 0:54</h4><b class="cue-instruction">Start when she sings “Is there a man out there?”</b><span>Begin as the bridal party starts walking in. Once they are in place, prepare “Happy Together” for the couple’s entrance.</span></div>
         </article>
         <article class="cue-card search-item"
           data-search="bride &amp; groom entrance happy together the turtles once the bridal party is in place and the couple is announced, please start with the drum lead-in at approximately 0:39. confirm the timestamp against the exact final audio file.">
