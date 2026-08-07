@@ -4304,17 +4304,26 @@
         box-shadow: 0 14px 38px rgba(74, 80, 100, .06);
       }
       .timeline-phase::before {
-        position: absolute;
-        top: 30px;
-        left: -35px;
-        width: 13px;
-        height: 13px;
-        border: 4px solid #f4f7fb;
-        border-radius: 50%;
-        content: "";
-        background: var(--phase);
-        box-shadow: 0 0 0 1px color-mix(in srgb, var(--phase) 52%, white);
+        display: none;
       }
+      .timeline-node {
+        position: absolute;
+        top: 20px;
+        left: -42px;
+        z-index: 2;
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        border: 1px solid color-mix(in srgb, var(--phase) 30%, white);
+        border-radius: 12px;
+        color: var(--phase);
+        background:
+          radial-gradient(circle at 28% 18%, rgba(255,255,255,.94), transparent 42%),
+          linear-gradient(145deg, white, var(--phase-tint));
+        box-shadow: 0 0 0 4px #f4f7fb;
+      }
+      .timeline-node-icon { width: 18px; height: 18px; }
       .phase-pre-ceremony { --phase: var(--g-lilac); --phase-tint: var(--g-lilac-soft); }
       .phase-dinner { --phase: var(--g-rose); --phase-tint: var(--g-rose-soft); }
       .phase-dance-floor { --phase: #647694; --phase-tint: #e9eff8; }
@@ -4421,7 +4430,7 @@
     @media screen and (max-width: 760px) {
       .timeline-grid { padding-left: 24px; }
       .timeline-grid::before { left: 5px; }
-      .timeline-phase::before { left: -30px; }
+      .timeline-node { left: -37px; }
       .timeline-phase,
       .timeline-phase.phase-ceremony,
       .timeline-phase.phase-canapes { padding: 18px; border-radius: 18px; }
@@ -4480,6 +4489,7 @@
       </div>
       <div class="timeline-grid">
       <section class="timeline-phase phase-pre-ceremony">
+        <span class="timeline-node" aria-hidden="true"><svg class="icon timeline-node-icon lucide lucide-flower-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /><circle cx="12" cy="8" r="2" /><path d="M12 10v12" /><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></svg></span>
         <div class="timeline-phase-heading">
           <div>
             <h3><svg class="icon phase-icon lucide lucide-flower-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /><circle cx="12" cy="8" r="2" /><path d="M12 10v12" /><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></svg><span>Pre-Ceremony</span></h3>
@@ -4500,6 +4510,7 @@
           </li></ol>
       </section>
       <section class="timeline-phase phase-ceremony">
+        <span class="timeline-node" aria-hidden="true"><svg class="icon timeline-node-icon iconoir iconoir-rings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 8C4.686 8 2 10.686 2 14s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6Zm0 0V3" /><path d="M16 8c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6Zm0 0V3" /></svg></span>
         <div class="timeline-phase-heading">
           <div>
             <h3><svg class="icon phase-icon iconoir iconoir-rings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 8C4.686 8 2 10.686 2 14s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6Zm0 0V3" /><path d="M16 8c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6Zm0 0V3" /></svg><span>Ceremony</span></h3>
@@ -4567,6 +4578,7 @@
           </li></ol>
       </section>
       <section class="timeline-phase phase-canapes">
+        <span class="timeline-node" aria-hidden="true"><svg class="icon timeline-node-icon lucide lucide-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 22h8" /><path d="M7 10h10" /><path d="M12 15v7" /><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" /></svg></span>
         <div class="timeline-phase-heading">
           <div>
             <h3><svg class="icon phase-icon lucide lucide-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 22h8" /><path d="M7 10h10" /><path d="M12 15v7" /><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" /></svg><span>Canapés</span></h3>
@@ -4588,6 +4600,7 @@
           </li></ol>
       </section>
       <section class="timeline-phase phase-dinner">
+        <span class="timeline-node" aria-hidden="true"><svg class="icon timeline-node-icon lucide lucide-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></svg></span>
         <div class="timeline-phase-heading">
           <div>
             <h3><svg class="icon phase-icon lucide lucide-utensils" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M3 2v7c0 1.1.9 2 2 2h4a2 2 0 0 0 2-2V2" /><path d="M7 2v20" /><path d="M21 15V2a5 5 0 0 0-5 5v6c0 1.1.9 2 2 2h3Zm0 0v7" /></svg><span>Dinner &amp; Speeches</span></h3>
@@ -4657,6 +4670,7 @@
           </li></ol>
       </section>
       <section class="timeline-phase phase-dance-floor">
+        <span class="timeline-node" aria-hidden="true"><svg class="icon timeline-node-icon lucide lucide-disc-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" /><path d="M6 12c0-1.7.7-3.2 1.8-4.2" /><circle cx="12" cy="12" r="2" /><path d="M18 12c0 1.7-.7 3.2-1.8 4.2" /></svg></span>
         <div class="timeline-phase-heading">
           <div>
             <h3><svg class="icon phase-icon lucide lucide-disc-3" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="10" /><path d="M6 12c0-1.7.7-3.2 1.8-4.2" /><circle cx="12" cy="12" r="2" /><path d="M18 12c0 1.7-.7 3.2-1.8 4.2" /></svg><span>Dance Floor</span></h3>
