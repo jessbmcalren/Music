@@ -4126,6 +4126,67 @@
       #search, .filter-btn { border-color: #283029; }
     }
 
+    @media screen {
+      .hero { min-height: 560px; padding-bottom: 48px; }
+      .hero-inner { min-height: 450px; }
+    }
+
+    @media screen and (max-width: 1040px) {
+      .hero { min-height: 540px; }
+      .hero-inner { min-height: 440px; }
+    }
+
+    @media screen and (max-width: 760px) {
+      .hero { min-height: 500px; padding-bottom: 30px; }
+      .hero-inner { min-height: 430px; }
+      .toolbar {
+        top: 0;
+        width: 100%;
+        margin: 0;
+        padding: 10px 10px 8px;
+        border-right: 0;
+        border-left: 0;
+        border-radius: 0 0 18px 18px;
+      }
+      .toolbar-inner {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr);
+        gap: 8px;
+      }
+      .search-wrap {
+        width: 100%;
+        min-width: 0;
+      }
+      .filters {
+        width: 100%;
+        justify-content: flex-start;
+        gap: 6px;
+        padding: 0 0 4px;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scroll-padding-inline: 4px;
+        scroll-snap-type: x proximity;
+        touch-action: pan-x;
+      }
+      .filter-btn {
+        flex: 0 0 auto;
+        min-width: max-content;
+        min-height: 44px;
+        padding: 0 14px;
+        font-size: 11px;
+        white-space: nowrap;
+        scroll-snap-align: start;
+      }
+      .filter-btn .icon { width: 15px; height: 15px; }
+      .playlist-section,
+      .timeline-section { overflow: hidden; }
+      .cue-card,
+      .cue-card h3,
+      .cue-note,
+      .table-wrap td { min-width: 0; overflow-wrap: anywhere; }
+      .key-song-disclosure summary span { min-width: 0; overflow-wrap: anywhere; }
+    }
+
     @media print {
       .key-song-disclosure { border: 0; }
       .key-song-disclosure summary { display: none !important; }
@@ -4141,11 +4202,6 @@
       <p class="eyebrow">Wedding music plan for the DJ</p>
       <h1><span>The Wedding</span><em>Playlist</em></h1>
       <p class="hero-copy">What to play, when each song starts and every cue in the order it happens.</p>
-      <div class="hero-stats" aria-label="Playlist summary">
-        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg><strong>248</strong><span>playlist tracks</span></div>
-        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 9 5-9 5-9-5 9-5Z"></path><path d="m3 12 9 5 9-5M3 17l9 5 9-5"></path></svg><strong>1</strong><span>DJ-ordered dance list</span></div>
-        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 5c3 0 5 2 5 5v7a4 4 0 0 1-8 0v-5c0-2 1-4 3-4h5M13 5V2M17 3v13M17 6h3"></path></svg><strong>1</strong><span>live bagpiper</span></div>
-      </div>
     </div>
   </header>
 
@@ -6054,6 +6110,15 @@
         buttons.forEach((candidate) => candidate.classList.toggle('active', candidate === button));
         buttons.forEach((candidate) => candidate.setAttribute('aria-pressed', candidate === button ? 'true' : 'false'));
         apply();
+        const selectedSection = document.querySelector(
+          active === 'ceremony'
+            ? '#key-songs'
+            : '.playlist-section[data-section="' + active + '"]'
+        );
+        requestAnimationFrame(() => selectedSection?.scrollIntoView({
+          behavior: window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth',
+          block: 'start',
+        }));
       }));
       document.addEventListener('keydown', (event) => {
         if (event.key === '/' && document.activeElement !== search) {
