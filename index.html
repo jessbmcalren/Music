@@ -4137,7 +4137,7 @@
       .toolbar-inner { display: grid; grid-template-columns: minmax(0, 1fr); }
       .filters {
         display: grid;
-        grid-template-columns: repeat(7, minmax(0, 1fr));
+        grid-template-columns: repeat(6, minmax(0, 1fr));
         width: 100%;
         gap: 6px;
       }
@@ -4306,15 +4306,16 @@
       .timeline-phase::before {
         display: none;
       }
-      .timeline-node {
+      .timeline-phase .timeline-node {
         position: absolute;
         top: 20px;
         left: -43px;
         z-index: 2;
-        display: grid;
+        display: flex;
         width: 36px;
         height: 36px;
-        place-items: center;
+        align-items: center;
+        justify-content: center;
         border: 1px solid color-mix(in srgb, var(--phase) 30%, white);
         border-radius: 12px;
         color: var(--phase);
@@ -4323,7 +4324,14 @@
           linear-gradient(145deg, white, var(--phase-tint));
         box-shadow: 0 0 0 4px #f4f7fb;
       }
-      .timeline-node-icon { width: 18px; height: 18px; }
+      .timeline-phase .timeline-node-icon {
+        display: block;
+        flex: 0 0 auto;
+        width: 18px;
+        height: 18px;
+        margin: 0;
+        transform: none;
+      }
       .phase-pre-ceremony { --phase: var(--g-lilac); --phase-tint: var(--g-lilac-soft); }
       .phase-dinner { --phase: var(--g-rose); --phase-tint: var(--g-rose-soft); }
       .phase-dance-floor { --phase: #647694; --phase-tint: #e9eff8; }
@@ -4396,6 +4404,11 @@
         border-color: rgba(119, 118, 165, .13);
         background: rgba(255,255,255,.72);
       }
+      .timeline-phase small strong {
+        display: inline;
+        color: var(--g-ink);
+        font-weight: 800;
+      }
       .icon-credit {
         display: block;
         max-width: 760px;
@@ -4430,7 +4443,7 @@
     @media screen and (max-width: 760px) {
       .timeline-grid { padding-left: 24px; }
       .timeline-grid::before { left: 5px; }
-      .timeline-node { left: -38px; }
+      .timeline-phase .timeline-node { left: -38px; }
       .timeline-phase,
       .timeline-phase.phase-ceremony,
       .timeline-phase.phase-canapes { padding: 18px; border-radius: 18px; }
@@ -4465,7 +4478,6 @@
     <div class="toolbar-inner">
       <div class="filters" role="group" aria-label="Filter by playlist section">
         <button class="filter-btn active" type="button" data-filter="timeline"><svg class="icon lucide lucide-list-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 5H3" /><path d="M11 12H3" /><path d="M11 19H3" /><path d="M21 16V5" /><circle cx="18" cy="16" r="3" /></svg><span>Timeline</span></button>
-        <button class="filter-btn" type="button" data-filter="key-songs"><svg class="icon lucide lucide-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg><span>Key Songs</span></button>
         <button class="filter-btn" type="button" data-filter="pre-ceremony"><svg class="icon lucide lucide-flower-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /><circle cx="12" cy="8" r="2" /><path d="M12 10v12" /><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></svg><span>Pre-Ceremony</span></button>
         <button class="filter-btn" type="button" data-filter="ceremony"><svg class="icon iconoir iconoir-rings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 8C4.686 8 2 10.686 2 14s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6Zm0 0V3" /><path d="M16 8c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6Zm0 0V3" /></svg><span>Ceremony</span></button>
         <button class="filter-btn" type="button" data-filter="canapes"><svg class="icon lucide lucide-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 22h8" /><path d="M7 10h10" /><path d="M12 15v7" /><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" /></svg><span>Canapés</span></button>
@@ -4526,7 +4538,7 @@
 
               <strong>Live bagpipes</strong>
               <span>Matthew (bagpiper)</span>
-              <small>We’ve hired Matthew as our bagpiper. He will play the groomsmen down the aisle.</small>
+              <small>We’ve hired <strong>Matthew as our bagpiper</strong>. He will <strong>play the groomsmen down the aisle</strong>.</small>
 
             </div>
           </li>
@@ -4537,7 +4549,7 @@
 
               <strong>We’ve Only Just Begun</strong>
               <span>The Carpenters</span>
-              <small>This is the song the bridesmaids will walk down the aisle to.</small>
+              <small>This is the song <strong>the bridesmaids will walk down the aisle to</strong>.</small>
 
             </div>
           </li>
@@ -4545,11 +4557,11 @@
             <span class="timeline-number">04</span>
             <div>
               <p>Bride walks down the mountain aisle</p>
-              <em class="timeline-time-label timeline-critical-label">Approx. 0:42</em>
+              <em class="timeline-time-label timeline-critical-label">Start at approx. 0:42</em>
 
               <strong>Archie, Marry Me</strong>
               <span>Flyte</span>
-              <small><b>The bride will walk down the aisle to the Flyte version. Start when he sings “Hey, hey, marry me Archie.”</b></small>
+              <small><strong>The bride will walk down the aisle to the Flyte version.</strong> Start when he sings <strong>“Hey, hey, marry me Archie.”</strong></small>
 
             </div>
           </li>
@@ -4561,7 +4573,7 @@
 
               <strong>Lover</strong>
               <span>Taylor Swift</span>
-              <small>As the ceremony ends and everyone cheers, please play “Lover” beginning with “Ladies and gentlemen, will you please stand?” Let the song play to the very end. Once the song is finished, Matthew will begin playing the bagpipes.</small>
+              <small>As the ceremony ends and everyone cheers, please play “Lover” beginning with <strong>“Ladies and gentlemen, will you please stand?”</strong> <strong>Let the song play to the very end.</strong> Once the song is finished, <strong>Matthew will begin playing the bagpipes</strong>.</small>
 
             </div>
           </li>
@@ -4572,7 +4584,7 @@
 
               <strong>Live bagpipes</strong>
               <span>Matthew (bagpiper)</span>
-              <small>Once “Lover” finishes, Matthew will begin playing bagpipes and lead everyone up the hill to the reception. When everyone reaches the orchard, the petal and confetti toss will happen while Matthew continues playing.</small>
+              <small>Once “Lover” finishes, <strong>Matthew will begin playing bagpipes and lead everyone up the hill to the reception</strong>. When everyone reaches the orchard, <strong>the petal and confetti toss will happen while Matthew continues playing</strong>.</small>
 
             </div>
           </li></ol>
@@ -4594,7 +4606,7 @@
 
               <strong>Man! I Feel Like a Woman!</strong>
               <span>Shania Twain</span>
-              <small>The MC or bridesmaids will let you know when the ribbon-cutting ceremony will begin. Please start the song then.</small>
+              <small><strong>The MC or bridesmaids will let you know</strong> when the ribbon-cutting ceremony will begin. <strong>Please start the song then.</strong></small>
 
             </div>
           </li></ol>
@@ -4613,11 +4625,11 @@
             <span class="timeline-number">08</span>
             <div>
               <p>Bridal party, groom and bride entrance</p>
-              <em class="timeline-time-label">Approx. 0:54</em>
+              <em class="timeline-time-label">Start at approx. 0:54</em>
 
               <strong>Gimme! Gimme! Gimme! (A Man After Midnight)</strong>
               <span>Amanda Seyfried, Ashley Lilley &amp; Rachel McDowall</span>
-              <small>Start when she sings “Is there a man out there?” This is the entrance song for the bridal party, groom and bride.</small>
+              <small>Start when she sings <strong>“Is there a man out there?”</strong> This is the <strong>entrance song for the bridal party, groom and bride</strong>.</small>
 
             </div>
           </li>
@@ -4629,7 +4641,7 @@
 
               <strong>The Best Day</strong>
               <span>Taylor Swift</span>
-              <small>Start as Taylor sings “I have an excellent father, his strength is making me stronger”, then fade gently at the end of that line.</small>
+              <small>Start as Taylor sings <strong>“I have an excellent father, his strength is making me stronger”</strong>, then <strong>fade gently at the end of that line</strong>.</small>
 
             </div>
           </li>
@@ -4641,7 +4653,7 @@
 
               <strong>You’re My Best Friend</strong>
               <span>Queen</span>
-              <small>Start as he sings “Oh, you’re my best friend” while she comes forward, then fade gently when she reaches the microphone.</small>
+              <small>Start as he sings <strong>“Oh, you’re my best friend”</strong> while she comes forward, then <strong>fade gently when she reaches the microphone</strong>.</small>
 
             </div>
           </li>
@@ -4652,7 +4664,7 @@
 
               <strong>Sister Bethina</strong>
               <span>Mgarimbe</span>
-              <small>This is their speech entrance song. Start it from the beginning as they come forward.</small>
+              <small>This is their speech entrance song. <strong>Start it from the beginning</strong> as they come forward.</small>
 
             </div>
           </li>
@@ -4660,11 +4672,11 @@
             <span class="timeline-number">12</span>
             <div>
               <p>Groom’s speech entrance</p>
-              <em class="timeline-time-label">Approx. 0:33</em>
+              <em class="timeline-time-label">Start at approx. 0:33</em>
 
               <strong>Jessica</strong>
               <span>Kurt Darren</span>
-              <small>Start on “Jessica” and stop at the next “Jessica.” This is the groom’s speech entrance song.</small>
+              <small><strong>Start on “Jessica” and stop at the next “Jessica.”</strong> This is the groom’s speech entrance song.</small>
 
             </div>
           </li></ol>
@@ -4686,7 +4698,7 @@
 
               <strong>Wouldn’t It Be Nice</strong>
               <span>The Beach Boys</span>
-              <small>Please start from the beginning.</small>
+              <small><strong>Please start from the beginning.</strong></small>
 
             </div>
           </li>
@@ -4697,7 +4709,7 @@
 
               <strong>(They Long to Be) Close to You</strong>
               <span>The Carpenters</span>
-              <small>Please start from the beginning.</small>
+              <small><strong>Please start from the beginning.</strong></small>
 
             </div>
           </li>
@@ -4708,7 +4720,7 @@
 
               <strong>Y.M.C.A.</strong>
               <span>Village People</span>
-              <small>The photographer will invite everyone onto the dance floor for a group photo. As soon as the photo is finished, please start Y.M.C.A. to open the dance floor.</small>
+              <small>The photographer will invite everyone onto the dance floor for a group photo. <strong>As soon as the photo is finished</strong>, please <strong>start Y.M.C.A. to open the dance floor</strong>.</small>
 
             </div>
           </li>
@@ -4719,7 +4731,7 @@
 
               <strong>You Sexy Thing</strong>
               <span>Hot Chocolate</span>
-              <small>I’ll ask the MCs and bridal party to let you know when the garter toss will be happening.</small>
+              <small>I’ll ask the <strong>MCs and bridal party</strong> to let you know <strong>when the garter toss will be happening</strong>.</small>
 
             </div>
           </li></ol>
@@ -4759,13 +4771,13 @@
           <p class="cue-note">This is the song the bridesmaids will walk down the aisle to.</p>
         </article>
         <article class="cue-card search-item is-critical"
-          data-search="bride’s walk archie, marry me flyte approx. 0:42 start when he sings “hey, hey, marry me archie.” the bride will walk down the aisle to the flyte version.">
+          data-search="bride’s walk archie, marry me flyte start at approx. 0:42 start when he sings “hey, hey, marry me archie.” the bride will walk down the aisle to the flyte version.">
           <div class="cue-top">
             <p class="moment">Bride’s walk</p>
             <span class="status critical"><svg class="icon status-icon lucide lucide-triangle-alert" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3" /><path d="M12 9v4" /><path d="M12 17h.01" /></svg>Critical DJ cue</span>
           </div>
           <h3>Archie, Marry Me</h3><p class="artist">Flyte</p>
-          <div class="critical-cue"><h4 class="critical-time">Approx. 0:42</h4><b class="critical-instruction">Start when he sings “Hey, hey, marry me Archie.”</b><span>The bride will walk down the aisle to the Flyte version.</span></div>
+          <div class="critical-cue"><h4 class="critical-time">Start at approx. 0:42</h4><b class="critical-instruction">Start when he sings “Hey, hey, marry me Archie.”</b><span>The bride will walk down the aisle to the Flyte version.</span></div>
         </article>
           </div>
         </section>
@@ -4808,12 +4820,12 @@
           <h3 class="cue-group-heading"><svg class="icon cue-group-icon lucide lucide-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg><span>Entrances</span></h3>
           <div class="cue-grid">
         <article class="cue-card search-item"
-          data-search="bridal party, groom and bride entrance gimme! gimme! gimme! (a man after midnight) amanda seyfried, ashley lilley &amp; rachel mcdowall approx. 0:54 start when she sings “is there a man out there?” this is the entrance song for the bridal party, groom and bride.">
+          data-search="bridal party, groom and bride entrance gimme! gimme! gimme! (a man after midnight) amanda seyfried, ashley lilley &amp; rachel mcdowall start at approx. 0:54 start when she sings “is there a man out there?” this is the entrance song for the bridal party, groom and bride.">
           <div class="cue-top">
             <p class="moment">Bridal party, groom and bride entrance</p>
           </div>
           <h3>Gimme! Gimme! Gimme! (A Man After Midnight)</h3><p class="artist">Amanda Seyfried, Ashley Lilley &amp; Rachel McDowall</p>
-          <div class="timed-cue"><h4 class="cue-time">Approx. 0:54</h4><b class="cue-instruction">Start when she sings “Is there a man out there?”</b><span>This is the entrance song for the bridal party, groom and bride.</span></div>
+          <div class="timed-cue"><h4 class="cue-time">Start at approx. 0:54</h4><b class="cue-instruction">Start when she sings “Is there a man out there?”</b><span>This is the entrance song for the bridal party, groom and bride.</span></div>
         </article>
           </div>
         </section>
@@ -4845,12 +4857,12 @@
           <p class="cue-note">This is their speech entrance song. Please start it from the beginning as they come forward.</p>
         </article>
         <article class="cue-card search-item"
-          data-search="groom’s speech entrance jessica kurt darren approx. 0:33 start on “jessica” and stop at the next “jessica.” this is the groom’s speech entrance song.">
+          data-search="groom’s speech entrance jessica kurt darren start at approx. 0:33 start on “jessica” and stop at the next “jessica.” this is the groom’s speech entrance song.">
           <div class="cue-top">
             <p class="moment">Groom’s speech entrance</p>
           </div>
           <h3>Jessica</h3><p class="artist">Kurt Darren</p>
-          <div class="timed-cue"><h4 class="cue-time">Approx. 0:33</h4><b class="cue-instruction">Start on “Jessica” and stop at the next “Jessica.”</b><span>This is the groom’s speech entrance song.</span></div>
+          <div class="timed-cue"><h4 class="cue-time">Start at approx. 0:33</h4><b class="cue-instruction">Start on “Jessica” and stop at the next “Jessica.”</b><span>This is the groom’s speech entrance song.</span></div>
         </article>
           </div>
         </section>
@@ -5362,12 +5374,12 @@
           <h3 class="cue-group-heading"><svg class="icon cue-group-icon lucide lucide-sparkles" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M11.017 2.814a1 1 0 0 1 1.966 0l1.051 5.558a2 2 0 0 0 1.594 1.594l5.558 1.051a1 1 0 0 1 0 1.966l-5.558 1.051a2 2 0 0 0-1.594 1.594l-1.051 5.558a1 1 0 0 1-1.966 0l-1.051-5.558a2 2 0 0 0-1.594-1.594l-5.558-1.051a1 1 0 0 1 0-1.966l5.558-1.051a2 2 0 0 0 1.594-1.594z" /><path d="M20 2v4" /><path d="M22 4h-4" /><circle cx="4" cy="20" r="2" /></svg><span>Entrances</span></h3>
           <div class="cue-grid">
         <article class="cue-card search-item"
-          data-search="bridal party, groom and bride entrance gimme! gimme! gimme! (a man after midnight) amanda seyfried, ashley lilley &amp; rachel mcdowall approx. 0:54 start when she sings “is there a man out there?” this is the entrance song for the bridal party, groom and bride.">
+          data-search="bridal party, groom and bride entrance gimme! gimme! gimme! (a man after midnight) amanda seyfried, ashley lilley &amp; rachel mcdowall start at approx. 0:54 start when she sings “is there a man out there?” this is the entrance song for the bridal party, groom and bride.">
           <div class="cue-top">
             <p class="moment">Bridal party, groom and bride entrance</p>
           </div>
           <h3>Gimme! Gimme! Gimme! (A Man After Midnight)</h3><p class="artist">Amanda Seyfried, Ashley Lilley &amp; Rachel McDowall</p>
-          <div class="timed-cue"><h4 class="cue-time">Approx. 0:54</h4><b class="cue-instruction">Start when she sings “Is there a man out there?”</b><span>This is the entrance song for the bridal party, groom and bride.</span></div>
+          <div class="timed-cue"><h4 class="cue-time">Start at approx. 0:54</h4><b class="cue-instruction">Start when she sings “Is there a man out there?”</b><span>This is the entrance song for the bridal party, groom and bride.</span></div>
         </article>
           </div>
         </section>
@@ -5399,12 +5411,12 @@
           <p class="cue-note">This is their speech entrance song. Please start it from the beginning as they come forward.</p>
         </article>
         <article class="cue-card search-item"
-          data-search="groom’s speech entrance jessica kurt darren approx. 0:33 start on “jessica” and stop at the next “jessica.” this is the groom’s speech entrance song.">
+          data-search="groom’s speech entrance jessica kurt darren start at approx. 0:33 start on “jessica” and stop at the next “jessica.” this is the groom’s speech entrance song.">
           <div class="cue-top">
             <p class="moment">Groom’s speech entrance</p>
           </div>
           <h3>Jessica</h3><p class="artist">Kurt Darren</p>
-          <div class="timed-cue"><h4 class="cue-time">Approx. 0:33</h4><b class="cue-instruction">Start on “Jessica” and stop at the next “Jessica.”</b><span>This is the groom’s speech entrance song.</span></div>
+          <div class="timed-cue"><h4 class="cue-time">Start at approx. 0:33</h4><b class="cue-instruction">Start on “Jessica” and stop at the next “Jessica.”</b><span>This is the groom’s speech entrance song.</span></div>
         </article>
           </div>
         </section>
