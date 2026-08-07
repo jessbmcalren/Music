@@ -4131,6 +4131,8 @@
       .hero-inner { min-height: 450px; }
     }
 
+    .tab-scroll-hint { display: none; }
+
     @media screen and (min-width: 761px) {
       .toolbar-inner { display: grid; grid-template-columns: minmax(0, 1fr); }
       .filters {
@@ -4206,6 +4208,21 @@
         scroll-snap-align: start;
       }
       .filter-btn .icon { width: 15px; height: 15px; }
+      .tab-scroll-hint {
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        gap: 6px;
+        margin: 0;
+        padding: 0 4px 2px;
+        color: var(--g-lilac);
+        font-size: 10px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      .tab-scroll-hint span { font-size: 15px; line-height: 1; }
+      .tab-scroll-hint[hidden] { display: none; }
       .playlist-section,
       .timeline-section { overflow: hidden; }
       .cue-card,
@@ -4243,6 +4260,7 @@
         <button class="filter-btn" type="button" data-filter="dinner"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 3v8M3.5 3v5a2.5 2.5 0 0 0 5 0V3M6 11v10M15 3v18M15 3c3 2 4 5 4 8h-4"></path></svg><span>Dinner</span></button>
         <button class="filter-btn" type="button" data-filter="reception"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>Dance Floor</span></button>
       </div>
+      <p class="tab-scroll-hint" id="tab-scroll-hint" aria-hidden="true" hidden>Swipe tabs for more <span>→</span></p>
     </div>
   </nav>
 
@@ -6066,7 +6084,14 @@
       const keySongsCount = document.getElementById('key-songs-count');
       const sections = [...document.querySelectorAll('.playlist-section')];
       const buttons = [...document.querySelectorAll('.filter-btn')];
+      const filters = document.querySelector('.filters');
+      const tabScrollHint = document.getElementById('tab-scroll-hint');
       let active = 'key-songs';
+
+      const updateTabScrollHint = () => {
+        const hasOverflow = filters.scrollWidth > filters.clientWidth + 2;
+        tabScrollHint.hidden = !hasOverflow || filters.scrollLeft > 8;
+      };
 
       const apply = () => {
         for (const section of sections) {
@@ -6120,6 +6145,9 @@
         }));
       }));
       buttons[0].setAttribute('aria-pressed', 'true');
+      filters.addEventListener('scroll', updateTabScrollHint, { passive: true });
+      window.addEventListener('resize', updateTabScrollHint);
+      requestAnimationFrame(updateTabScrollHint);
       apply();
     })();
   </script>
