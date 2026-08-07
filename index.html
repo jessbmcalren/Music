@@ -4464,8 +4464,8 @@
   <nav class="toolbar" aria-label="Playlist controls">
     <div class="toolbar-inner">
       <div class="filters" role="group" aria-label="Filter by playlist section">
-        <button class="filter-btn active" type="button" data-filter="key-songs"><svg class="icon lucide lucide-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg><span>Key Songs</span></button>
         <button class="filter-btn" type="button" data-filter="timeline"><svg class="icon lucide lucide-list-music" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M16 5H3" /><path d="M11 12H3" /><path d="M11 19H3" /><path d="M21 16V5" /><circle cx="18" cy="16" r="3" /></svg><span>Timeline</span></button>
+        <button class="filter-btn active" type="button" data-filter="key-songs"><svg class="icon lucide lucide-heart" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M2 9.5a5.5 5.5 0 0 1 9.591-3.676.56.56 0 0 0 .818 0A5.49 5.49 0 0 1 22 9.5c0 2.29-1.5 4-3 5.5l-5.492 5.313a2 2 0 0 1-3 .019L5 15c-1.5-1.5-3-3.2-3-5.5" /></svg><span>Key Songs</span></button>
         <button class="filter-btn" type="button" data-filter="pre-ceremony"><svg class="icon lucide lucide-flower-2" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M12 5a3 3 0 1 1 3 3m-3-3a3 3 0 1 0-3 3m3-3v1M9 8a3 3 0 1 0 3 3M9 8h1m5 0a3 3 0 1 1-3 3m3-3h-1m-2 3v-1" /><circle cx="12" cy="8" r="2" /><path d="M12 10v12" /><path d="M12 22c4.2 0 7-1.667 7-5-4.2 0-7 1.667-7 5Z" /><path d="M12 22c-4.2 0-7-1.667-7-5 4.2 0 7 1.667 7 5Z" /></svg><span>Pre-Ceremony</span></button>
         <button class="filter-btn" type="button" data-filter="ceremony"><svg class="icon iconoir iconoir-rings" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 8C4.686 8 2 10.686 2 14s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6Zm0 0V3" /><path d="M16 8c-3.314 0-6 2.686-6 6s2.686 6 6 6 6-2.686 6-6-2.686-6-6-6Zm0 0V3" /></svg><span>Ceremony</span></button>
         <button class="filter-btn" type="button" data-filter="canapes"><svg class="icon lucide lucide-wine" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 22h8" /><path d="M7 10h10" /><path d="M12 15v7" /><path d="M12 15a5 5 0 0 0 5-5c0-2-.5-4-2-8H9c-1.5 4-2 6-2 8a5 5 0 0 0 5 5Z" /></svg><span>Canapés</span></button>
@@ -6427,7 +6427,7 @@
         event.preventDefault();
         document.querySelector('.filter-btn[data-filter="' + link.dataset.timelineFilter + '"]')?.click();
       }));
-      buttons[0].setAttribute('aria-pressed', 'true');
+      document.querySelector('.filter-btn.active')?.setAttribute('aria-pressed', 'true');
       filters.addEventListener('scroll', updateTabScrollHint, { passive: true });
       window.addEventListener('resize', updateTabScrollHint);
       requestAnimationFrame(updateTabScrollHint);
