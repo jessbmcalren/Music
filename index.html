@@ -4131,6 +4131,17 @@
       .hero-inner { min-height: 450px; }
     }
 
+    @media screen and (min-width: 761px) {
+      .toolbar-inner { display: grid; grid-template-columns: minmax(0, 1fr); }
+      .filters {
+        display: grid;
+        grid-template-columns: repeat(6, minmax(0, 1fr));
+        width: 100%;
+        gap: 6px;
+      }
+      .filter-btn { width: 100%; }
+    }
+
     @media screen and (max-width: 1040px) {
       .hero {
         min-height: 0;
@@ -4174,6 +4185,7 @@
         min-width: 0;
       }
       .filters {
+        display: flex;
         width: 100%;
         justify-content: flex-start;
         gap: 6px;
@@ -4223,12 +4235,6 @@
 
   <nav class="toolbar" aria-label="Playlist controls">
     <div class="toolbar-inner">
-      <div class="search-wrap">
-        <span aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="11" cy="11" r="7"></circle><path d="m20 20-3.5-3.5"></path></svg></span>
-        <label for="search" class="skip-link">Search songs, artists or moments</label>
-        <input id="search" type="search" placeholder="Search songs, artists or moments" autocomplete="off">
-        <button id="clear-search" type="button" aria-label="Clear search" title="Clear search"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m6 6 12 12M18 6 6 18"></path></svg></button>
-      </div>
       <div class="filters" role="group" aria-label="Filter by playlist section">
         <button class="filter-btn active" type="button" data-filter="key-songs"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>Key Songs</span></button>
         <button class="filter-btn" type="button" data-filter="pre-ceremony"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="12" r="5.5"></circle><circle cx="15" cy="12" r="5.5"></circle><path d="m7.5 4.5 1.5-2 1.5 2"></path></svg><span>Pre-Ceremony</span></button>
@@ -4241,8 +4247,6 @@
   </nav>
 
   <main id="playlist">
-    <p class="results-line" id="results" aria-live="polite">14 matches</p>
-
     <section class="timeline-section" id="timeline" aria-labelledby="timeline-title">
       <div class="timeline-heading">
         <span class="timeline-title-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M5 5h.01M5 12h.01M5 19h.01M9 5h10M9 12h10M9 19h10"></path></svg></span>
@@ -6046,9 +6050,6 @@
       <p class="section-signoff"><svg class="icon signoff-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>End of playlist</span></p>
     </section>
 
-    <div class="empty-state" id="empty-state">
-      <strong>No matches found.</strong><br>Try another song, artist or wedding moment.
-    </div>
   </main>
 
   <footer>
@@ -6059,10 +6060,6 @@
 
   <script>
     (() => {
-      const search = document.getElementById('search');
-      const clear = document.getElementById('clear-search');
-      const results = document.getElementById('results');
-      const empty = document.getElementById('empty-state');
       const timeline = document.getElementById('timeline');
       const keySongsTitle = document.getElementById('key-songs-title');
       const keySongsDescription = document.getElementById('key-songs-description');
@@ -6072,20 +6069,15 @@
       let active = 'key-songs';
 
       const apply = () => {
-        const query = search.value.trim().toLocaleLowerCase('en');
-        let visibleTotal = 0;
-
         for (const section of sections) {
           const ceremonyMode = active === 'ceremony';
           const categoryMatch = active === 'all' || section.dataset.section === active || (ceremonyMode && section.dataset.section === 'key-songs');
           const items = [...section.querySelectorAll('.search-item')];
-          let sectionVisible = 0;
 
           for (const item of items) {
             const ceremonyItem = Boolean(item.closest('.cue-group-ceremony, .cue-group-after-ceremony'));
-            const matches = categoryMatch && (!ceremonyMode || ceremonyItem) && (!query || item.dataset.search.includes(query));
+            const matches = categoryMatch && (!ceremonyMode || ceremonyItem);
             item.hidden = !matches;
-            if (matches) sectionVisible += 1;
           }
 
           for (const group of section.querySelectorAll('.dance-group')) {
@@ -6096,8 +6088,7 @@
             group.hidden = ![...group.querySelectorAll('.search-item')].some((item) => !item.hidden);
           }
 
-          section.hidden = !categoryMatch || (query && sectionVisible === 0);
-          visibleTotal += sectionVisible;
+          section.hidden = !categoryMatch;
         }
 
         if (active === 'ceremony') {
@@ -6110,17 +6101,9 @@
           keySongsCount.textContent = '14 key cues';
         }
 
-        const label = query || active !== 'all'
-          ? visibleTotal + ' ' + (visibleTotal === 1 ? 'match' : 'matches')
-          : 'Showing all 262 entries';
-        results.textContent = label;
-        empty.classList.toggle('visible', visibleTotal === 0);
-        timeline.hidden = Boolean(query) || active !== 'all';
-        clear.hidden = search.value.length === 0;
+        timeline.hidden = active !== 'all';
       };
 
-      search.addEventListener('input', apply);
-      clear.addEventListener('click', () => { search.value = ''; search.focus(); apply(); });
       buttons.forEach((button) => button.addEventListener('click', () => {
         active = button.dataset.filter;
         buttons.forEach((candidate) => candidate.classList.toggle('active', candidate === button));
@@ -6136,12 +6119,6 @@
           block: 'start',
         }));
       }));
-      document.addEventListener('keydown', (event) => {
-        if (event.key === '/' && document.activeElement !== search) {
-          event.preventDefault();
-          search.focus();
-        }
-      });
       buttons[0].setAttribute('aria-pressed', 'true');
       apply();
     })();
