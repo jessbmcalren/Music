@@ -4460,9 +4460,17 @@
     }
 
     @media screen and (max-width: 760px) {
-      .timeline-grid { padding-left: 24px; }
+      .timeline-grid { padding-left: 44px; }
       .timeline-grid::before { left: 5px; }
-      .timeline-phase .timeline-node { left: -38px; }
+      .timeline-phase .timeline-node {
+        left: -55px;
+        width: 32px;
+        height: 32px;
+      }
+      .timeline-phase .timeline-node-icon {
+        width: 16px;
+        height: 16px;
+      }
       .timeline-phase,
       .timeline-phase.phase-ceremony,
       .timeline-phase.phase-canapes { padding: 18px; border-radius: 18px; }
