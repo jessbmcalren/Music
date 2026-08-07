@@ -377,6 +377,9 @@
       .playlist-section[hidden], .search-item[hidden], .dance-group[hidden] { display: revert !important; }
       .section-heading { margin-bottom: 4mm; }
       .section-heading h2 { font-size: 25pt; }
+      .key-song-disclosure { border: 0; }
+      .key-song-disclosure summary { display: none !important; }
+      .key-song-disclosure > .embedded-cues { display: grid !important; }
       .cue-grid { grid-template-columns: 1fr 1fr; gap: 3mm; }
       .cue-card { min-height: 38mm; padding: 4mm; break-inside: avoid; }
       .table-wrap { border-radius: 0; }
@@ -946,7 +949,7 @@
       .section-icon { grid-row: 1 / span 2; width: 3rem; height: 3rem; border-radius: 14px; }
       .section-heading > div { min-width: 0; }
       .section-heading h2 { font-size: 2.35rem; }
-      .count-pill { grid-column: 2; justify-self: start; margin-top: .8rem; }
+      .count-pill { grid-column: 1 / -1; justify-self: center; margin-top: .8rem; }
       .cue-grid { grid-template-columns: 1fr; }
       .cue-card { min-height: 0; }
       .cue-top { align-items: start; flex-direction: column; }
@@ -3180,9 +3183,9 @@
       .cue-top { align-items: center; gap: 12px; }
       .moment {
         color: var(--g-muted);
-        font-size: 8px;
-        font-weight: 800;
-        letter-spacing: .14em;
+        font-size: 11px;
+        font-weight: 850;
+        letter-spacing: .11em;
         line-height: 1.4;
         text-transform: uppercase;
       }
@@ -3945,7 +3948,7 @@
         margin: 0;
         color: #a84361;
         font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-        font-size: clamp(42px, 6vw, 66px);
+        font-size: clamp(32px, 4vw, 48px);
         font-weight: 650;
         letter-spacing: -.06em;
         line-height: .9;
@@ -3982,11 +3985,21 @@
         line-height: 1.45;
       }
       .cue-title-time {
-        color: var(--g-rose);
-        font-size: .58em;
-        font-weight: 600;
-        letter-spacing: -.02em;
-        white-space: nowrap;
+        display: block;
+        margin-top: 8px;
+        color: var(--g-lilac);
+        font-family: "DM Sans", -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+        font-size: clamp(20px, 2vw, 26px);
+        font-weight: 700;
+        letter-spacing: -.025em;
+        line-height: 1.08;
+      }
+      .critical-time,
+      .cue-time {
+        font-size: clamp(20px, 2vw, 26px);
+        font-weight: 700;
+        letter-spacing: -.025em;
+        line-height: 1.08;
       }
       .timed-cue span { color: var(--g-muted); font-size: 12px; line-height: 1.55; }
       .cue-groups {
@@ -4020,11 +4033,82 @@
         color: var(--g-rose);
         stroke-width: 1.8;
       }
+      .embedded-cues {
+        margin: 0 0 32px;
+        padding: 24px;
+        border: 1px solid var(--g-line);
+        border-radius: 22px;
+        background: rgba(255, 255, 255, .58);
+      }
+      .key-song-disclosure {
+        margin: 0 0 32px;
+        overflow: hidden;
+        border: 1px solid var(--g-line-strong);
+        border-radius: 18px;
+        background: rgba(255, 255, 255, .7);
+      }
+      .key-song-disclosure summary {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto 36px;
+        align-items: center;
+        gap: 16px;
+        min-height: 68px;
+        padding: 14px 18px;
+        color: var(--g-ink);
+        cursor: pointer;
+        list-style: none;
+        font-size: 15px;
+        font-weight: 750;
+      }
+      .key-song-disclosure summary::-webkit-details-marker { display: none; }
+      .key-song-disclosure summary small {
+        color: var(--g-muted);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: .08em;
+        text-transform: uppercase;
+      }
+      .key-song-disclosure summary::after {
+        content: "+";
+        display: grid;
+        width: 36px;
+        height: 36px;
+        place-items: center;
+        border-radius: 50%;
+        color: white;
+        background: var(--section-accent);
+        font-size: 21px;
+        font-weight: 500;
+        line-height: 1;
+      }
+      .key-song-disclosure[open] summary::after { content: "−"; }
+      .key-song-disclosure[open] summary { border-bottom: 1px solid var(--g-line); }
+      .key-song-disclosure .embedded-cues {
+        margin: 0;
+        border: 0;
+        border-radius: 0;
+        background: rgba(255, 255, 255, .38);
+      }
+    }
+
+    .count-pill,
+    .timeline-heading .count-pill {
+      display: inline-grid;
+      place-items: center;
+      text-align: center;
+      line-height: 1.25;
     }
 
     @media screen and (max-width: 700px) {
       .cue-groups { gap: 36px; }
       .cue-group-heading { margin-bottom: 14px; font-size: 11px; }
+      .embedded-cues { margin-bottom: 24px; padding: 16px; border-radius: 18px; }
+      .key-song-disclosure { margin-bottom: 24px; border-radius: 16px; }
+      .key-song-disclosure summary { min-height: 62px; grid-template-columns: minmax(0, 1fr) auto 32px; gap: 10px; padding: 12px 14px; }
+      .key-song-disclosure summary::after { width: 32px; height: 32px; }
+      .key-song-disclosure .embedded-cues { margin: 0; border-radius: 0; }
+      .count-pill,
+      .timeline-heading .count-pill { justify-self: center; }
     }
 
     @media (prefers-reduced-motion: reduce) {
@@ -4041,6 +4125,12 @@
       .timeline-phase { border-width: 2px; border-color: #283029; }
       #search, .filter-btn { border-color: #283029; }
     }
+
+    @media print {
+      .key-song-disclosure { border: 0; }
+      .key-song-disclosure summary { display: none !important; }
+      .key-song-disclosure > .embedded-cues { display: grid !important; }
+    }
   </style>
 </head>
 <body>
@@ -4052,9 +4142,8 @@
       <h1><span>The Wedding</span><em>Playlist</em></h1>
       <p class="hero-copy">What to play, when each song starts and every cue in the order it happens.</p>
       <div class="hero-stats" aria-label="Playlist summary">
-        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg><strong>211</strong><span>playlist tracks</span></div>
-        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 9 5-9 5-9-5 9-5Z"></path><path d="m3 12 9 5 9-5M3 17l9 5 9-5"></path></svg><strong>17</strong><span>dance sections</span></div>
-        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg><strong>13 of 17</strong><span>cues confirmed</span></div>
+        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg><strong>248</strong><span>playlist tracks</span></div>
+        <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 2 9 5-9 5-9-5 9-5Z"></path><path d="m3 12 9 5 9-5M3 17l9 5 9-5"></path></svg><strong>1</strong><span>DJ-ordered dance list</span></div>
         <div class="stat"><svg class="icon stat-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 5c3 0 5 2 5 5v7a4 4 0 0 1-8 0v-5c0-2 1-4 3-4h5M13 5V2M17 3v13M17 6h3"></path></svg><strong>1</strong><span>live bagpiper</span></div>
       </div>
     </div>
@@ -4071,6 +4160,7 @@
       <div class="filters" role="group" aria-label="Filter by playlist section">
         <button class="filter-btn active" type="button" data-filter="key-songs"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg><span>Key Songs</span></button>
         <button class="filter-btn" type="button" data-filter="pre-ceremony"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="12" r="5.5"></circle><circle cx="15" cy="12" r="5.5"></circle><path d="m7.5 4.5 1.5-2 1.5 2"></path></svg><span>Pre-Ceremony</span></button>
+        <button class="filter-btn" type="button" data-filter="ceremony"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3ZM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14ZM19 13l.7 1.8 1.8.7-1.8.7L19 18l-.7-1.8-1.8-.7 1.8-.7L19 13Z"></path></svg><span>Ceremony</span></button>
         <button class="filter-btn" type="button" data-filter="canapes"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3h10l-1.2 7.2a3.8 3.8 0 0 1-7.6 0L7 3Z"></path><path d="M12 14v7M8.5 21h7"></path></svg><span>Canapés</span></button>
         <button class="filter-btn" type="button" data-filter="dinner"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 3v8M3.5 3v5a2.5 2.5 0 0 0 5 0V3M6 11v10M15 3v18M15 3c3 2 4 5 4 8h-4"></path></svg><span>Dinner</span></button>
         <button class="filter-btn" type="button" data-filter="reception"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>Dance Floor</span></button>
@@ -4079,7 +4169,7 @@
   </nav>
 
   <main id="playlist">
-    <p class="results-line" id="results" aria-live="polite">17 matches</p>
+    <p class="results-line" id="results" aria-live="polite">14 matches</p>
 
     <section class="timeline-section" id="timeline" aria-labelledby="timeline-title">
       <div class="timeline-heading">
@@ -4089,7 +4179,7 @@
           <h2 id="timeline-title">The Music Timeline</h2>
           <p>For the venue, MCs, musicians and DJ. Add exact times when the venue schedule is confirmed.</p>
         </div>
-        <span class="count-pill">18 moments</span>
+        <span class="count-pill">15 moments</span>
       </div>
       <div class="timeline-grid">
       <section class="timeline-phase phase-ceremony">
@@ -4112,7 +4202,7 @@
 
               <strong>Live bagpipes</strong>
               <span>Matthew (bagpiper)</span>
-              <small>Matthew begins playing as the groomsmen start their aisle walk. Confirm his start signal before the ceremony.</small>
+              <small>We’ve hired Matthew as our bagpiper. He will play the groomsmen down the aisle.</small>
 
             </div>
           </li>
@@ -4123,7 +4213,7 @@
 
               <strong>We’ve Only Just Begun</strong>
               <span>The Carpenters</span>
-              <small>Please begin as the bridesmaids start walking and continue until everyone is in place.</small>
+              <small>This is the song the bridesmaids will walk down the aisle to.</small>
 
             </div>
           </li>
@@ -4135,7 +4225,7 @@
 
               <strong>Archie, Marry Me</strong>
               <span>Flyte</span>
-              <small><b>Start when he sings “Hey, hey, marry me Archie.”</b></small>
+              <small><b>The bride will walk down the aisle to the Flyte version. Start when he sings “Hey, hey, marry me Archie.”</b></small>
 
             </div>
           </li>
@@ -4146,18 +4236,18 @@
 
               <strong>Lover</strong>
               <span>Taylor Swift</span>
-              <small>DJ: As the ceremony ends and everyone cheers, please play “Lover” loudly from the bridge at approximately 2:13, beginning with “Ladies and gentlemen, will you please stand?” Confirm the timestamp against the exact final studio audio file.</small>
+              <small>As the ceremony ends and everyone cheers, please play “Lover” from approximately 2:13, beginning with “Ladies and gentlemen, will you please stand?”</small>
 
             </div>
           </li>
           <li>
             <span class="timeline-number">06</span>
             <div>
-              <p>After Lover: ceremony exit</p>
+              <p>Orchard petal and confetti toss</p>
 
               <strong>Live bagpipes</strong>
               <span>Matthew (bagpiper)</span>
-              <small>As the “Lover” cue finishes, Matthew begins playing live bagpipes.</small>
+              <small>Once “Lover” finishes, Matthew will begin playing bagpipes and lead everyone up the hill to the reception. When everyone reaches the orchard, the petal and confetti toss will happen while Matthew continues playing.</small>
 
             </div>
           </li></ol>
@@ -4168,11 +4258,11 @@
           <li>
             <span class="timeline-number">07</span>
             <div>
-              <p>Bouquet toss</p>
+              <p>Bouquet ribbon ceremony</p>
 
               <strong>Man! I Feel Like a Woman!</strong>
               <span>Shania Twain</span>
-              <small>During canapés, once the photos are finished and the bouquet toss is announced, please start the song.</small>
+              <small>The MC or bridesmaids will let you know when the ribbon-cutting ceremony will begin. Please start the song then.</small>
 
             </div>
           </li></ol>
@@ -4183,23 +4273,12 @@
           <li>
             <span class="timeline-number">08</span>
             <div>
-              <p>Bridal party entrance</p>
+              <p>Bridal party, groom and bride entrance</p>
               <em class="timeline-time-label">Approx. 0:54</em>
 
               <strong>Gimme! Gimme! Gimme! (A Man After Midnight)</strong>
               <span>Amanda Seyfried, Ashley Lilley &amp; Rachel McDowall</span>
-              <small>Start when she sings “Is there a man out there?” Begin as the bridal party starts walking in.</small>
-
-            </div>
-          </li>
-          <li class="timeline-tbc">
-            <span class="timeline-number">09</span>
-            <div>
-              <p>MCs walk up</p>
-
-              <strong>Song to be confirmed</strong>
-              <span>After the bridal party entrance, before dinner speeches</span>
-              <small>This song is still being chosen; please keep the cue open.</small>
+              <small>Start when she sings “Is there a man out there?” This is the entrance song for the bridal party, groom and bride.</small>
 
             </div>
           </li></ol>
@@ -4208,46 +4287,37 @@
         <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"></path></svg><span>Dinner and speeches</span></h3>
         <ol>
           <li>
-            <span class="timeline-number">10</span>
+            <span class="timeline-number">09</span>
             <div>
               <p>Dad’s speech entrance</p>
+              <em class="timeline-time-label">Start at approx. 2:20</em>
 
               <strong>The Best Day</strong>
               <span>Taylor Swift</span>
-              <small>Start at the agreed father section as Dad comes forward, then fade gently when he reaches the microphone.</small>
+              <small>Start as Taylor sings “I have an excellent father, his strength is making me stronger”, then fade gently at the end of that line.</small>
+
+            </div>
+          </li>
+          <li>
+            <span class="timeline-number">10</span>
+            <div>
+              <p>Sister / maid of honour’s speech entrance</p>
+              <em class="timeline-time-label">Start at approx. 0:48</em>
+
+              <strong>You’re My Best Friend</strong>
+              <span>Queen</span>
+              <small>Start as he sings “Oh, you’re my best friend” while she comes forward, then fade gently when she reaches the microphone.</small>
 
             </div>
           </li>
           <li>
             <span class="timeline-number">11</span>
             <div>
-              <p>Sister / maid of honour’s speech entrance</p>
-
-              <strong>Where You Lead I Will Follow</strong>
-              <span>Carole King &amp; Louise Goffin</span>
-              <small>Start at the chorus as she comes forward, then fade gently when she reaches the microphone.</small>
-
-            </div>
-          </li>
-          <li class="timeline-tbc">
-            <span class="timeline-number">12</span>
-            <div>
-              <p>Seb’s speech entrance</p>
-
-              <strong>Still deciding</strong>
-              <span>Groomsman</span>
-              <small>This song is still being chosen; please keep the cue open.</small>
-
-            </div>
-          </li>
-          <li class="timeline-tbc">
-            <span class="timeline-number">13</span>
-            <div>
               <p>Groom’s speech entrance</p>
 
-              <strong>Still deciding</strong>
-              <span>Leave this cue open</span>
-              <small>This song is still being chosen; please keep the cue open.</small>
+              <strong>Sister Bethina</strong>
+              <span>Mgarimbe</span>
+              <small>This is their speech entrance song. Start it from the beginning as they come forward.</small>
 
             </div>
           </li></ol>
@@ -4255,58 +4325,47 @@
       <section class="timeline-phase phase-dancing">
         <h3><svg class="icon phase-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>Later in the evening</span></h3>
         <ol>
-          <li class="timeline-tbc">
+          <li>
+            <span class="timeline-number">12</span>
+            <div>
+              <p>Garter toss, later in the night</p>
+
+              <strong>You Sexy Thing</strong>
+              <span>Hot Chocolate</span>
+              <small>I’ll ask the MCs and bridal party to let you know when the garter toss will be happening.</small>
+
+            </div>
+          </li>
+          <li>
+            <span class="timeline-number">13</span>
+            <div>
+              <p>Bride and groom first dance</p>
+
+              <strong>Wouldn’t It Be Nice</strong>
+              <span>The Beach Boys</span>
+              <small>Please start from the beginning.</small>
+
+            </div>
+          </li>
+          <li>
             <span class="timeline-number">14</span>
             <div>
-              <p>Cake cutting</p>
+              <p>Father and daughter dance</p>
 
-              <strong>Song to be confirmed</strong>
-              <span>Immediately after the speeches</span>
-              <small>The song is still being chosen. Please confirm the exact cake-cutting time with the MC and venue.</small>
+              <strong>(They Long to Be) Close to You</strong>
+              <span>The Carpenters</span>
+              <small>Please start from the beginning.</small>
 
             </div>
           </li>
           <li>
             <span class="timeline-number">15</span>
             <div>
-              <p>Garter toss, around 9 pm</p>
-
-              <strong>You Sexy Thing</strong>
-              <span>Hot Chocolate</span>
-              <small>The MC will announce this later in the evening, at approximately 9 pm. Start the song when it is announced, then prepare for the first dance.</small>
-
-            </div>
-          </li>
-          <li>
-            <span class="timeline-number">16</span>
-            <div>
-              <p>First dance</p>
-
-              <strong>Wouldn’t It Be Nice</strong>
-              <span>The Beach Boys</span>
-              <small>After the garter toss, wait for the MC to introduce the couple, then begin the first dance.</small>
-
-            </div>
-          </li>
-          <li>
-            <span class="timeline-number">17</span>
-            <div>
-              <p>Father and daughter dance</p>
-
-              <strong>(They Long to Be) Close to You</strong>
-              <span>The Carpenters</span>
-              <small>Begin after the first dance, when the MC invites the father and daughter onto the floor.</small>
-
-            </div>
-          </li>
-          <li>
-            <span class="timeline-number">18</span>
-            <div>
-              <p>Photographer invites everyone onto the dance floor for the group photo</p>
+              <p>Dance floor opening, after the group photo</p>
 
               <strong>Y.M.C.A.</strong>
               <span>Village People</span>
-              <small>DJ: Please start Y.M.C.A. as soon as the photographer gives the invitation. Keep it playing after the photo so the moment flows naturally into the opening of the dance floor.</small>
+              <small>The photographer will invite everyone onto the dance floor for a group photo. As soon as the photo is finished, please start Y.M.C.A. to open the dance floor.</small>
 
             </div>
           </li></ol>
@@ -4319,41 +4378,40 @@
         <span class="section-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.7l-1.1-1.1a5.5 5.5 0 0 0-7.8 7.8L12 21l8.8-8.6a5.5 5.5 0 0 0 0-7.8Z"></path></svg></span>
         <div>
           <p class="section-kicker">DJ and musician cues</p>
-          <h2>Key Songs</h2>
-          <p>Ceremony, entrance, speech and dance cues.</p>
+          <h2 id="key-songs-title">Key Songs</h2>
+          <p id="key-songs-description">Ceremony, entrance, speech and dance cues.</p>
         </div>
-        <span class="count-pill">13 confirmed, 4 TBC</span>
+        <span class="count-pill" id="key-songs-count">14 key cues</span>
       </div>
       <div class="cue-groups">
         <section class="cue-group cue-group-ceremony">
           <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="9" cy="12" r="5.5"></circle><circle cx="15" cy="12" r="5.5"></circle><path d="m7.5 4.5 1.5-2 1.5 2"></path></svg><span>Ceremony</span></h3>
           <div class="cue-grid">
         <article class="cue-card search-item is-live"
-          data-search="groomsmen walk live bagpipes matthew (bagpiper) matthew will play live bagpipes as the groomsmen begin walking down the aisle. please agree the start signal with matthew and the venue before the ceremony.">
+          data-search="groomsmen walk live bagpipes matthew (bagpiper) we’ve hired matthew as our bagpiper. he will play the groomsmen down the aisle.">
           <div class="cue-top">
             <p class="moment">Groomsmen walk</p>
             <span class="status live"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg>Live performance</span>
           </div>
           <h3>Live bagpipes</h3><p class="artist">Matthew (bagpiper)</p>
-          <p class="cue-note">Matthew will play live bagpipes as the groomsmen begin walking down the aisle. Please agree the start signal with Matthew and the venue before the ceremony.</p>
+          <p class="cue-note">We’ve hired Matthew as our bagpiper. He will play the groomsmen down the aisle.</p>
         </article>
         <article class="cue-card search-item"
-          data-search="bridesmaids walk we’ve only just begun the carpenters please begin as the bridesmaids start their aisle walk and continue until everyone is in place.">
+          data-search="bridesmaids walk we’ve only just begun the carpenters this is the song the bridesmaids will walk down the aisle to.">
           <div class="cue-top">
             <p class="moment">Bridesmaids walk</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>We’ve Only Just Begun</h3><p class="artist">The Carpenters</p>
-          <p class="cue-note">Please begin as the bridesmaids start their aisle walk and continue until everyone is in place.</p>
+          <p class="cue-note">This is the song the bridesmaids will walk down the aisle to.</p>
         </article>
         <article class="cue-card search-item is-critical"
-          data-search="bride’s walk archie, marry me flyte approx. 0:42 start when he sings “hey, hey, marry me archie.” please use the flyte version.">
+          data-search="bride’s walk archie, marry me flyte approx. 0:42 start when he sings “hey, hey, marry me archie.” the bride will walk down the aisle to the flyte version.">
           <div class="cue-top">
             <p class="moment">Bride’s walk</p>
             <span class="status critical"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M10.3 3.8 2.2 18a2 2 0 0 0 1.7 3h16.2a2 2 0 0 0 1.7-3L13.7 3.8a2 2 0 0 0-3.4 0Z"></path><path d="M12 9v4M12 17h.01"></path></svg>Critical DJ cue</span>
           </div>
           <h3>Archie, Marry Me</h3><p class="artist">Flyte</p>
-          <div class="critical-cue"><h4 class="critical-time">Approx. 0:42</h4><b class="critical-instruction">Start when he sings “Hey, hey, marry me Archie.”</b><span>Please use the Flyte version.</span></div>
+          <div class="critical-cue"><h4 class="critical-time">Approx. 0:42</h4><b class="critical-instruction">Start when he sings “Hey, hey, marry me Archie.”</b><span>The bride will walk down the aisle to the Flyte version.</span></div>
         </article>
           </div>
         </section>
@@ -4361,22 +4419,21 @@
           <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M8 5c3 0 5 2 5 5v7a4 4 0 0 1-8 0v-5c0-2 1-4 3-4h5M13 5V2M17 3v13M17 6h3"></path></svg><span>Just after the ceremony</span></h3>
           <div class="cue-grid">
         <article class="cue-card search-item"
-          data-search="ceremony ends and everyone cheers lover taylor swift start at approx. 2:13 dj: as the ceremony ends and everyone cheers, please play “lover” loudly from the bridge at approximately 2:13, beginning with “ladies and gentlemen, will you please stand?” confirm the timestamp against the exact final studio audio file. next, matthew begins live bagpipes.">
+          data-search="ceremony ends and everyone cheers lover taylor swift start at approx. 2:13 as the ceremony ends and everyone cheers, please play “lover” from approximately 2:13, beginning with “ladies and gentlemen, will you please stand?” next, matthew begins live bagpipes.">
           <div class="cue-top">
             <p class="moment">Ceremony ends and everyone cheers</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>Lover <span class="cue-title-time">(start at approx. 2:13)</span></h3><p class="artist">Taylor Swift</p>
-          <p class="cue-note">DJ: As the ceremony ends and everyone cheers, please play “Lover” loudly from the bridge at approximately 2:13, beginning with “Ladies and gentlemen, will you please stand?” Confirm the timestamp against the exact final studio audio file. Next, Matthew begins live bagpipes.</p>
+          <p class="cue-note">As the ceremony ends and everyone cheers, please play “Lover” from approximately 2:13, beginning with “<strong>Ladies and gentlemen, will you please stand?</strong>” Next, Matthew begins live bagpipes.</p>
         </article>
         <article class="cue-card search-item is-live"
-          data-search="after lover: ceremony exit live bagpipes matthew (bagpiper) as the “lover” cue finishes, matthew begins playing live bagpipes for the ceremony exit.">
+          data-search="orchard petal and confetti toss live bagpipes matthew (bagpiper) once “lover” finishes, matthew will begin playing bagpipes and lead everyone up the hill to the reception. when everyone reaches the orchard, the petal and confetti toss will happen while matthew continues playing.">
           <div class="cue-top">
-            <p class="moment">After Lover: ceremony exit</p>
+            <p class="moment">Orchard petal and confetti toss</p>
             <span class="status live"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg>Live performance</span>
           </div>
           <h3>Live bagpipes</h3><p class="artist">Matthew (bagpiper)</p>
-          <p class="cue-note">As the “Lover” cue finishes, Matthew begins playing live bagpipes for the ceremony exit.</p>
+          <p class="cue-note">Once “Lover” finishes, Matthew will begin playing bagpipes and lead everyone up the hill to the reception. When everyone reaches the orchard, the petal and confetti toss will happen while Matthew continues playing.</p>
         </article>
           </div>
         </section>
@@ -4384,13 +4441,12 @@
           <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3h10l-1.2 7.2a3.8 3.8 0 0 1-7.6 0L7 3Z"></path><path d="M12 14v7M8.5 21h7"></path></svg><span>Canapés after photos</span></h3>
           <div class="cue-grid">
         <article class="cue-card search-item"
-          data-search="bouquet toss (during canapés, after photos) man! i feel like a woman! shania twain during canapés, once the photos are finished and the bouquet toss is announced, please start the song.">
+          data-search="bouquet ribbon ceremony (during canapés, after photos) man! i feel like a woman! shania twain the mc or bridesmaids will let you know when the ribbon-cutting ceremony will begin. please start the song then.">
           <div class="cue-top">
-            <p class="moment">Bouquet toss (during canapés, after photos)</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
+            <p class="moment">Bouquet ribbon ceremony (during canapés, after photos)</p>
           </div>
           <h3>Man! I Feel Like a Woman!</h3><p class="artist">Shania Twain</p>
-          <p class="cue-note">During canapés, once the photos are finished and the bouquet toss is announced, please start the song.</p>
+          <p class="cue-note">The MC or bridesmaids will let you know when the ribbon-cutting ceremony will begin. Please start the song then.</p>
         </article>
           </div>
         </section>
@@ -4398,22 +4454,12 @@
           <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3ZM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14ZM19 13l.7 1.8 1.8.7-1.8.7L19 18l-.7-1.8-1.8-.7 1.8-.7L19 13Z"></path></svg><span>Entrances</span></h3>
           <div class="cue-grid">
         <article class="cue-card search-item"
-          data-search="bridal party entrance gimme! gimme! gimme! (a man after midnight) amanda seyfried, ashley lilley &amp; rachel mcdowall approx. 0:54 start when she sings “is there a man out there?” begin as the bridal party starts walking in.">
+          data-search="bridal party, groom and bride entrance gimme! gimme! gimme! (a man after midnight) amanda seyfried, ashley lilley &amp; rachel mcdowall approx. 0:54 start when she sings “is there a man out there?” this is the entrance song for the bridal party, groom and bride.">
           <div class="cue-top">
-            <p class="moment">Bridal party entrance</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
+            <p class="moment">Bridal party, groom and bride entrance</p>
           </div>
           <h3>Gimme! Gimme! Gimme! (A Man After Midnight)</h3><p class="artist">Amanda Seyfried, Ashley Lilley &amp; Rachel McDowall</p>
-          <div class="timed-cue"><h4 class="cue-time">Approx. 0:54</h4><b class="cue-instruction">Start when she sings “Is there a man out there?”</b><span>Begin as the bridal party starts walking in.</span></div>
-        </article>
-        <article class="cue-card search-item is-tbc"
-          data-search="mcs walk-up this song is still being chosen. please keep the cue open after the bridal party entrance and before the dinner speeches.">
-          <div class="cue-top">
-            <p class="moment">MCs walk-up</p>
-            <span class="status tbc"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>To be confirmed</span>
-          </div>
-          <h3 class="pending">Song to be confirmed</h3><p class="artist">&nbsp;</p>
-          <p class="cue-note">This song is still being chosen. Please keep the cue open after the bridal party entrance and before the dinner speeches.</p>
+          <div class="timed-cue"><h4 class="cue-time">Approx. 0:54</h4><b class="cue-instruction">Start when she sings “Is there a man out there?”</b><span>This is the entrance song for the bridal party, groom and bride.</span></div>
         </article>
           </div>
         </section>
@@ -4421,90 +4467,70 @@
           <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"></path></svg><span>Dinner and speeches</span></h3>
           <div class="cue-grid">
         <article class="cue-card search-item"
-          data-search="dad’s speech entrance the best day taylor swift please start at the agreed father section as dad comes forward, then fade gently as he reaches the microphone. confirm the precise start point against the final audio file.">
+          data-search="dad’s speech entrance the best day taylor swift start at approx. 2:20 please start as taylor sings “i have an excellent father, his strength is making me stronger”, then fade gently at the end of that line.">
           <div class="cue-top">
             <p class="moment">Dad’s speech entrance</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
-          <h3>The Best Day</h3><p class="artist">Taylor Swift</p>
-          <p class="cue-note">Please start at the agreed father section as Dad comes forward, then fade gently as he reaches the microphone. Confirm the precise start point against the final audio file.</p>
+          <h3>The Best Day <span class="cue-title-time">(start at approx. 2:20)</span></h3><p class="artist">Taylor Swift</p>
+          <p class="cue-note">Please start as Taylor sings “<strong>I have an excellent father, his strength is making me stronger</strong>”, then fade gently at the end of that line.</p>
         </article>
         <article class="cue-card search-item"
-          data-search="maid of honour / sister’s speech entrance where you lead i will follow carole king &amp; louise goffin please start at the chorus as she comes forward to speak, then fade gently once she reaches the microphone.">
+          data-search="maid of honour / sister’s speech entrance you’re my best friend queen start at approx. 0:48 please start as he sings “oh, you’re my best friend” while she comes forward to speak, then fade gently once she reaches the microphone.">
           <div class="cue-top">
             <p class="moment">Maid of honour / sister’s speech entrance</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
-          <h3>Where You Lead I Will Follow</h3><p class="artist">Carole King &amp; Louise Goffin</p>
-          <p class="cue-note">Please start at the chorus as she comes forward to speak, then fade gently once she reaches the microphone.</p>
+          <h3>You’re My Best Friend <span class="cue-title-time">(start at approx. 0:48)</span></h3><p class="artist">Queen</p>
+          <p class="cue-note">Please start as he sings “<strong>Oh, you’re my best friend</strong>” while she comes forward to speak, then fade gently once she reaches the microphone.</p>
         </article>
-        <article class="cue-card search-item is-tbc"
-          data-search="seb’s speech entrance (groomsman) this song is still being chosen. please keep the cue open for now.">
-          <div class="cue-top">
-            <p class="moment">Seb’s speech entrance (groomsman)</p>
-            <span class="status tbc"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>To be confirmed</span>
-          </div>
-          <h3 class="pending">Song to be confirmed</h3><p class="artist">&nbsp;</p>
-          <p class="cue-note">This song is still being chosen. Please keep the cue open for now.</p>
-        </article>
-        <article class="cue-card search-item is-tbc"
-          data-search="groom’s speech entrance this song is still being chosen. please keep the cue open for now.">
+        <article class="cue-card search-item"
+          data-search="groom’s speech entrance sister bethina mgarimbe this is their speech entrance song. please start it from the beginning as they come forward.">
           <div class="cue-top">
             <p class="moment">Groom’s speech entrance</p>
-            <span class="status tbc"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>To be confirmed</span>
           </div>
-          <h3 class="pending">Song to be confirmed</h3><p class="artist">&nbsp;</p>
-          <p class="cue-note">This song is still being chosen. Please keep the cue open for now.</p>
-        </article>
-        <article class="cue-card search-item is-tbc"
-          data-search="cake cutting (after the speeches) the cake-cutting song is still being chosen. cake cutting is planned for immediately after the speeches; please confirm the exact timing with the mc and venue.">
-          <div class="cue-top">
-            <p class="moment">Cake cutting (after the speeches)</p>
-            <span class="status tbc"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="M12 7v5l3 2"></path></svg>To be confirmed</span>
-          </div>
-          <h3 class="pending">Song to be confirmed</h3><p class="artist">&nbsp;</p>
-          <p class="cue-note">The cake-cutting song is still being chosen. Cake cutting is planned for immediately after the speeches; please confirm the exact timing with the MC and venue.</p>
+          <h3>Sister Bethina</h3><p class="artist">Mgarimbe</p>
+          <p class="cue-note">This is their speech entrance song. Please start it from the beginning as they come forward.</p>
         </article>
           </div>
         </section>
-        <section class="cue-group cue-group-later-evening">
-          <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>Later in the evening</span></h3>
+        <section class="cue-group cue-group-first-dances">
+          <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>Dances</span></h3>
           <div class="cue-grid">
         <article class="cue-card search-item"
-          data-search="garter toss (around 9 pm, before the first dance) you sexy thing hot chocolate the mc will announce the garter toss later in the evening, at approximately 9 pm. please start “you sexy thing” when it is announced, then prepare for the first dance.">
+          data-search="bride and groom first dance wouldn’t it be nice the beach boys please start from the beginning.">
           <div class="cue-top">
-            <p class="moment">Garter toss (around 9 pm, before the first dance)</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
-          </div>
-          <h3>You Sexy Thing</h3><p class="artist">Hot Chocolate</p>
-          <p class="cue-note">The MC will announce the garter toss later in the evening, at approximately 9 pm. Please start “You Sexy Thing” when it is announced, then prepare for the first dance.</p>
-        </article>
-        <article class="cue-card search-item"
-          data-search="first dance wouldn’t it be nice the beach boys after the garter toss, please wait for the mc to introduce the couple, then begin the first dance.">
-          <div class="cue-top">
-            <p class="moment">First dance</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
+            <p class="moment">Bride and groom first dance</p>
           </div>
           <h3>Wouldn’t It Be Nice</h3><p class="artist">The Beach Boys</p>
-          <p class="cue-note">After the garter toss, please wait for the MC to introduce the couple, then begin the first dance.</p>
+          <p class="cue-note">Please start from the beginning.</p>
         </article>
         <article class="cue-card search-item"
-          data-search="father and daughter dance (they long to be) close to you the carpenters please begin after the first dance, when the mc invites the father and daughter onto the floor.">
+          data-search="father and daughter dance (they long to be) close to you the carpenters this is the song for the father and daughter dance. please start from the beginning.">
           <div class="cue-top">
             <p class="moment">Father and daughter dance</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
           </div>
           <h3>(They Long to Be) Close to You</h3><p class="artist">The Carpenters</p>
-          <p class="cue-note">Please begin after the first dance, when the MC invites the father and daughter onto the floor.</p>
+          <p class="cue-note">This is the song for the father and daughter dance. Please start from the beginning.</p>
         </article>
         <article class="cue-card search-item"
-          data-search="dance floor opening (group photo cue) y.m.c.a. village people dj: please start y.m.c.a. as soon as the photographer invites everyone onto the dance floor for the group photo. keep it playing after the photo so the moment flows naturally into the opening of the dance floor.">
+          data-search="dance floor opening (after the group photo) y.m.c.a. village people the photographer will invite everyone onto the dance floor for a group photo. as soon as the photo is finished, please start y.m.c.a. to open the dance floor.">
           <div class="cue-top">
-            <p class="moment">Dance floor opening (group photo cue)</p>
-            <span class="status confirmed"><svg class="icon status-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><path d="m8 12 2.6 2.6L16.5 9"></path></svg>Confirmed</span>
+            <p class="moment">Dance floor opening (after the group photo)</p>
           </div>
           <h3>Y.M.C.A.</h3><p class="artist">Village People</p>
-          <p class="cue-note">DJ: Please start Y.M.C.A. as soon as the photographer invites everyone onto the dance floor for the group photo. Keep it playing after the photo so the moment flows naturally into the opening of the dance floor.</p>
+          <p class="cue-note">The photographer will invite everyone onto the dance floor for a group photo. As soon as the photo is finished, please start Y.M.C.A. to open the dance floor.</p>
+        </article>
+          </div>
+        </section>
+        <section class="cue-group cue-group-garter-toss">
+          <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3ZM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14ZM19 13l.7 1.8 1.8.7-1.8.7L19 18l-.7-1.8-1.8-.7 1.8-.7L19 13Z"></path></svg><span>Garter toss</span></h3>
+          <div class="cue-grid">
+        <article class="cue-card search-item"
+          data-search="garter toss (later in the night, before the first dance) you sexy thing hot chocolate i’ll ask the mcs and bridal party to let you know when the garter toss will be happening.">
+          <div class="cue-top">
+            <p class="moment">Garter toss (later in the night, before the first dance)</p>
+          </div>
+          <h3>You Sexy Thing</h3><p class="artist">Hot Chocolate</p>
+          <p class="cue-note">I’ll ask the MCs and bridal party to let you know when the garter toss will be happening.</p>
         </article>
           </div>
         </section>
@@ -4521,9 +4547,10 @@
             <h2>Pre-Ceremony</h2>
             <p>Guest arrival music, in play order</p>
           </div>
-          <span class="count-pill">26 songs</span>
+          <span class="count-pill">28 songs</span>
         </div>
-        
+
+
         <div class="table-wrap">
           <table>
             <thead><tr><th>No.</th><th>Song</th><th>Artist / Version</th></tr></thead>
@@ -4538,125 +4565,135 @@
                 <td data-label="Song"><strong>Wildest Dreams</strong></td>
                 <td data-label="Artist">Bridgerton-style string version</td>
               </tr>
-              <tr class="search-item" data-search="3 diamonds bridgerton-style string version">
+              <tr class="search-item" data-search="3 strange bridgerton-style string version">
                 <td class="track-number" data-label="No.">3</td>
-                <td data-label="Song"><strong>Diamonds</strong></td>
-                <td data-label="Artist">Bridgerton-style string version</td>
-              </tr>
-              <tr class="search-item" data-search="4 strange bridgerton-style string version">
-                <td class="track-number" data-label="No.">4</td>
                 <td data-label="Song"><strong>Strange</strong></td>
                 <td data-label="Artist">Bridgerton-style string version</td>
               </tr>
-              <tr class="search-item" data-search="5 yellow vitamin string quartet / string version">
-                <td class="track-number" data-label="No.">5</td>
+              <tr class="search-item" data-search="4 yellow vitamin string quartet / string version">
+                <td class="track-number" data-label="No.">4</td>
                 <td data-label="Song"><strong>Yellow</strong></td>
                 <td data-label="Artist">Vitamin String Quartet / string version</td>
               </tr>
-              <tr class="search-item" data-search="6 a thousand years piano or string version">
-                <td class="track-number" data-label="No.">6</td>
+              <tr class="search-item" data-search="5 a thousand years piano or string version">
+                <td class="track-number" data-label="No.">5</td>
                 <td data-label="Song"><strong>A Thousand Years</strong></td>
                 <td data-label="Artist">Piano or string version</td>
               </tr>
-              <tr class="search-item" data-search="7 bloom the paper kites">
-                <td class="track-number" data-label="No.">7</td>
+              <tr class="search-item" data-search="6 bloom the paper kites">
+                <td class="track-number" data-label="No.">6</td>
                 <td data-label="Song"><strong>Bloom</strong></td>
                 <td data-label="Artist">The Paper Kites</td>
               </tr>
-              <tr class="search-item" data-search="8 chapel of love the dixie cups">
-                <td class="track-number" data-label="No.">8</td>
+              <tr class="search-item" data-search="7 chapel of love the dixie cups">
+                <td class="track-number" data-label="No.">7</td>
                 <td data-label="Song"><strong>Chapel of Love</strong></td>
                 <td data-label="Artist">The Dixie Cups</td>
               </tr>
-              <tr class="search-item" data-search="9 unforgettable nat king cole">
-                <td class="track-number" data-label="No.">9</td>
+              <tr class="search-item" data-search="8 unforgettable nat king cole">
+                <td class="track-number" data-label="No.">8</td>
                 <td data-label="Song"><strong>Unforgettable</strong></td>
                 <td data-label="Artist">Nat King Cole</td>
               </tr>
-              <tr class="search-item" data-search="10 love me tender elvis presley">
-                <td class="track-number" data-label="No.">10</td>
+              <tr class="search-item" data-search="9 love me tender elvis presley">
+                <td class="track-number" data-label="No.">9</td>
                 <td data-label="Song"><strong>Love Me Tender</strong></td>
                 <td data-label="Artist">Elvis Presley</td>
               </tr>
-              <tr class="search-item" data-search="11 always on my mind elvis presley">
-                <td class="track-number" data-label="No.">11</td>
-                <td data-label="Song"><strong>Always on My Mind</strong></td>
-                <td data-label="Artist">Elvis Presley</td>
-              </tr>
-              <tr class="search-item" data-search="12 i’ve got you under my skin frank sinatra">
-                <td class="track-number" data-label="No.">12</td>
+              <tr class="search-item" data-search="10 i’ve got you under my skin frank sinatra">
+                <td class="track-number" data-label="No.">10</td>
                 <td data-label="Song"><strong>I’ve Got You Under My Skin</strong></td>
                 <td data-label="Artist">Frank Sinatra</td>
               </tr>
-              <tr class="search-item" data-search="13 my funny valentine frank sinatra">
-                <td class="track-number" data-label="No.">13</td>
-                <td data-label="Song"><strong>My Funny Valentine</strong></td>
-                <td data-label="Artist">Frank Sinatra</td>
-              </tr>
-              <tr class="search-item" data-search="14 nice ’n’ easy frank sinatra">
-                <td class="track-number" data-label="No.">14</td>
-                <td data-label="Song"><strong>Nice ’n’ Easy</strong></td>
-                <td data-label="Artist">Frank Sinatra</td>
-              </tr>
-              <tr class="search-item" data-search="15 all the way frank sinatra">
-                <td class="track-number" data-label="No.">15</td>
-                <td data-label="Song"><strong>All the Way</strong></td>
-                <td data-label="Artist">Frank Sinatra</td>
-              </tr>
-              <tr class="search-item" data-search="16 we’ve only just begun the carpenters">
-                <td class="track-number" data-label="No.">16</td>
-                <td data-label="Song"><strong>We’ve Only Just Begun</strong></td>
-                <td data-label="Artist">The Carpenters</td>
-              </tr>
-              <tr class="search-item" data-search="17 i get to love you ruelle">
-                <td class="track-number" data-label="No.">17</td>
+              <tr class="search-item" data-search="11 i get to love you ruelle">
+                <td class="track-number" data-label="No.">11</td>
                 <td data-label="Song"><strong>I Get to Love You</strong></td>
                 <td data-label="Artist">Ruelle</td>
               </tr>
-              <tr class="search-item" data-search="18 la vie en rose instrumental / louis armstrong version">
-                <td class="track-number" data-label="No.">18</td>
+              <tr class="search-item" data-search="12 la vie en rose instrumental / louis armstrong version">
+                <td class="track-number" data-label="No.">12</td>
                 <td data-label="Song"><strong>La Vie En Rose</strong></td>
                 <td data-label="Artist">Instrumental / Louis Armstrong version</td>
               </tr>
-              <tr class="search-item" data-search="19 have i told you lately van morrison / rod stewart">
-                <td class="track-number" data-label="No.">19</td>
+              <tr class="search-item" data-search="13 have i told you lately van morrison / rod stewart">
+                <td class="track-number" data-label="No.">13</td>
                 <td data-label="Song"><strong>Have I Told You Lately</strong></td>
                 <td data-label="Artist">Van Morrison / Rod Stewart</td>
               </tr>
-              <tr class="search-item" data-search="20 all of me john legend">
-                <td class="track-number" data-label="No.">20</td>
+              <tr class="search-item" data-search="14 all of me john legend">
+                <td class="track-number" data-label="No.">14</td>
                 <td data-label="Song"><strong>All of Me</strong></td>
                 <td data-label="Artist">John Legend</td>
               </tr>
-              <tr class="search-item" data-search="21 perfect ed sheeran">
-                <td class="track-number" data-label="No.">21</td>
+              <tr class="search-item" data-search="15 perfect ed sheeran">
+                <td class="track-number" data-label="No.">15</td>
                 <td data-label="Song"><strong>Perfect</strong></td>
                 <td data-label="Artist">Ed Sheeran</td>
               </tr>
-              <tr class="search-item" data-search="22 iris colbie caillat acoustic cover">
-                <td class="track-number" data-label="No.">22</td>
+              <tr class="search-item" data-search="16 iris colbie caillat acoustic cover">
+                <td class="track-number" data-label="No.">16</td>
                 <td data-label="Song"><strong>Iris</strong></td>
                 <td data-label="Artist">Colbie Caillat acoustic cover</td>
               </tr>
-              <tr class="search-item" data-search="23 make you feel my love adele">
-                <td class="track-number" data-label="No.">23</td>
+              <tr class="search-item" data-search="17 make you feel my love adele">
+                <td class="track-number" data-label="No.">17</td>
                 <td data-label="Song"><strong>Make You Feel My Love</strong></td>
                 <td data-label="Artist">Adele</td>
               </tr>
-              <tr class="search-item" data-search="24 a moment apart odesza">
-                <td class="track-number" data-label="No.">24</td>
+              <tr class="search-item" data-search="18 a moment apart odesza">
+                <td class="track-number" data-label="No.">18</td>
                 <td data-label="Song"><strong>A Moment Apart</strong></td>
                 <td data-label="Artist">ODESZA</td>
               </tr>
-              <tr class="search-item" data-search="25 just a memory odesza feat. regina spektor">
-                <td class="track-number" data-label="No.">25</td>
+              <tr class="search-item" data-search="19 just a memory odesza feat. regina spektor">
+                <td class="track-number" data-label="No.">19</td>
                 <td data-label="Song"><strong>Just A Memory</strong></td>
                 <td data-label="Artist">ODESZA feat. Regina Spektor</td>
               </tr>
-              <tr class="search-item" data-search="26 heavenly cigarettes after sex">
-                <td class="track-number" data-label="No.">26</td>
+              <tr class="search-item" data-search="20 heavenly cigarettes after sex">
+                <td class="track-number" data-label="No.">20</td>
                 <td data-label="Song"><strong>Heavenly</strong></td>
                 <td data-label="Artist">Cigarettes After Sex</td>
+              </tr>
+              <tr class="search-item" data-search="21 postcards james blunt">
+                <td class="track-number" data-label="No.">21</td>
+                <td data-label="Song"><strong>Postcards</strong></td>
+                <td data-label="Artist">James Blunt</td>
+              </tr>
+              <tr class="search-item" data-search="22 unchained melody the righteous brothers">
+                <td class="track-number" data-label="No.">22</td>
+                <td data-label="Song"><strong>Unchained Melody</strong></td>
+                <td data-label="Artist">The Righteous Brothers</td>
+              </tr>
+              <tr class="search-item" data-search="23 my girl the temptations">
+                <td class="track-number" data-label="No.">23</td>
+                <td data-label="Song"><strong>My Girl</strong></td>
+                <td data-label="Artist">The Temptations</td>
+              </tr>
+              <tr class="search-item" data-search="24 just the way you are billy joel">
+                <td class="track-number" data-label="No.">24</td>
+                <td data-label="Song"><strong>Just the Way You Are</strong></td>
+                <td data-label="Artist">Billy Joel</td>
+              </tr>
+              <tr class="search-item" data-search="25 she elvis costello">
+                <td class="track-number" data-label="No.">25</td>
+                <td data-label="Song"><strong>She</strong></td>
+                <td data-label="Artist">Elvis Costello</td>
+              </tr>
+              <tr class="search-item" data-search="26 more than words extreme">
+                <td class="track-number" data-label="No.">26</td>
+                <td data-label="Song"><strong>More Than Words</strong></td>
+                <td data-label="Artist">Extreme</td>
+              </tr>
+              <tr class="search-item" data-search="27 august taylor swift">
+                <td class="track-number" data-label="No.">27</td>
+                <td data-label="Song"><strong>august</strong></td>
+                <td data-label="Artist">Taylor Swift</td>
+              </tr>
+              <tr class="search-item" data-search="28 right here right now nerin">
+                <td class="track-number" data-label="No.">28</td>
+                <td data-label="Song"><strong>Right Here Right Now</strong></td>
+                <td data-label="Artist">Nerin</td>
               </tr></tbody>
           </table>
         </div>
@@ -4670,20 +4707,28 @@
             <h2>Canapés</h2>
             <p>Music for drinks and canapés, in play order</p>
           </div>
-          <span class="count-pill">45 songs</span>
+          <span class="count-pill">49 songs</span>
         </div>
-        <div class="event-callouts">
-        <aside class="event-callout" aria-label="Bouquet toss cue">
-          <span class="event-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3ZM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14ZM19 13l.7 1.8 1.8.7-1.8.7L19 18l-.7-1.8-1.8-.7 1.8-.7L19 13Z"></path></svg></span>
-          <div>
-            <p>After the photos</p>
-            <h3>Bouquet toss</h3>
+
+        <details class="key-song-disclosure">
+          <summary><span>Canapés key song</span><small>1 cue</small></summary>
+          <div class="cue-groups embedded-cues">
+        <section class="cue-group cue-group-canapes" id="canapes-canapes">
+          <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M7 3h10l-1.2 7.2a3.8 3.8 0 0 1-7.6 0L7 3Z"></path><path d="M12 14v7M8.5 21h7"></path></svg><span>Canapés after photos</span></h3>
+          <div class="cue-grid">
+        <article class="cue-card search-item"
+          data-search="bouquet ribbon ceremony (during canapés, after photos) man! i feel like a woman! shania twain the mc or bridesmaids will let you know when the ribbon-cutting ceremony will begin. please start the song then.">
+          <div class="cue-top">
+            <p class="moment">Bouquet ribbon ceremony (during canapés, after photos)</p>
           </div>
-          <div class="event-track">
-            <strong>Man! I Feel Like a Woman!</strong>
-            <span>Shania Twain</span>
+          <h3>Man! I Feel Like a Woman!</h3><p class="artist">Shania Twain</p>
+          <p class="cue-note">The MC or bridesmaids will let you know when the ribbon-cutting ceremony will begin. Please start the song then.</p>
+        </article>
           </div>
-        </aside></div>
+        </section>
+          </div>
+        </details>
+
         <div class="table-wrap">
           <table>
             <thead><tr><th>No.</th><th>Song</th><th>Artist / Version</th></tr></thead>
@@ -4698,220 +4743,240 @@
                 <td data-label="Song"><strong>Put Your Records On</strong></td>
                 <td data-label="Artist">Corinne Bailey Rae</td>
               </tr>
-              <tr class="search-item" data-search="3 banana pancakes jack johnson">
+              <tr class="search-item" data-search="3 sunday morning maroon 5">
                 <td class="track-number" data-label="No.">3</td>
-                <td data-label="Song"><strong>Banana Pancakes</strong></td>
-                <td data-label="Artist">Jack Johnson</td>
-              </tr>
-              <tr class="search-item" data-search="4 sunday morning maroon 5">
-                <td class="track-number" data-label="No.">4</td>
                 <td data-label="Song"><strong>Sunday Morning</strong></td>
                 <td data-label="Artist">Maroon 5</td>
               </tr>
-              <tr class="search-item" data-search="5 i’m yours jason mraz">
-                <td class="track-number" data-label="No.">5</td>
+              <tr class="search-item" data-search="4 i’m yours jason mraz">
+                <td class="track-number" data-label="No.">4</td>
                 <td data-label="Song"><strong>I’m Yours</strong></td>
                 <td data-label="Artist">Jason Mraz</td>
               </tr>
-              <tr class="search-item" data-search="6 dreams fleetwood mac">
-                <td class="track-number" data-label="No.">6</td>
+              <tr class="search-item" data-search="5 dreams fleetwood mac">
+                <td class="track-number" data-label="No.">5</td>
                 <td data-label="Song"><strong>Dreams</strong></td>
                 <td data-label="Artist">Fleetwood Mac</td>
               </tr>
-              <tr class="search-item" data-search="7 lucky jason mraz ft. colbie caillat">
-                <td class="track-number" data-label="No.">7</td>
+              <tr class="search-item" data-search="6 lucky jason mraz ft. colbie caillat">
+                <td class="track-number" data-label="No.">6</td>
                 <td data-label="Song"><strong>Lucky</strong></td>
                 <td data-label="Artist">Jason Mraz ft. Colbie Caillat</td>
               </tr>
-              <tr class="search-item" data-search="8 budapest george ezra">
-                <td class="track-number" data-label="No.">8</td>
+              <tr class="search-item" data-search="7 budapest george ezra">
+                <td class="track-number" data-label="No.">7</td>
                 <td data-label="Song"><strong>Budapest</strong></td>
                 <td data-label="Artist">George Ezra</td>
               </tr>
-              <tr class="search-item" data-search="9 radio lana del rey">
-                <td class="track-number" data-label="No.">9</td>
+              <tr class="search-item" data-search="8 radio lana del rey">
+                <td class="track-number" data-label="No.">8</td>
                 <td data-label="Song"><strong>Radio</strong></td>
                 <td data-label="Artist">Lana Del Rey</td>
               </tr>
-              <tr class="search-item" data-search="10 shotgun george ezra">
-                <td class="track-number" data-label="No.">10</td>
+              <tr class="search-item" data-search="9 shotgun george ezra">
+                <td class="track-number" data-label="No.">9</td>
                 <td data-label="Song"><strong>Shotgun</strong></td>
                 <td data-label="Artist">George Ezra</td>
               </tr>
-              <tr class="search-item" data-search="11 ho hey the lumineers">
-                <td class="track-number" data-label="No.">11</td>
+              <tr class="search-item" data-search="10 ho hey the lumineers">
+                <td class="track-number" data-label="No.">10</td>
                 <td data-label="Song"><strong>Ho Hey</strong></td>
                 <td data-label="Artist">The Lumineers</td>
               </tr>
-              <tr class="search-item" data-search="12 fast car tracy chapman">
-                <td class="track-number" data-label="No.">12</td>
+              <tr class="search-item" data-search="11 fast car tracy chapman">
+                <td class="track-number" data-label="No.">11</td>
                 <td data-label="Song"><strong>Fast Car</strong></td>
                 <td data-label="Artist">Tracy Chapman</td>
               </tr>
-              <tr class="search-item" data-search="13 ophelia the lumineers">
-                <td class="track-number" data-label="No.">13</td>
-                <td data-label="Song"><strong>Ophelia</strong></td>
-                <td data-label="Artist">The Lumineers</td>
-              </tr>
-              <tr class="search-item" data-search="14 sweet disposition the temper trap">
-                <td class="track-number" data-label="No.">14</td>
+              <tr class="search-item" data-search="12 sweet disposition the temper trap">
+                <td class="track-number" data-label="No.">12</td>
                 <td data-label="Song"><strong>Sweet Disposition</strong></td>
                 <td data-label="Artist">The Temper Trap</td>
               </tr>
-              <tr class="search-item" data-search="15 everywhere fleetwood mac">
-                <td class="track-number" data-label="No.">15</td>
+              <tr class="search-item" data-search="13 everywhere fleetwood mac">
+                <td class="track-number" data-label="No.">13</td>
                 <td data-label="Song"><strong>Everywhere</strong></td>
                 <td data-label="Artist">Fleetwood Mac</td>
               </tr>
-              <tr class="search-item" data-search="16 riptide vance joy">
-                <td class="track-number" data-label="No.">16</td>
+              <tr class="search-item" data-search="14 riptide vance joy">
+                <td class="track-number" data-label="No.">14</td>
                 <td data-label="Song"><strong>Riptide</strong></td>
                 <td data-label="Artist">Vance Joy</td>
               </tr>
-              <tr class="search-item" data-search="17 brown eyed girl van morrison">
-                <td class="track-number" data-label="No.">17</td>
+              <tr class="search-item" data-search="15 brown eyed girl van morrison">
+                <td class="track-number" data-label="No.">15</td>
                 <td data-label="Song"><strong>Brown Eyed Girl</strong></td>
                 <td data-label="Artist">Van Morrison</td>
               </tr>
-              <tr class="search-item" data-search="18 how sweet it is james taylor">
-                <td class="track-number" data-label="No.">18</td>
+              <tr class="search-item" data-search="16 how sweet it is james taylor">
+                <td class="track-number" data-label="No.">16</td>
                 <td data-label="Song"><strong>How Sweet It Is</strong></td>
                 <td data-label="Artist">James Taylor</td>
               </tr>
-              <tr class="search-item" data-search="19 lovely day bill withers">
-                <td class="track-number" data-label="No.">19</td>
+              <tr class="search-item" data-search="17 lovely day bill withers">
+                <td class="track-number" data-label="No.">17</td>
                 <td data-label="Song"><strong>Lovely Day</strong></td>
                 <td data-label="Artist">Bill Withers</td>
               </tr>
-              <tr class="search-item" data-search="20 more than a woman bee gees">
-                <td class="track-number" data-label="No.">20</td>
+              <tr class="search-item" data-search="18 more than a woman bee gees">
+                <td class="track-number" data-label="No.">18</td>
                 <td data-label="Song"><strong>More Than a Woman</strong></td>
                 <td data-label="Artist">Bee Gees</td>
               </tr>
-              <tr class="search-item" data-search="21 just the two of us grover washington jr. ft. bill withers">
-                <td class="track-number" data-label="No.">21</td>
+              <tr class="search-item" data-search="19 just the two of us grover washington jr. ft. bill withers">
+                <td class="track-number" data-label="No.">19</td>
                 <td data-label="Song"><strong>Just the Two of Us</strong></td>
                 <td data-label="Artist">Grover Washington Jr. ft. Bill Withers</td>
               </tr>
-              <tr class="search-item" data-search="22 valerie mark ronson ft. amy winehouse">
-                <td class="track-number" data-label="No.">22</td>
+              <tr class="search-item" data-search="20 valerie mark ronson ft. amy winehouse">
+                <td class="track-number" data-label="No.">20</td>
                 <td data-label="Song"><strong>Valerie</strong></td>
                 <td data-label="Artist">Mark Ronson ft. Amy Winehouse</td>
               </tr>
-              <tr class="search-item" data-search="23 isn’t she lovely stevie wonder">
-                <td class="track-number" data-label="No.">23</td>
+              <tr class="search-item" data-search="21 isn’t she lovely stevie wonder">
+                <td class="track-number" data-label="No.">21</td>
                 <td data-label="Song"><strong>Isn’t She Lovely</strong></td>
                 <td data-label="Artist">Stevie Wonder</td>
               </tr>
-              <tr class="search-item" data-search="24 send me on my way rusted root">
-                <td class="track-number" data-label="No.">24</td>
+              <tr class="search-item" data-search="22 send me on my way rusted root">
+                <td class="track-number" data-label="No.">22</td>
                 <td data-label="Song"><strong>Send Me On My Way</strong></td>
                 <td data-label="Artist">Rusted Root</td>
               </tr>
-              <tr class="search-item" data-search="25 l-o-v-e nat king cole">
-                <td class="track-number" data-label="No.">25</td>
+              <tr class="search-item" data-search="23 l-o-v-e nat king cole">
+                <td class="track-number" data-label="No.">23</td>
                 <td data-label="Song"><strong>L-O-V-E</strong></td>
                 <td data-label="Artist">Nat King Cole</td>
               </tr>
-              <tr class="search-item" data-search="26 here comes the sun the beatles">
-                <td class="track-number" data-label="No.">26</td>
+              <tr class="search-item" data-search="24 here comes the sun the beatles">
+                <td class="track-number" data-label="No.">24</td>
                 <td data-label="Song"><strong>Here Comes the Sun</strong></td>
                 <td data-label="Artist">The Beatles</td>
               </tr>
-              <tr class="search-item" data-search="27 everything michael bublé">
-                <td class="track-number" data-label="No.">27</td>
+              <tr class="search-item" data-search="25 everything michael bublé">
+                <td class="track-number" data-label="No.">25</td>
                 <td data-label="Song"><strong>Everything</strong></td>
                 <td data-label="Artist">Michael Bublé</td>
               </tr>
-              <tr class="search-item" data-search="28 you are the best thing ray lamontagne">
-                <td class="track-number" data-label="No.">28</td>
+              <tr class="search-item" data-search="26 you are the best thing ray lamontagne">
+                <td class="track-number" data-label="No.">26</td>
                 <td data-label="Song"><strong>You Are the Best Thing</strong></td>
                 <td data-label="Artist">Ray LaMontagne</td>
               </tr>
-              <tr class="search-item" data-search="29 the way you look tonight frank sinatra">
-                <td class="track-number" data-label="No.">29</td>
-                <td data-label="Song"><strong>The Way You Look Tonight</strong></td>
-                <td data-label="Artist">Frank Sinatra</td>
-              </tr>
-              <tr class="search-item" data-search="30 golden harry styles">
-                <td class="track-number" data-label="No.">30</td>
+              <tr class="search-item" data-search="27 golden harry styles">
+                <td class="track-number" data-label="No.">27</td>
                 <td data-label="Song"><strong>Golden</strong></td>
                 <td data-label="Artist">Harry Styles</td>
               </tr>
-              <tr class="search-item" data-search="31 sweet creature harry styles">
-                <td class="track-number" data-label="No.">31</td>
+              <tr class="search-item" data-search="28 sweet creature harry styles">
+                <td class="track-number" data-label="No.">28</td>
                 <td data-label="Song"><strong>Sweet Creature</strong></td>
                 <td data-label="Artist">Harry Styles</td>
               </tr>
-              <tr class="search-item" data-search="32 this will be an everlasting love natalie cole">
-                <td class="track-number" data-label="No.">32</td>
+              <tr class="search-item" data-search="29 this will be an everlasting love natalie cole">
+                <td class="track-number" data-label="No.">29</td>
                 <td data-label="Song"><strong>This Will Be An Everlasting Love</strong></td>
                 <td data-label="Artist">Natalie Cole</td>
               </tr>
-              <tr class="search-item" data-search="33 dream a little dream of me the mamas &amp; the papas">
-                <td class="track-number" data-label="No.">33</td>
+              <tr class="search-item" data-search="30 dream a little dream of me the mamas &amp; the papas">
+                <td class="track-number" data-label="No.">30</td>
                 <td data-label="Song"><strong>Dream a Little Dream of Me</strong></td>
                 <td data-label="Artist">The Mamas &amp; The Papas</td>
               </tr>
-              <tr class="search-item" data-search="34 real love baby father john misty">
-                <td class="track-number" data-label="No.">34</td>
+              <tr class="search-item" data-search="31 real love baby father john misty">
+                <td class="track-number" data-label="No.">31</td>
                 <td data-label="Song"><strong>Real Love Baby</strong></td>
                 <td data-label="Artist">Father John Misty</td>
               </tr>
-              <tr class="search-item" data-search="35 electric love børns">
-                <td class="track-number" data-label="No.">35</td>
+              <tr class="search-item" data-search="32 electric love børns">
+                <td class="track-number" data-label="No.">32</td>
                 <td data-label="Song"><strong>Electric Love</strong></td>
                 <td data-label="Artist">BØRNS</td>
               </tr>
-              <tr class="search-item" data-search="36 sun models odesza feat. madelyn grant">
-                <td class="track-number" data-label="No.">36</td>
+              <tr class="search-item" data-search="33 sun models odesza feat. madelyn grant">
+                <td class="track-number" data-label="No.">33</td>
                 <td data-label="Song"><strong>Sun Models</strong></td>
                 <td data-label="Artist">ODESZA feat. Madelyn Grant</td>
               </tr>
-              <tr class="search-item" data-search="37 unwritten natasha bedingfield">
-                <td class="track-number" data-label="No.">37</td>
+              <tr class="search-item" data-search="34 unwritten natasha bedingfield">
+                <td class="track-number" data-label="No.">34</td>
                 <td data-label="Song"><strong>Unwritten</strong></td>
                 <td data-label="Artist">Natasha Bedingfield</td>
               </tr>
-              <tr class="search-item" data-search="38 dog days are over florence + the machine">
-                <td class="track-number" data-label="No.">38</td>
+              <tr class="search-item" data-search="35 dog days are over florence + the machine">
+                <td class="track-number" data-label="No.">35</td>
                 <td data-label="Song"><strong>Dog Days Are Over</strong></td>
                 <td data-label="Artist">Florence + the Machine</td>
               </tr>
-              <tr class="search-item" data-search="39 maphupho fezeka french fuse, zandimaz &amp; onset music group">
-                <td class="track-number" data-label="No.">39</td>
+              <tr class="search-item" data-search="36 maphupho fezeka french fuse, zandimaz &amp; onset music group">
+                <td class="track-number" data-label="No.">36</td>
                 <td data-label="Song"><strong>Maphupho Fezeka</strong></td>
                 <td data-label="Artist">French Fuse, Zandimaz &amp; Onset Music Group</td>
               </tr>
-              <tr class="search-item" data-search="40 cinnamon girl lana del rey">
-                <td class="track-number" data-label="No.">40</td>
+              <tr class="search-item" data-search="37 cinnamon girl lana del rey">
+                <td class="track-number" data-label="No.">37</td>
                 <td data-label="Song"><strong>Cinnamon Girl</strong></td>
                 <td data-label="Artist">Lana Del Rey</td>
               </tr>
-              <tr class="search-item" data-search="41 national anthem lana del rey">
-                <td class="track-number" data-label="No.">41</td>
+              <tr class="search-item" data-search="38 national anthem lana del rey">
+                <td class="track-number" data-label="No.">38</td>
                 <td data-label="Song"><strong>National Anthem</strong></td>
                 <td data-label="Artist">Lana Del Rey</td>
               </tr>
-              <tr class="search-item" data-search="42 young and beautiful lana del rey">
-                <td class="track-number" data-label="No.">42</td>
-                <td data-label="Song"><strong>Young and Beautiful</strong></td>
-                <td data-label="Artist">Lana Del Rey</td>
-              </tr>
-              <tr class="search-item" data-search="43 mountain to move nick mulvey">
-                <td class="track-number" data-label="No.">43</td>
+              <tr class="search-item" data-search="39 mountain to move nick mulvey">
+                <td class="track-number" data-label="No.">39</td>
                 <td data-label="Song"><strong>Mountain To Move</strong></td>
                 <td data-label="Artist">Nick Mulvey</td>
               </tr>
-              <tr class="search-item" data-search="44 begin again nick mulvey">
-                <td class="track-number" data-label="No.">44</td>
+              <tr class="search-item" data-search="40 begin again nick mulvey">
+                <td class="track-number" data-label="No.">40</td>
                 <td data-label="Song"><strong>Begin Again</strong></td>
                 <td data-label="Artist">Nick Mulvey</td>
               </tr>
-              <tr class="search-item" data-search="45 on my way sons of the east">
-                <td class="track-number" data-label="No.">45</td>
+              <tr class="search-item" data-search="41 on my way sons of the east">
+                <td class="track-number" data-label="No.">41</td>
                 <td data-label="Song"><strong>On My Way</strong></td>
                 <td data-label="Artist">Sons of the East</td>
+              </tr>
+              <tr class="search-item" data-search="42 suddenly i see kt tunstall">
+                <td class="track-number" data-label="No.">42</td>
+                <td data-label="Song"><strong>Suddenly I See</strong></td>
+                <td data-label="Artist">KT Tunstall</td>
+              </tr>
+              <tr class="search-item" data-search="43 kiss me sixpence none the richer">
+                <td class="track-number" data-label="No.">43</td>
+                <td data-label="Song"><strong>Kiss Me</strong></td>
+                <td data-label="Artist">Sixpence None the Richer</td>
+              </tr>
+              <tr class="search-item" data-search="44 so easy (to fall in love) olivia dean">
+                <td class="track-number" data-label="No.">44</td>
+                <td data-label="Song"><strong>So Easy (To Fall in Love)</strong></td>
+                <td data-label="Artist">Olivia Dean</td>
+              </tr>
+              <tr class="search-item" data-search="45 end of beginning djo">
+                <td class="track-number" data-label="No.">45</td>
+                <td data-label="Song"><strong>End of Beginning</strong></td>
+                <td data-label="Artist">Djo</td>
+              </tr>
+              <tr class="search-item" data-search="46 i knew you were trouble. taylor swift">
+                <td class="track-number" data-label="No.">46</td>
+                <td data-label="Song"><strong>I Knew You Were Trouble.</strong></td>
+                <td data-label="Artist">Taylor Swift</td>
+              </tr>
+              <tr class="search-item" data-search="47 oogum boogum song brenton wood">
+                <td class="track-number" data-label="No.">47</td>
+                <td data-label="Song"><strong>Oogum Boogum Song</strong></td>
+                <td data-label="Artist">Brenton Wood</td>
+              </tr>
+              <tr class="search-item" data-search="48 soulful strut the fame gang">
+                <td class="track-number" data-label="No.">48</td>
+                <td data-label="Song"><strong>Soulful Strut</strong></td>
+                <td data-label="Artist">The Fame Gang</td>
+              </tr>
+              <tr class="search-item" data-search="49 baby i’m yours arctic monkeys">
+                <td class="track-number" data-label="No.">49</td>
+                <td data-label="Song"><strong>Baby I’m Yours</strong></td>
+                <td data-label="Artist">Arctic Monkeys</td>
               </tr></tbody>
           </table>
         </div>
@@ -4922,34 +4987,60 @@
           <span class="section-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M6 3v8M3.5 3v5a2.5 2.5 0 0 0 5 0V3M6 11v10M15 3v18M15 3c3 2 4 5 4 8h-4"></path></svg></span>
           <div>
             <p class="section-kicker">Playlist section</p>
-            <h2>Dinner</h2>
-            <p>Dinner music, in play order</p>
+            <h2>Dinner and Speeches</h2>
+            <p>Entrances, speeches and dinner music, in play order</p>
           </div>
-          <span class="count-pill">29 songs</span>
+          <span class="count-pill">37 songs</span>
         </div>
-        <div class="event-callouts">
-        <aside class="event-callout" aria-label="Cake cutting cue">
-          <span class="event-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M4 10h16v10H4zM4 15h16M7 10V7h10v3M9 7V4M15 7V4"></path><path d="M8 4c0-1 .5-1.7 1-2 .5.3 1 1 1 2M14 4c0-1 .5-1.7 1-2 .5.3 1 1 1 2"></path></svg></span>
-          <div>
-            <p>Immediately after the speeches</p>
-            <h3>Cake cutting</h3>
+
+        <details class="key-song-disclosure">
+          <summary><span>Dinner and speech key songs</span><small>4 cues</small></summary>
+          <div class="cue-groups embedded-cues">
+        <section class="cue-group cue-group-entrances" id="dinner-entrances">
+          <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3ZM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14ZM19 13l.7 1.8 1.8.7-1.8.7L19 18l-.7-1.8-1.8-.7 1.8-.7L19 13Z"></path></svg><span>Entrances</span></h3>
+          <div class="cue-grid">
+        <article class="cue-card search-item"
+          data-search="bridal party, groom and bride entrance gimme! gimme! gimme! (a man after midnight) amanda seyfried, ashley lilley &amp; rachel mcdowall approx. 0:54 start when she sings “is there a man out there?” this is the entrance song for the bridal party, groom and bride.">
+          <div class="cue-top">
+            <p class="moment">Bridal party, groom and bride entrance</p>
           </div>
-          <div class="event-track">
-            <strong>Song to be confirmed</strong>
-            <span>Choose the cake-cutting track</span>
+          <h3>Gimme! Gimme! Gimme! (A Man After Midnight)</h3><p class="artist">Amanda Seyfried, Ashley Lilley &amp; Rachel McDowall</p>
+          <div class="timed-cue"><h4 class="cue-time">Approx. 0:54</h4><b class="cue-instruction">Start when she sings “Is there a man out there?”</b><span>This is the entrance song for the bridal party, groom and bride.</span></div>
+        </article>
           </div>
-        </aside>
-        <aside class="event-callout" aria-label="Garter toss cue">
-          <span class="event-icon" aria-hidden="true"><svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="M9 18V5l10-2v13"></path><circle cx="6" cy="18" r="3"></circle><circle cx="16" cy="16" r="3"></circle></svg></span>
-          <div>
-            <p>Before the first dance</p>
-            <h3>Garter toss</h3>
+        </section>
+        <section class="cue-group cue-group-speeches" id="dinner-speeches">
+          <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><rect x="9" y="2" width="6" height="12" rx="3"></rect><path d="M5 10a7 7 0 0 0 14 0M12 17v5M8 22h8"></path></svg><span>Dinner and speeches</span></h3>
+          <div class="cue-grid">
+        <article class="cue-card search-item"
+          data-search="dad’s speech entrance the best day taylor swift start at approx. 2:20 please start as taylor sings “i have an excellent father, his strength is making me stronger”, then fade gently at the end of that line.">
+          <div class="cue-top">
+            <p class="moment">Dad’s speech entrance</p>
           </div>
-          <div class="event-track">
-            <strong>You Sexy Thing</strong>
-            <span>Hot Chocolate</span>
+          <h3>The Best Day <span class="cue-title-time">(start at approx. 2:20)</span></h3><p class="artist">Taylor Swift</p>
+          <p class="cue-note">Please start as Taylor sings “<strong>I have an excellent father, his strength is making me stronger</strong>”, then fade gently at the end of that line.</p>
+        </article>
+        <article class="cue-card search-item"
+          data-search="maid of honour / sister’s speech entrance you’re my best friend queen start at approx. 0:48 please start as he sings “oh, you’re my best friend” while she comes forward to speak, then fade gently once she reaches the microphone.">
+          <div class="cue-top">
+            <p class="moment">Maid of honour / sister’s speech entrance</p>
           </div>
-        </aside></div>
+          <h3>You’re My Best Friend <span class="cue-title-time">(start at approx. 0:48)</span></h3><p class="artist">Queen</p>
+          <p class="cue-note">Please start as he sings “<strong>Oh, you’re my best friend</strong>” while she comes forward to speak, then fade gently once she reaches the microphone.</p>
+        </article>
+        <article class="cue-card search-item"
+          data-search="groom’s speech entrance sister bethina mgarimbe this is their speech entrance song. please start it from the beginning as they come forward.">
+          <div class="cue-top">
+            <p class="moment">Groom’s speech entrance</p>
+          </div>
+          <h3>Sister Bethina</h3><p class="artist">Mgarimbe</p>
+          <p class="cue-note">This is their speech entrance song. Please start it from the beginning as they come forward.</p>
+        </article>
+          </div>
+        </section>
+          </div>
+        </details>
+
         <div class="table-wrap">
           <table>
             <thead><tr><th>No.</th><th>Song</th><th>Artist / Version</th></tr></thead>
@@ -4974,130 +5065,170 @@
                 <td data-label="Song"><strong>You’re Still the One</strong></td>
                 <td data-label="Artist">Shania Twain</td>
               </tr>
-              <tr class="search-item" data-search="5 i knew i loved you savage garden">
+              <tr class="search-item" data-search="5 let’s stay together al green">
                 <td class="track-number" data-label="No.">5</td>
-                <td data-label="Song"><strong>I Knew I Loved You</strong></td>
-                <td data-label="Artist">Savage Garden</td>
-              </tr>
-              <tr class="search-item" data-search="6 let’s stay together al green">
-                <td class="track-number" data-label="No.">6</td>
                 <td data-label="Song"><strong>Let’s Stay Together</strong></td>
                 <td data-label="Artist">Al Green</td>
               </tr>
-              <tr class="search-item" data-search="7 fly me to the moon frank sinatra">
-                <td class="track-number" data-label="No.">7</td>
+              <tr class="search-item" data-search="6 fly me to the moon frank sinatra">
+                <td class="track-number" data-label="No.">6</td>
                 <td data-label="Song"><strong>Fly Me to the Moon</strong></td>
                 <td data-label="Artist">Frank Sinatra</td>
               </tr>
-              <tr class="search-item" data-search="8 my girl the temptations">
-                <td class="track-number" data-label="No.">8</td>
+              <tr class="search-item" data-search="7 my girl the temptations">
+                <td class="track-number" data-label="No.">7</td>
                 <td data-label="Song"><strong>My Girl</strong></td>
                 <td data-label="Artist">The Temptations</td>
               </tr>
-              <tr class="search-item" data-search="9 you send me sam cooke">
-                <td class="track-number" data-label="No.">9</td>
+              <tr class="search-item" data-search="8 you send me sam cooke">
+                <td class="track-number" data-label="No.">8</td>
                 <td data-label="Song"><strong>You Send Me</strong></td>
                 <td data-label="Artist">Sam Cooke</td>
               </tr>
-              <tr class="search-item" data-search="10 sweet nothing taylor swift">
-                <td class="track-number" data-label="No.">10</td>
+              <tr class="search-item" data-search="9 sweet nothing taylor swift">
+                <td class="track-number" data-label="No.">9</td>
                 <td data-label="Song"><strong>Sweet Nothing</strong></td>
                 <td data-label="Artist">Taylor Swift</td>
               </tr>
-              <tr class="search-item" data-search="11 landslide fleetwood mac">
-                <td class="track-number" data-label="No.">11</td>
+              <tr class="search-item" data-search="10 landslide fleetwood mac">
+                <td class="track-number" data-label="No.">10</td>
                 <td data-label="Song"><strong>Landslide</strong></td>
                 <td data-label="Artist">Fleetwood Mac</td>
               </tr>
-              <tr class="search-item" data-search="12 like i’m gonna lose you meghan trainor ft. john legend">
-                <td class="track-number" data-label="No.">12</td>
-                <td data-label="Song"><strong>Like I’m Gonna Lose You</strong></td>
-                <td data-label="Artist">Meghan Trainor ft. John Legend</td>
-              </tr>
-              <tr class="search-item" data-search="13 invisible string taylor swift">
-                <td class="track-number" data-label="No.">13</td>
+              <tr class="search-item" data-search="11 invisible string taylor swift">
+                <td class="track-number" data-label="No.">11</td>
                 <td data-label="Song"><strong>invisible string</strong></td>
                 <td data-label="Artist">Taylor Swift</td>
               </tr>
-              <tr class="search-item" data-search="14 you and me lifehouse">
-                <td class="track-number" data-label="No.">14</td>
+              <tr class="search-item" data-search="12 you and me lifehouse">
+                <td class="track-number" data-label="No.">12</td>
                 <td data-label="Song"><strong>You and Me</strong></td>
                 <td data-label="Artist">Lifehouse</td>
               </tr>
-              <tr class="search-item" data-search="15 everywhere, everything noah kahan">
-                <td class="track-number" data-label="No.">15</td>
+              <tr class="search-item" data-search="13 everywhere, everything noah kahan">
+                <td class="track-number" data-label="No.">13</td>
                 <td data-label="Song"><strong>Everywhere, Everything</strong></td>
                 <td data-label="Artist">Noah Kahan</td>
               </tr>
-              <tr class="search-item" data-search="16 honey taylor swift">
-                <td class="track-number" data-label="No.">16</td>
+              <tr class="search-item" data-search="14 honey taylor swift">
+                <td class="track-number" data-label="No.">14</td>
                 <td data-label="Song"><strong>Honey</strong></td>
                 <td data-label="Artist">Taylor Swift</td>
               </tr>
-              <tr class="search-item" data-search="17 linger the cranberries">
-                <td class="track-number" data-label="No.">17</td>
-                <td data-label="Song"><strong>Linger</strong></td>
-                <td data-label="Artist">The Cranberries</td>
-              </tr>
-              <tr class="search-item" data-search="18 tequila dan + shay">
-                <td class="track-number" data-label="No.">18</td>
-                <td data-label="Song"><strong>Tequila</strong></td>
-                <td data-label="Artist">Dan + Shay</td>
-              </tr>
-              <tr class="search-item" data-search="19 can’t take my eyes off you frankie valli">
-                <td class="track-number" data-label="No.">19</td>
+              <tr class="search-item" data-search="15 can’t take my eyes off you frankie valli">
+                <td class="track-number" data-label="No.">15</td>
                 <td data-label="Song"><strong>Can’t Take My Eyes Off You</strong></td>
                 <td data-label="Artist">Frankie Valli</td>
               </tr>
-              <tr class="search-item" data-search="20 all you need is love the beatles">
-                <td class="track-number" data-label="No.">20</td>
+              <tr class="search-item" data-search="16 all you need is love the beatles">
+                <td class="track-number" data-label="No.">16</td>
                 <td data-label="Song"><strong>All You Need Is Love</strong></td>
                 <td data-label="Artist">The Beatles</td>
               </tr>
-              <tr class="search-item" data-search="21 i’m a believer the monkees">
-                <td class="track-number" data-label="No.">21</td>
+              <tr class="search-item" data-search="17 i’m a believer the monkees">
+                <td class="track-number" data-label="No.">17</td>
                 <td data-label="Song"><strong>I’m a Believer</strong></td>
                 <td data-label="Artist">The Monkees</td>
               </tr>
-              <tr class="search-item" data-search="22 ob-la-di, ob-la-da the beatles">
-                <td class="track-number" data-label="No.">22</td>
+              <tr class="search-item" data-search="18 ob-la-di, ob-la-da the beatles">
+                <td class="track-number" data-label="No.">18</td>
                 <td data-label="Song"><strong>Ob-La-Di, Ob-La-Da</strong></td>
                 <td data-label="Artist">The Beatles</td>
               </tr>
-              <tr class="search-item" data-search="23 accidentally in love counting crows">
-                <td class="track-number" data-label="No.">23</td>
+              <tr class="search-item" data-search="19 accidentally in love counting crows">
+                <td class="track-number" data-label="No.">19</td>
                 <td data-label="Song"><strong>Accidentally in Love</strong></td>
                 <td data-label="Artist">Counting Crows</td>
               </tr>
-              <tr class="search-item" data-search="24 never let you go third eye blind">
-                <td class="track-number" data-label="No.">24</td>
+              <tr class="search-item" data-search="20 never let you go third eye blind">
+                <td class="track-number" data-label="No.">20</td>
                 <td data-label="Song"><strong>Never Let You Go</strong></td>
                 <td data-label="Artist">Third Eye Blind</td>
               </tr>
-              <tr class="search-item" data-search="25 friday i’m in love the cure">
-                <td class="track-number" data-label="No.">25</td>
+              <tr class="search-item" data-search="21 friday i’m in love the cure">
+                <td class="track-number" data-label="No.">21</td>
                 <td data-label="Song"><strong>Friday I’m in Love</strong></td>
                 <td data-label="Artist">The Cure</td>
               </tr>
-              <tr class="search-item" data-search="26 good vibrations the beach boys">
-                <td class="track-number" data-label="No.">26</td>
+              <tr class="search-item" data-search="22 good vibrations the beach boys">
+                <td class="track-number" data-label="No.">22</td>
                 <td data-label="Song"><strong>Good Vibrations</strong></td>
                 <td data-label="Artist">The Beach Boys</td>
               </tr>
-              <tr class="search-item" data-search="27 video games lana del rey">
-                <td class="track-number" data-label="No.">27</td>
+              <tr class="search-item" data-search="23 video games lana del rey">
+                <td class="track-number" data-label="No.">23</td>
                 <td data-label="Song"><strong>Video Games</strong></td>
                 <td data-label="Artist">Lana Del Rey</td>
               </tr>
-              <tr class="search-item" data-search="28 nothing’s gonna hurt you baby cigarettes after sex">
-                <td class="track-number" data-label="No.">28</td>
+              <tr class="search-item" data-search="24 nothing’s gonna hurt you baby cigarettes after sex">
+                <td class="track-number" data-label="No.">24</td>
                 <td data-label="Song"><strong>Nothing’s Gonna Hurt You Baby</strong></td>
                 <td data-label="Artist">Cigarettes After Sex</td>
               </tr>
-              <tr class="search-item" data-search="29 lazy bones desmond and the tutus">
-                <td class="track-number" data-label="No.">29</td>
+              <tr class="search-item" data-search="25 lazy bones desmond and the tutus">
+                <td class="track-number" data-label="No.">25</td>
                 <td data-label="Song"><strong>Lazy Bones</strong></td>
                 <td data-label="Artist">Desmond and the Tutus</td>
+              </tr>
+              <tr class="search-item" data-search="26 drops of jupiter train">
+                <td class="track-number" data-label="No.">26</td>
+                <td data-label="Song"><strong>Drops of Jupiter</strong></td>
+                <td data-label="Artist">Train</td>
+              </tr>
+              <tr class="search-item" data-search="27 until i found you stephen sanchez">
+                <td class="track-number" data-label="No.">27</td>
+                <td data-label="Song"><strong>Until I Found You</strong></td>
+                <td data-label="Artist">Stephen Sanchez</td>
+              </tr>
+              <tr class="search-item" data-search="28 ain’t no mountain high enough marvin gaye &amp; tammi terrell">
+                <td class="track-number" data-label="No.">28</td>
+                <td data-label="Song"><strong>Ain’t No Mountain High Enough</strong></td>
+                <td data-label="Artist">Marvin Gaye &amp; Tammi Terrell</td>
+              </tr>
+              <tr class="search-item" data-search="29 bitter sweet symphony the verve">
+                <td class="track-number" data-label="No.">29</td>
+                <td data-label="Song"><strong>Bitter Sweet Symphony</strong></td>
+                <td data-label="Artist">The Verve</td>
+              </tr>
+              <tr class="search-item" data-search="30 don’t go breaking my heart elton john &amp; kiki dee">
+                <td class="track-number" data-label="No.">30</td>
+                <td data-label="Song"><strong>Don’t Go Breaking My Heart</strong></td>
+                <td data-label="Artist">Elton John &amp; Kiki Dee</td>
+              </tr>
+              <tr class="search-item" data-search="31 radio ga ga queen">
+                <td class="track-number" data-label="No.">31</td>
+                <td data-label="Song"><strong>Radio Ga Ga</strong></td>
+                <td data-label="Artist">Queen</td>
+              </tr>
+              <tr class="search-item" data-search="32 island in the sun weezer">
+                <td class="track-number" data-label="No.">32</td>
+                <td data-label="Song"><strong>Island in the Sun</strong></td>
+                <td data-label="Artist">Weezer</td>
+              </tr>
+              <tr class="search-item" data-search="33 dreams the cranberries">
+                <td class="track-number" data-label="No.">33</td>
+                <td data-label="Song"><strong>Dreams</strong></td>
+                <td data-label="Artist">The Cranberries</td>
+              </tr>
+              <tr class="search-item" data-search="34 you get what you give new radicals">
+                <td class="track-number" data-label="No.">34</td>
+                <td data-label="Song"><strong>You Get What You Give</strong></td>
+                <td data-label="Artist">New Radicals</td>
+              </tr>
+              <tr class="search-item" data-search="35 more than a feeling boston">
+                <td class="track-number" data-label="No.">35</td>
+                <td data-label="Song"><strong>More Than a Feeling</strong></td>
+                <td data-label="Artist">Boston</td>
+              </tr>
+              <tr class="search-item" data-search="36 what dreams are made of hilary duff">
+                <td class="track-number" data-label="No.">36</td>
+                <td data-label="Song"><strong>What Dreams Are Made Of</strong></td>
+                <td data-label="Artist">Hilary Duff</td>
+              </tr>
+              <tr class="search-item" data-search="37 love grows (where my rosemary goes) edison lighthouse">
+                <td class="track-number" data-label="No.">37</td>
+                <td data-label="Song"><strong>Love Grows (Where My Rosemary Goes)</strong></td>
+                <td data-label="Artist">Edison Lighthouse</td>
               </tr></tbody>
           </table>
         </div>
@@ -5110,10 +5241,57 @@
         <div>
           <p class="section-kicker">The dance floor</p>
           <h2>Dance Floor</h2>
-          <p>111 songs across 17 sections, arranged in play order for the DJ.</p>
+          <p>134 songs, arranged in DJ play order from Y.M.C.A. to Closing Time.</p>
         </div>
-        <span class="count-pill">111 songs</span>
+        <span class="count-pill">134 songs</span>
       </div>
+      <details class="key-song-disclosure">
+        <summary><span>Dance Floor key songs</span><small>4 cues</small></summary>
+        <div class="cue-groups embedded-cues">
+        <section class="cue-group cue-group-first-dances" id="reception-first-dances">
+          <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><circle cx="12" cy="12" r="9"></circle><circle cx="12" cy="12" r="2.5"></circle><path d="M12 3a9 9 0 0 1 9 9M3 12a9 9 0 0 1 9-9"></path></svg><span>Dances</span></h3>
+          <div class="cue-grid">
+        <article class="cue-card search-item"
+          data-search="bride and groom first dance wouldn’t it be nice the beach boys please start from the beginning.">
+          <div class="cue-top">
+            <p class="moment">Bride and groom first dance</p>
+          </div>
+          <h3>Wouldn’t It Be Nice</h3><p class="artist">The Beach Boys</p>
+          <p class="cue-note">Please start from the beginning.</p>
+        </article>
+        <article class="cue-card search-item"
+          data-search="father and daughter dance (they long to be) close to you the carpenters this is the song for the father and daughter dance. please start from the beginning.">
+          <div class="cue-top">
+            <p class="moment">Father and daughter dance</p>
+          </div>
+          <h3>(They Long to Be) Close to You</h3><p class="artist">The Carpenters</p>
+          <p class="cue-note">This is the song for the father and daughter dance. Please start from the beginning.</p>
+        </article>
+        <article class="cue-card search-item"
+          data-search="dance floor opening (after the group photo) y.m.c.a. village people the photographer will invite everyone onto the dance floor for a group photo. as soon as the photo is finished, please start y.m.c.a. to open the dance floor.">
+          <div class="cue-top">
+            <p class="moment">Dance floor opening (after the group photo)</p>
+          </div>
+          <h3>Y.M.C.A.</h3><p class="artist">Village People</p>
+          <p class="cue-note">The photographer will invite everyone onto the dance floor for a group photo. As soon as the photo is finished, please start Y.M.C.A. to open the dance floor.</p>
+        </article>
+          </div>
+        </section>
+        <section class="cue-group cue-group-garter-toss" id="reception-garter-toss">
+          <h3 class="cue-group-heading"><svg class="icon cue-group-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true" focusable="false"><path d="m12 3 1.2 3.8L17 8l-3.8 1.2L12 13l-1.2-3.8L7 8l3.8-1.2L12 3ZM5 14l.8 2.2L8 17l-2.2.8L5 20l-.8-2.2L2 17l2.2-.8L5 14ZM19 13l.7 1.8 1.8.7-1.8.7L19 18l-.7-1.8-1.8-.7 1.8-.7L19 13Z"></path></svg><span>Garter toss</span></h3>
+          <div class="cue-grid">
+        <article class="cue-card search-item"
+          data-search="garter toss (later in the night, before the first dance) you sexy thing hot chocolate i’ll ask the mcs and bridal party to let you know when the garter toss will be happening.">
+          <div class="cue-top">
+            <p class="moment">Garter toss (later in the night, before the first dance)</p>
+          </div>
+          <h3>You Sexy Thing</h3><p class="artist">Hot Chocolate</p>
+          <p class="cue-note">I’ll ask the MCs and bridal party to let you know when the garter toss will be happening.</p>
+        </article>
+          </div>
+        </section>
+        </div>
+      </details>
       <div class="table-wrap">
         <table>
           <thead><tr><th>No.</th><th>Song</th><th>Artist</th></tr></thead>
@@ -5145,597 +5323,648 @@
                 <td data-label="Song"><strong>Sweet Caroline</strong></td>
                 <td data-label="Artist">Neil Diamond</td>
               </tr>
-              <tr class="search-item" data-search="6 signed, sealed, delivered stevie wonder">
+              <tr class="search-item" data-search="6 build me up buttercup the foundations">
                 <td class="track-number" data-label="No.">6</td>
-                <td data-label="Song"><strong>Signed, Sealed, Delivered</strong></td>
-                <td data-label="Artist">Stevie Wonder</td>
-              </tr>
-              <tr class="search-item" data-search="7 build me up buttercup the foundations">
-                <td class="track-number" data-label="No.">7</td>
                 <td data-label="Song"><strong>Build Me Up Buttercup</strong></td>
                 <td data-label="Artist">The Foundations</td>
               </tr>
-              <tr class="search-item" data-search="8 let’s twist again chubby checker">
-                <td class="track-number" data-label="No.">8</td>
+              <tr class="search-item" data-search="7 let’s twist again chubby checker">
+                <td class="track-number" data-label="No.">7</td>
                 <td data-label="Song"><strong>Let’s Twist Again</strong></td>
                 <td data-label="Artist">Chubby Checker</td>
               </tr>
-              <tr class="search-item" data-search="9 we are family sister sledge">
-                <td class="track-number" data-label="No.">9</td>
+              <tr class="search-item" data-search="8 we are family sister sledge">
+                <td class="track-number" data-label="No.">8</td>
                 <td data-label="Song"><strong>We Are Family</strong></td>
                 <td data-label="Artist">Sister Sledge</td>
               </tr>
-              <tr class="search-item" data-search="10 who let the dogs out baha men">
-                <td class="track-number" data-label="No.">10</td>
+              <tr class="search-item" data-search="9 who let the dogs out baha men">
+                <td class="track-number" data-label="No.">9</td>
                 <td data-label="Song"><strong>Who Let the Dogs Out</strong></td>
                 <td data-label="Artist">Baha Men</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">II. Fun group dance lift, 4 songs</th></tr>
-              
-              <tr class="search-item" data-search="11 the macarena los del río">
-                <td class="track-number" data-label="No.">11</td>
+              <tr class="search-item" data-search="10 the macarena los del río">
+                <td class="track-number" data-label="No.">10</td>
                 <td data-label="Song"><strong>The Macarena</strong></td>
                 <td data-label="Artist">Los Del Río</td>
               </tr>
-              <tr class="search-item" data-search="12 ain’t no mountain high enough marvin gaye &amp; tammi terrell">
-                <td class="track-number" data-label="No.">12</td>
-                <td data-label="Song"><strong>Ain’t No Mountain High Enough</strong></td>
-                <td data-label="Artist">Marvin Gaye &amp; Tammi Terrell</td>
-              </tr>
-              <tr class="search-item" data-search="13 greased lightnin’ john travolta">
-                <td class="track-number" data-label="No.">13</td>
+              <tr class="search-item" data-search="11 greased lightnin’ john travolta">
+                <td class="track-number" data-label="No.">11</td>
                 <td data-label="Song"><strong>Greased Lightnin’</strong></td>
                 <td data-label="Artist">John Travolta</td>
               </tr>
-              <tr class="search-item" data-search="14 you make my dreams hall &amp; oates">
-                <td class="track-number" data-label="No.">14</td>
+              <tr class="search-item" data-search="12 you make my dreams hall &amp; oates">
+                <td class="track-number" data-label="No.">12</td>
                 <td data-label="Song"><strong>You Make My Dreams</strong></td>
                 <td data-label="Artist">Hall &amp; Oates</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">III. SA wedding energy lift, 6 songs</th></tr>
-              
-              <tr class="search-item" data-search="15 nkalakatha mandoza">
-                <td class="track-number" data-label="No.">15</td>
+              <tr class="search-item" data-search="13 nkalakatha mandoza">
+                <td class="track-number" data-label="No.">13</td>
                 <td data-label="Song"><strong>Nkalakatha</strong></td>
                 <td data-label="Artist">Mandoza</td>
               </tr>
-              <tr class="search-item" data-search="16 sister bethina mgarimbe">
-                <td class="track-number" data-label="No.">16</td>
+              <tr class="search-item" data-search="14 sister bethina mgarimbe">
+                <td class="track-number" data-label="No.">14</td>
                 <td data-label="Song"><strong>Sister Bethina</strong></td>
                 <td data-label="Artist">Mgarimbe</td>
               </tr>
-              <tr class="search-item" data-search="17 waka waka shakira ft. freshlyground">
-                <td class="track-number" data-label="No.">17</td>
+              <tr class="search-item" data-search="15 waka waka shakira ft. freshlyground">
+                <td class="track-number" data-label="No.">15</td>
                 <td data-label="Song"><strong>Waka Waka</strong></td>
                 <td data-label="Artist">Shakira ft. Freshlyground</td>
               </tr>
-              <tr class="search-item" data-search="18 jerusalema master kg ft. nomcebo zikode">
-                <td class="track-number" data-label="No.">18</td>
+              <tr class="search-item" data-search="16 jerusalema master kg ft. nomcebo zikode">
+                <td class="track-number" data-label="No.">16</td>
                 <td data-label="Song"><strong>Jerusalema</strong></td>
                 <td data-label="Artist">Master KG ft. Nomcebo Zikode</td>
               </tr>
-              <tr class="search-item" data-search="19 cha cha slide dj casper">
-                <td class="track-number" data-label="No.">19</td>
-                <td data-label="Song"><strong>Cha Cha Slide</strong></td>
-                <td data-label="Artist">DJ Casper</td>
-              </tr>
-              <tr class="search-item" data-search="20 uptown funk mark ronson ft. bruno mars">
-                <td class="track-number" data-label="No.">20</td>
+              <tr class="search-item" data-search="17 uptown funk mark ronson ft. bruno mars">
+                <td class="track-number" data-label="No.">17</td>
                 <td data-label="Song"><strong>Uptown Funk</strong></td>
                 <td data-label="Artist">Mark Ronson ft. Bruno Mars</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">IV. First 1995-born crowd peak, 11 songs</th></tr>
-              
-              <tr class="search-item" data-search="21 i gotta feeling the black eyed peas">
+              <tr class="search-item" data-search="18 net die een vir my (maia hee) nicholis louw &amp; shine 4">
+                <td class="track-number" data-label="No.">18</td>
+                <td data-label="Song"><strong>Net Die Een Vir My (Maia Hee)</strong></td>
+                <td data-label="Artist">Nicholis Louw &amp; Shine 4</td>
+              </tr>
+              <tr class="search-item" data-search="19 wit skoene loufi feat. jayms">
+                <td class="track-number" data-label="No.">19</td>
+                <td data-label="Song"><strong>Wit Skoene</strong></td>
+                <td data-label="Artist">Loufi feat. Jayms</td>
+              </tr>
+              <tr class="search-item" data-search="20 sun in my pocket locnville">
+                <td class="track-number" data-label="No.">20</td>
+                <td data-label="Song"><strong>Sun in My Pocket</strong></td>
+                <td data-label="Artist">Locnville</td>
+              </tr>
+              <tr class="search-item" data-search="21 pretoria girls desmond and the tutus">
                 <td class="track-number" data-label="No.">21</td>
+                <td data-label="Song"><strong>Pretoria Girls</strong></td>
+                <td data-label="Artist">Desmond and the Tutus</td>
+              </tr>
+              <tr class="search-item" data-search="22 i gotta feeling the black eyed peas">
+                <td class="track-number" data-label="No.">22</td>
                 <td data-label="Song"><strong>I Gotta Feeling</strong></td>
                 <td data-label="Artist">The Black Eyed Peas</td>
               </tr>
-              <tr class="search-item" data-search="22 hey ya! outkast">
-                <td class="track-number" data-label="No.">22</td>
+              <tr class="search-item" data-search="23 hey ya! outkast">
+                <td class="track-number" data-label="No.">23</td>
                 <td data-label="Song"><strong>Hey Ya!</strong></td>
                 <td data-label="Artist">OutKast</td>
               </tr>
-              <tr class="search-item" data-search="23 kaptein kurt darren">
-                <td class="track-number" data-label="No.">23</td>
+              <tr class="search-item" data-search="24 kaptein kurt darren">
+                <td class="track-number" data-label="No.">24</td>
                 <td data-label="Song"><strong>Kaptein</strong></td>
                 <td data-label="Artist">Kurt Darren</td>
               </tr>
-              <tr class="search-item" data-search="24 don’t stop me now queen">
-                <td class="track-number" data-label="No.">24</td>
+              <tr class="search-item" data-search="25 don’t stop me now queen">
+                <td class="track-number" data-label="No.">25</td>
                 <td data-label="Song"><strong>Don’t Stop Me Now</strong></td>
                 <td data-label="Artist">Queen</td>
               </tr>
-              <tr class="search-item" data-search="25 shut up and dance walk the moon">
-                <td class="track-number" data-label="No.">25</td>
+              <tr class="search-item" data-search="26 shut up and dance walk the moon">
+                <td class="track-number" data-label="No.">26</td>
                 <td data-label="Song"><strong>Shut Up and Dance</strong></td>
                 <td data-label="Artist">Walk the Moon</td>
               </tr>
-              <tr class="search-item" data-search="26 livin’ on a prayer bon jovi">
-                <td class="track-number" data-label="No.">26</td>
+              <tr class="search-item" data-search="27 livin’ on a prayer bon jovi">
+                <td class="track-number" data-label="No.">27</td>
                 <td data-label="Song"><strong>Livin’ on a Prayer</strong></td>
                 <td data-label="Artist">Bon Jovi</td>
               </tr>
-              <tr class="search-item" data-search="27 mr. brightside the killers">
-                <td class="track-number" data-label="No.">27</td>
+              <tr class="search-item" data-search="28 mr. brightside the killers">
+                <td class="track-number" data-label="No.">28</td>
                 <td data-label="Song"><strong>Mr. Brightside</strong></td>
                 <td data-label="Artist">The Killers</td>
               </tr>
-              <tr class="search-item" data-search="28 yeah! usher ft. lil jon &amp; ludacris">
-                <td class="track-number" data-label="No.">28</td>
+              <tr class="search-item" data-search="29 yeah! usher ft. lil jon &amp; ludacris">
+                <td class="track-number" data-label="No.">29</td>
                 <td data-label="Song"><strong>Yeah!</strong></td>
                 <td data-label="Artist">Usher ft. Lil Jon &amp; Ludacris</td>
               </tr>
-              <tr class="search-item" data-search="29 waterloo abba">
-                <td class="track-number" data-label="No.">29</td>
+              <tr class="search-item" data-search="30 waterloo abba">
+                <td class="track-number" data-label="No.">30</td>
                 <td data-label="Song"><strong>Waterloo</strong></td>
                 <td data-label="Artist">ABBA</td>
               </tr>
-              <tr class="search-item" data-search="30 man! i feel like a woman! shania twain">
-                <td class="track-number" data-label="No.">30</td>
+              <tr class="search-item" data-search="31 man! i feel like a woman! shania twain">
+                <td class="track-number" data-label="No.">31</td>
                 <td data-label="Song"><strong>Man! I Feel Like a Woman!</strong></td>
                 <td data-label="Artist">Shania Twain</td>
               </tr>
-              <tr class="search-item" data-search="31 hips don’t lie shakira ft. wyclef jean">
-                <td class="track-number" data-label="No.">31</td>
-                <td data-label="Song"><strong>Hips Don’t Lie</strong></td>
-                <td data-label="Artist">Shakira ft. Wyclef Jean</td>
-              </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">V. Club section, 5 songs</th></tr>
-              
               <tr class="search-item" data-search="32 don’t stop the music rihanna">
                 <td class="track-number" data-label="No.">32</td>
                 <td data-label="Song"><strong>Don’t Stop the Music</strong></td>
                 <td data-label="Artist">Rihanna</td>
               </tr>
-              <tr class="search-item" data-search="33 where have you been rihanna">
+              <tr class="search-item" data-search="33 loslappie kurt darren">
                 <td class="track-number" data-label="No.">33</td>
-                <td data-label="Song"><strong>Where Have You Been</strong></td>
-                <td data-label="Artist">Rihanna</td>
-              </tr>
-              <tr class="search-item" data-search="34 loslappie kurt darren">
-                <td class="track-number" data-label="No.">34</td>
                 <td data-label="Song"><strong>Loslappie</strong></td>
                 <td data-label="Artist">Kurt Darren</td>
               </tr>
-              <tr class="search-item" data-search="35 just dance lady gaga ft. colby o’donis">
-                <td class="track-number" data-label="No.">35</td>
+              <tr class="search-item" data-search="34 just dance lady gaga ft. colby o’donis">
+                <td class="track-number" data-label="No.">34</td>
                 <td data-label="Song"><strong>Just Dance</strong></td>
                 <td data-label="Artist">Lady Gaga ft. Colby O’Donis</td>
               </tr>
-              <tr class="search-item" data-search="36 party rock anthem lmfao">
-                <td class="track-number" data-label="No.">36</td>
-                <td data-label="Song"><strong>Party Rock Anthem</strong></td>
-                <td data-label="Artist">LMFAO</td>
+              <tr class="search-item" data-search="35 colours &amp; lights goldfish &amp; cat dealers">
+                <td class="track-number" data-label="No.">35</td>
+                <td data-label="Song"><strong>Colours &amp; Lights</strong></td>
+                <td data-label="Artist">GoldFish &amp; Cat Dealers</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">VI. Scream-sing and nostalgia bridge, 9 songs</th></tr>
-              
-              <tr class="search-item" data-search="37 i’m gonna be (500 miles) the proclaimers">
+              <tr class="search-item" data-search="36 moonwalk away goldfish">
+                <td class="track-number" data-label="No.">36</td>
+                <td data-label="Song"><strong>Moonwalk Away</strong></td>
+                <td data-label="Artist">GoldFish</td>
+              </tr>
+              <tr class="search-item" data-search="37 stay high (habits remix) tove lo &amp; hippie sabotage">
                 <td class="track-number" data-label="No.">37</td>
+                <td data-label="Song"><strong>Stay High (Habits Remix)</strong></td>
+                <td data-label="Artist">Tove Lo &amp; Hippie Sabotage</td>
+              </tr>
+              <tr class="search-item" data-search="38 it wasn’t me shaggy feat. rikrok">
+                <td class="track-number" data-label="No.">38</td>
+                <td data-label="Song"><strong>It Wasn’t Me</strong></td>
+                <td data-label="Artist">Shaggy feat. RikRok</td>
+              </tr>
+              <tr class="search-item" data-search="39 want to want me jason derulo">
+                <td class="track-number" data-label="No.">39</td>
+                <td data-label="Song"><strong>Want to Want Me</strong></td>
+                <td data-label="Artist">Jason Derulo</td>
+              </tr>
+              <tr class="search-item" data-search="40 wiggle jason derulo feat. snoop dogg">
+                <td class="track-number" data-label="No.">40</td>
+                <td data-label="Song"><strong>Wiggle</strong></td>
+                <td data-label="Artist">Jason Derulo feat. Snoop Dogg</td>
+              </tr>
+              <tr class="search-item" data-search="41 i’m gonna be (500 miles) the proclaimers">
+                <td class="track-number" data-label="No.">41</td>
                 <td data-label="Song"><strong>I’m Gonna Be (500 Miles)</strong></td>
                 <td data-label="Artist">The Proclaimers</td>
               </tr>
-              <tr class="search-item" data-search="38 levitating dua lipa">
-                <td class="track-number" data-label="No.">38</td>
+              <tr class="search-item" data-search="42 levitating dua lipa">
+                <td class="track-number" data-label="No.">42</td>
                 <td data-label="Song"><strong>Levitating</strong></td>
                 <td data-label="Artist">Dua Lipa</td>
               </tr>
-              <tr class="search-item" data-search="39 mambo no. 5 lou bega">
-                <td class="track-number" data-label="No.">39</td>
+              <tr class="search-item" data-search="43 mambo no. 5 lou bega">
+                <td class="track-number" data-label="No.">43</td>
                 <td data-label="Song"><strong>Mambo No. 5</strong></td>
                 <td data-label="Artist">Lou Bega</td>
               </tr>
-              <tr class="search-item" data-search="40 pink pony club chappell roan">
-                <td class="track-number" data-label="No.">40</td>
+              <tr class="search-item" data-search="44 pink pony club chappell roan">
+                <td class="track-number" data-label="No.">44</td>
                 <td data-label="Song"><strong>Pink Pony Club</strong></td>
                 <td data-label="Artist">Chappell Roan</td>
               </tr>
-              <tr class="search-item" data-search="41 come on eileen dexys midnight runners">
-                <td class="track-number" data-label="No.">41</td>
+              <tr class="search-item" data-search="45 come on eileen dexys midnight runners">
+                <td class="track-number" data-label="No.">45</td>
                 <td data-label="Song"><strong>Come On Eileen</strong></td>
                 <td data-label="Artist">Dexys Midnight Runners</td>
               </tr>
-              <tr class="search-item" data-search="42 dynamite taio cruz">
-                <td class="track-number" data-label="No.">42</td>
+              <tr class="search-item" data-search="46 dynamite taio cruz">
+                <td class="track-number" data-label="No.">46</td>
                 <td data-label="Song"><strong>Dynamite</strong></td>
                 <td data-label="Artist">Taio Cruz</td>
               </tr>
-              <tr class="search-item" data-search="43 take a chance on me abba">
-                <td class="track-number" data-label="No.">43</td>
+              <tr class="search-item" data-search="47 take a chance on me abba">
+                <td class="track-number" data-label="No.">47</td>
                 <td data-label="Song"><strong>Take a Chance on Me</strong></td>
                 <td data-label="Artist">ABBA</td>
               </tr>
-              <tr class="search-item" data-search="44 dj got us fallin’ in love usher ft. pitbull">
-                <td class="track-number" data-label="No.">44</td>
+              <tr class="search-item" data-search="48 dj got us fallin’ in love usher ft. pitbull">
+                <td class="track-number" data-label="No.">48</td>
                 <td data-label="Song"><strong>DJ Got Us Fallin’ in Love</strong></td>
                 <td data-label="Artist">Usher ft. Pitbull</td>
               </tr>
-              <tr class="search-item" data-search="45 summer of ’69 bryan adams">
-                <td class="track-number" data-label="No.">45</td>
+              <tr class="search-item" data-search="49 summer of ’69 bryan adams">
+                <td class="track-number" data-label="No.">49</td>
                 <td data-label="Song"><strong>Summer of ’69</strong></td>
                 <td data-label="Artist">Bryan Adams</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">VII. Pop and funk lift, 5 songs</th></tr>
-              
-              <tr class="search-item" data-search="46 treasure bruno mars">
-                <td class="track-number" data-label="No.">46</td>
+              <tr class="search-item" data-search="50 treasure bruno mars">
+                <td class="track-number" data-label="No.">50</td>
                 <td data-label="Song"><strong>Treasure</strong></td>
                 <td data-label="Artist">Bruno Mars</td>
               </tr>
-              <tr class="search-item" data-search="47 poker face lady gaga">
-                <td class="track-number" data-label="No.">47</td>
+              <tr class="search-item" data-search="51 poker face lady gaga">
+                <td class="track-number" data-label="No.">51</td>
                 <td data-label="Song"><strong>Poker Face</strong></td>
                 <td data-label="Artist">Lady Gaga</td>
               </tr>
-              <tr class="search-item" data-search="48 wake me up before you go-go wham!">
-                <td class="track-number" data-label="No.">48</td>
+              <tr class="search-item" data-search="52 wake me up before you go-go wham!">
+                <td class="track-number" data-label="No.">52</td>
                 <td data-label="Song"><strong>Wake Me Up Before You Go-Go</strong></td>
                 <td data-label="Artist">Wham!</td>
               </tr>
-              <tr class="search-item" data-search="49 sexy and i know it lmfao">
-                <td class="track-number" data-label="No.">49</td>
-                <td data-label="Song"><strong>Sexy and I Know It</strong></td>
-                <td data-label="Artist">LMFAO</td>
-              </tr>
-              <tr class="search-item" data-search="50 gimme! gimme! gimme! abba">
-                <td class="track-number" data-label="No.">50</td>
+              <tr class="search-item" data-search="53 gimme! gimme! gimme! abba">
+                <td class="track-number" data-label="No.">53</td>
                 <td data-label="Song"><strong>Gimme! Gimme! Gimme!</strong></td>
                 <td data-label="Artist">ABBA</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">VIII. Pop singalong section, 6 songs</th></tr>
-              
-              <tr class="search-item" data-search="51 party in the u.s.a. miley cyrus">
-                <td class="track-number" data-label="No.">51</td>
+              <tr class="search-item" data-search="54 party in the u.s.a. miley cyrus">
+                <td class="track-number" data-label="No.">54</td>
                 <td data-label="Song"><strong>Party in the U.S.A.</strong></td>
                 <td data-label="Artist">Miley Cyrus</td>
               </tr>
-              <tr class="search-item" data-search="52 love story taylor swift">
-                <td class="track-number" data-label="No.">52</td>
+              <tr class="search-item" data-search="55 love story taylor swift">
+                <td class="track-number" data-label="No.">55</td>
                 <td data-label="Song"><strong>Love Story</strong></td>
                 <td data-label="Artist">Taylor Swift</td>
               </tr>
-              <tr class="search-item" data-search="53 tik tok kesha">
-                <td class="track-number" data-label="No.">53</td>
-                <td data-label="Song"><strong>TiK ToK</strong></td>
-                <td data-label="Artist">Kesha</td>
-              </tr>
-              <tr class="search-item" data-search="54 super trouper abba">
-                <td class="track-number" data-label="No.">54</td>
+              <tr class="search-item" data-search="56 super trouper meryl streep, julie walters &amp; christine baranski">
+                <td class="track-number" data-label="No.">56</td>
                 <td data-label="Song"><strong>Super Trouper</strong></td>
-                <td data-label="Artist">ABBA</td>
+                <td data-label="Artist">Meryl Streep, Julie Walters &amp; Christine Baranski</td>
               </tr>
-              <tr class="search-item" data-search="55 shake it off taylor swift">
-                <td class="track-number" data-label="No.">55</td>
+              <tr class="search-item" data-search="57 shake it off taylor swift">
+                <td class="track-number" data-label="No.">57</td>
                 <td data-label="Song"><strong>Shake It Off</strong></td>
                 <td data-label="Artist">Taylor Swift</td>
               </tr>
-              <tr class="search-item" data-search="56 locked out of heaven bruno mars">
-                <td class="track-number" data-label="No.">56</td>
+              <tr class="search-item" data-search="58 locked out of heaven bruno mars">
+                <td class="track-number" data-label="No.">58</td>
                 <td data-label="Song"><strong>Locked Out of Heaven</strong></td>
                 <td data-label="Artist">Bruno Mars</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading group-note"><th colspan="3">Note: Personal wedding moment. These four songs are especially meaningful to the couple.</th></tr>
-              
-              <tr class="search-item" data-search="57 jessica ray dylan">
-                <td class="track-number" data-label="No.">57</td>
-                <td data-label="Song"><strong>Jessica</strong></td>
-                <td data-label="Artist">Ray Dylan</td>
+              <tr class="search-item" data-search="59 honey, honey amanda seyfried, ashley lilley &amp; rachel mcdowall">
+                <td class="track-number" data-label="No.">59</td>
+                <td data-label="Song"><strong>Honey, Honey</strong></td>
+                <td data-label="Artist">Amanda Seyfried, Ashley Lilley &amp; Rachel McDowall</td>
               </tr>
-              <tr class="search-item" data-search="58 superhero eden">
-                <td class="track-number" data-label="No.">58</td>
+              <tr class="search-item" data-search="60 superhero eden">
+                <td class="track-number" data-label="No.">60</td>
                 <td data-label="Song"><strong>Superhero</strong></td>
                 <td data-label="Artist">Eden</td>
               </tr>
-              <tr class="search-item" data-search="59 marry you bruno mars">
-                <td class="track-number" data-label="No.">59</td>
+              <tr class="search-item" data-search="61 marry you bruno mars">
+                <td class="track-number" data-label="No.">61</td>
                 <td data-label="Song"><strong>Marry You</strong></td>
                 <td data-label="Artist">Bruno Mars</td>
               </tr>
-              <tr class="search-item" data-search="60 i don’t want to miss a thing aerosmith">
-                <td class="track-number" data-label="No.">60</td>
+              <tr class="search-item" data-search="62 i don’t want to miss a thing aerosmith">
+                <td class="track-number" data-label="No.">62</td>
                 <td data-label="Song"><strong>I Don’t Want to Miss a Thing</strong></td>
                 <td data-label="Artist">Aerosmith</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">X. Energy rebuild after slow reset, 5 songs</th></tr>
-              
-              <tr class="search-item" data-search="61 boom boom pow the black eyed peas">
-                <td class="track-number" data-label="No.">61</td>
-                <td data-label="Song"><strong>Boom Boom Pow</strong></td>
-                <td data-label="Artist">The Black Eyed Peas</td>
-              </tr>
-              <tr class="search-item" data-search="62 can’t feel my face the weeknd">
-                <td class="track-number" data-label="No.">62</td>
+              <tr class="search-item" data-search="63 can’t feel my face the weeknd">
+                <td class="track-number" data-label="No.">63</td>
                 <td data-label="Song"><strong>Can’t Feel My Face</strong></td>
                 <td data-label="Artist">The Weeknd</td>
               </tr>
-              <tr class="search-item" data-search="63 blinding lights the weeknd">
-                <td class="track-number" data-label="No.">63</td>
+              <tr class="search-item" data-search="64 blinding lights the weeknd">
+                <td class="track-number" data-label="No.">64</td>
                 <td data-label="Song"><strong>Blinding Lights</strong></td>
                 <td data-label="Artist">The Weeknd</td>
               </tr>
-              <tr class="search-item" data-search="64 le freak chic">
-                <td class="track-number" data-label="No.">64</td>
+              <tr class="search-item" data-search="65 le freak chic">
+                <td class="track-number" data-label="No.">65</td>
                 <td data-label="Song"><strong>Le Freak</strong></td>
                 <td data-label="Artist">Chic</td>
               </tr>
-              <tr class="search-item" data-search="65 rasputin boney m.">
-                <td class="track-number" data-label="No.">65</td>
+              <tr class="search-item" data-search="66 rasputin boney m.">
+                <td class="track-number" data-label="No.">66</td>
                 <td data-label="Song"><strong>Rasputin</strong></td>
                 <td data-label="Artist">Boney M.</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">XI. Modern pop section, 3 songs</th></tr>
-              
-              <tr class="search-item" data-search="66 espresso sabrina carpenter">
-                <td class="track-number" data-label="No.">66</td>
+              <tr class="search-item" data-search="67 espresso sabrina carpenter">
+                <td class="track-number" data-label="No.">67</td>
                 <td data-label="Song"><strong>Espresso</strong></td>
                 <td data-label="Artist">Sabrina Carpenter</td>
               </tr>
-              <tr class="search-item" data-search="67 moves like jagger maroon 5 ft. christina aguilera">
-                <td class="track-number" data-label="No.">67</td>
+              <tr class="search-item" data-search="68 moves like jagger maroon 5 ft. christina aguilera">
+                <td class="track-number" data-label="No.">68</td>
                 <td data-label="Song"><strong>Moves Like Jagger</strong></td>
                 <td data-label="Artist">Maroon 5 ft. Christina Aguilera</td>
               </tr>
-              <tr class="search-item" data-search="68 flowers miley cyrus">
-                <td class="track-number" data-label="No.">68</td>
+              <tr class="search-item" data-search="69 flowers miley cyrus">
+                <td class="track-number" data-label="No.">69</td>
                 <td data-label="Song"><strong>Flowers</strong></td>
                 <td data-label="Artist">Miley Cyrus</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">XII. 1995 crowd nostalgia, 7 songs</th></tr>
-              
-              <tr class="search-item" data-search="69 teenage dirtbag wheatus">
-                <td class="track-number" data-label="No.">69</td>
+              <tr class="search-item" data-search="70 teenage dirtbag wheatus">
+                <td class="track-number" data-label="No.">70</td>
                 <td data-label="Song"><strong>Teenage Dirtbag</strong></td>
                 <td data-label="Artist">Wheatus</td>
               </tr>
-              <tr class="search-item" data-search="70 year 3000 busted">
-                <td class="track-number" data-label="No.">70</td>
+              <tr class="search-item" data-search="71 year 3000 busted">
+                <td class="track-number" data-label="No.">71</td>
                 <td data-label="Song"><strong>Year 3000</strong></td>
                 <td data-label="Artist">Busted</td>
               </tr>
-              <tr class="search-item" data-search="71 cuff it beyoncé">
-                <td class="track-number" data-label="No.">71</td>
+              <tr class="search-item" data-search="72 cuff it beyoncé">
+                <td class="track-number" data-label="No.">72</td>
                 <td data-label="Song"><strong>CUFF IT</strong></td>
                 <td data-label="Artist">Beyoncé</td>
               </tr>
-              <tr class="search-item" data-search="72 funkytown lipps inc.">
-                <td class="track-number" data-label="No.">72</td>
+              <tr class="search-item" data-search="73 funkytown lipps inc.">
+                <td class="track-number" data-label="No.">73</td>
                 <td data-label="Song"><strong>Funkytown</strong></td>
                 <td data-label="Artist">Lipps Inc.</td>
               </tr>
-              <tr class="search-item" data-search="73 stacy’s mom fountains of wayne">
-                <td class="track-number" data-label="No.">73</td>
+              <tr class="search-item" data-search="74 stacy’s mom fountains of wayne">
+                <td class="track-number" data-label="No.">74</td>
                 <td data-label="Song"><strong>Stacy’s Mom</strong></td>
                 <td data-label="Artist">Fountains of Wayne</td>
               </tr>
-              <tr class="search-item" data-search="74 cake by the ocean dnce">
-                <td class="track-number" data-label="No.">74</td>
+              <tr class="search-item" data-search="75 cake by the ocean dnce">
+                <td class="track-number" data-label="No.">75</td>
                 <td data-label="Song"><strong>Cake by the Ocean</strong></td>
                 <td data-label="Artist">DNCE</td>
               </tr>
-              <tr class="search-item" data-search="75 sk8er boi avril lavigne">
-                <td class="track-number" data-label="No.">75</td>
+              <tr class="search-item" data-search="76 sk8er boi avril lavigne">
+                <td class="track-number" data-label="No.">76</td>
                 <td data-label="Song"><strong>Sk8er Boi</strong></td>
                 <td data-label="Artist">Avril Lavigne</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">XIII. Modern/party blend, 5 songs</th></tr>
-              
-              <tr class="search-item" data-search="76 24k magic bruno mars">
-                <td class="track-number" data-label="No.">76</td>
+              <tr class="search-item" data-search="77 irreplaceable beyoncé">
+                <td class="track-number" data-label="No.">77</td>
+                <td data-label="Song"><strong>Irreplaceable</strong></td>
+                <td data-label="Artist">Beyoncé</td>
+              </tr>
+              <tr class="search-item" data-search="78 no air jordin sparks &amp; chris brown">
+                <td class="track-number" data-label="No.">78</td>
+                <td data-label="Song"><strong>No Air</strong></td>
+                <td data-label="Artist">Jordin Sparks &amp; Chris Brown</td>
+              </tr>
+              <tr class="search-item" data-search="79 24k magic bruno mars">
+                <td class="track-number" data-label="No.">79</td>
                 <td data-label="Song"><strong>24K Magic</strong></td>
                 <td data-label="Artist">Bruno Mars</td>
               </tr>
-              <tr class="search-item" data-search="77 calm down rema &amp; selena gomez">
-                <td class="track-number" data-label="No.">77</td>
+              <tr class="search-item" data-search="80 calm down rema &amp; selena gomez">
+                <td class="track-number" data-label="No.">80</td>
                 <td data-label="Song"><strong>Calm Down</strong></td>
                 <td data-label="Artist">Rema &amp; Selena Gomez</td>
               </tr>
-              <tr class="search-item" data-search="78 water tyla">
-                <td class="track-number" data-label="No.">78</td>
+              <tr class="search-item" data-search="81 water tyla">
+                <td class="track-number" data-label="No.">81</td>
                 <td data-label="Song"><strong>Water</strong></td>
                 <td data-label="Artist">Tyla</td>
               </tr>
-              <tr class="search-item" data-search="79 all star smash mouth">
-                <td class="track-number" data-label="No.">79</td>
+              <tr class="search-item" data-search="82 all star smash mouth">
+                <td class="track-number" data-label="No.">82</td>
                 <td data-label="Song"><strong>All Star</strong></td>
                 <td data-label="Artist">Smash Mouth</td>
               </tr>
-              <tr class="search-item" data-search="80 watermelon sugar harry styles">
-                <td class="track-number" data-label="No.">80</td>
+              <tr class="search-item" data-search="83 watermelon sugar harry styles">
+                <td class="track-number" data-label="No.">83</td>
                 <td data-label="Song"><strong>Watermelon Sugar</strong></td>
                 <td data-label="Artist">Harry Styles</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">XIV. Late-night fun extras, 8 songs</th></tr>
-              
-              <tr class="search-item" data-search="81 girlfriend avril lavigne">
-                <td class="track-number" data-label="No.">81</td>
+              <tr class="search-item" data-search="84 girlfriend avril lavigne">
+                <td class="track-number" data-label="No.">84</td>
                 <td data-label="Song"><strong>Girlfriend</strong></td>
                 <td data-label="Artist">Avril Lavigne</td>
               </tr>
-              <tr class="search-item" data-search="82 texas hold ’em beyoncé">
-                <td class="track-number" data-label="No.">82</td>
+              <tr class="search-item" data-search="85 texas hold ’em beyoncé">
+                <td class="track-number" data-label="No.">85</td>
                 <td data-label="Song"><strong>Texas Hold ’Em</strong></td>
                 <td data-label="Artist">Beyoncé</td>
               </tr>
-              <tr class="search-item" data-search="83 pour some sugar on me def leppard">
-                <td class="track-number" data-label="No.">83</td>
+              <tr class="search-item" data-search="86 pour some sugar on me def leppard">
+                <td class="track-number" data-label="No.">86</td>
                 <td data-label="Song"><strong>Pour Some Sugar on Me</strong></td>
                 <td data-label="Artist">Def Leppard</td>
               </tr>
-              <tr class="search-item" data-search="84 single ladies beyoncé">
-                <td class="track-number" data-label="No.">84</td>
+              <tr class="search-item" data-search="87 single ladies beyoncé">
+                <td class="track-number" data-label="No.">87</td>
                 <td data-label="Song"><strong>Single Ladies</strong></td>
                 <td data-label="Artist">Beyoncé</td>
               </tr>
-              <tr class="search-item" data-search="85 raise your glass p!nk">
-                <td class="track-number" data-label="No.">85</td>
+              <tr class="search-item" data-search="88 raise your glass p!nk">
+                <td class="track-number" data-label="No.">88</td>
                 <td data-label="Song"><strong>Raise Your Glass</strong></td>
                 <td data-label="Artist">P!nk</td>
               </tr>
-              <tr class="search-item" data-search="86 take on me a-ha">
-                <td class="track-number" data-label="No.">86</td>
+              <tr class="search-item" data-search="89 take on me a-ha">
+                <td class="track-number" data-label="No.">89</td>
                 <td data-label="Song"><strong>Take On Me</strong></td>
                 <td data-label="Artist">a-ha</td>
               </tr>
-              <tr class="search-item" data-search="87 wannabe spice girls">
-                <td class="track-number" data-label="No.">87</td>
+              <tr class="search-item" data-search="90 wannabe spice girls">
+                <td class="track-number" data-label="No.">90</td>
                 <td data-label="Song"><strong>Wannabe</strong></td>
                 <td data-label="Artist">Spice Girls</td>
               </tr>
-              <tr class="search-item" data-search="88 we are never ever getting back together taylor swift">
-                <td class="track-number" data-label="No.">88</td>
+              <tr class="search-item" data-search="91 we are never ever getting back together taylor swift">
+                <td class="track-number" data-label="No.">91</td>
                 <td data-label="Song"><strong>We Are Never Ever Getting Back Together</strong></td>
                 <td data-label="Artist">Taylor Swift</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">XV. Playful theatre/novelty section, 6 songs</th></tr>
-              
-              <tr class="search-item" data-search="89 summer nights grease cast">
-                <td class="track-number" data-label="No.">89</td>
+              <tr class="search-item" data-search="92 summer nights grease cast">
+                <td class="track-number" data-label="No.">92</td>
                 <td data-label="Song"><strong>Summer Nights</strong></td>
                 <td data-label="Artist">Grease Cast</td>
               </tr>
-              <tr class="search-item" data-search="90 we’re all in this together high school musical cast">
-                <td class="track-number" data-label="No.">90</td>
-                <td data-label="Song"><strong>We’re All in This Together</strong></td>
-                <td data-label="Artist">High School Musical Cast</td>
-              </tr>
-              <tr class="search-item" data-search="91 mickey toni basil">
-                <td class="track-number" data-label="No.">91</td>
+              <tr class="search-item" data-search="93 mickey toni basil">
+                <td class="track-number" data-label="No.">93</td>
                 <td data-label="Song"><strong>Mickey</strong></td>
                 <td data-label="Artist">Toni Basil</td>
               </tr>
-              <tr class="search-item" data-search="92 breaking free high school musical cast">
-                <td class="track-number" data-label="No.">92</td>
+              <tr class="search-item" data-search="94 breaking free high school musical cast">
+                <td class="track-number" data-label="No.">94</td>
                 <td data-label="Song"><strong>Breaking Free</strong></td>
                 <td data-label="Artist">High School Musical Cast</td>
               </tr>
-              <tr class="search-item" data-search="93 the best of both worlds hannah montana">
-                <td class="track-number" data-label="No.">93</td>
+              <tr class="search-item" data-search="95 the best of both worlds hannah montana">
+                <td class="track-number" data-label="No.">95</td>
                 <td data-label="Song"><strong>The Best of Both Worlds</strong></td>
                 <td data-label="Artist">Hannah Montana</td>
               </tr>
-              <tr class="search-item" data-search="94 hakuna matata the lion king">
-                <td class="track-number" data-label="No.">94</td>
+              <tr class="search-item" data-search="96 hakuna matata the lion king">
+                <td class="track-number" data-label="No.">96</td>
                 <td data-label="Song"><strong>Hakuna Matata</strong></td>
                 <td data-label="Artist">The Lion King</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">XVI. Final classic/singalong wave, 11 songs</th></tr>
-              
-              <tr class="search-item" data-search="95 another one bites the dust queen">
-                <td class="track-number" data-label="No.">95</td>
+              <tr class="search-item" data-search="97 another one bites the dust queen">
+                <td class="track-number" data-label="No.">97</td>
                 <td data-label="Song"><strong>Another One Bites the Dust</strong></td>
                 <td data-label="Artist">Queen</td>
               </tr>
-              <tr class="search-item" data-search="96 oh, pretty woman roy orbison">
-                <td class="track-number" data-label="No.">96</td>
+              <tr class="search-item" data-search="98 oh, pretty woman roy orbison">
+                <td class="track-number" data-label="No.">98</td>
                 <td data-label="Song"><strong>Oh, Pretty Woman</strong></td>
                 <td data-label="Artist">Roy Orbison</td>
               </tr>
-              <tr class="search-item" data-search="97 twist and shout the beatles">
-                <td class="track-number" data-label="No.">97</td>
+              <tr class="search-item" data-search="99 twist and shout the beatles">
+                <td class="track-number" data-label="No.">99</td>
                 <td data-label="Song"><strong>Twist and Shout</strong></td>
                 <td data-label="Artist">The Beatles</td>
               </tr>
-              <tr class="search-item" data-search="98 don’t stop believin’ journey">
-                <td class="track-number" data-label="No.">98</td>
+              <tr class="search-item" data-search="100 don’t stop believin’ journey">
+                <td class="track-number" data-label="No.">100</td>
                 <td data-label="Song"><strong>Don’t Stop Believin’</strong></td>
                 <td data-label="Artist">Journey</td>
               </tr>
-              <tr class="search-item" data-search="99 somebody to love queen">
-                <td class="track-number" data-label="No.">99</td>
+              <tr class="search-item" data-search="101 somebody to love queen">
+                <td class="track-number" data-label="No.">101</td>
                 <td data-label="Song"><strong>Somebody to Love</strong></td>
                 <td data-label="Artist">Queen</td>
               </tr>
-              <tr class="search-item" data-search="100 stayin’ alive bee gees">
-                <td class="track-number" data-label="No.">100</td>
+              <tr class="search-item" data-search="102 stayin’ alive bee gees">
+                <td class="track-number" data-label="No.">102</td>
                 <td data-label="Song"><strong>Stayin’ Alive</strong></td>
                 <td data-label="Artist">Bee Gees</td>
               </tr>
-              <tr class="search-item" data-search="101 let’s dance david bowie">
-                <td class="track-number" data-label="No.">101</td>
+              <tr class="search-item" data-search="103 let’s dance david bowie">
+                <td class="track-number" data-label="No.">103</td>
                 <td data-label="Song"><strong>Let’s Dance</strong></td>
                 <td data-label="Artist">David Bowie</td>
               </tr>
-              <tr class="search-item" data-search="102 i will survive gloria gaynor">
-                <td class="track-number" data-label="No.">102</td>
+              <tr class="search-item" data-search="104 i will survive gloria gaynor">
+                <td class="track-number" data-label="No.">104</td>
                 <td data-label="Song"><strong>I Will Survive</strong></td>
                 <td data-label="Artist">Gloria Gaynor</td>
               </tr>
-              <tr class="search-item" data-search="103 dancing in the moonlight toploader">
-                <td class="track-number" data-label="No.">103</td>
+              <tr class="search-item" data-search="105 dancing in the moonlight toploader">
+                <td class="track-number" data-label="No.">105</td>
                 <td data-label="Song"><strong>Dancing in the Moonlight</strong></td>
                 <td data-label="Artist">Toploader</td>
               </tr>
-              <tr class="search-item" data-search="104 pretoria girls desmond and the tutus">
-                <td class="track-number" data-label="No.">104</td>
-                <td data-label="Song"><strong>Pretoria Girls</strong></td>
-                <td data-label="Artist">Desmond and the Tutus</td>
-              </tr>
-              <tr class="search-item" data-search="105 fergalicious fergie">
-                <td class="track-number" data-label="No.">105</td>
+              <tr class="search-item" data-search="106 fergalicious fergie">
+                <td class="track-number" data-label="No.">106</td>
                 <td data-label="Song"><strong>Fergalicious</strong></td>
                 <td data-label="Artist">Fergie</td>
               </tr>
-            </tbody>
-            <tbody class="dance-group">
-              <tr class="group-heading"><th colspan="3">XVII. End-of-night landing, 6 songs</th></tr>
-              
-              <tr class="search-item" data-search="106 last dance donna summer">
-                <td class="track-number" data-label="No.">106</td>
-                <td data-label="Song"><strong>Last Dance</strong></td>
-                <td data-label="Artist">Donna Summer</td>
-              </tr>
-              <tr class="search-item" data-search="107 angels robbie williams">
+              <tr class="search-item" data-search="107 milkshake kelis">
                 <td class="track-number" data-label="No.">107</td>
+                <td data-label="Song"><strong>Milkshake</strong></td>
+                <td data-label="Artist">Kelis</td>
+              </tr>
+              <tr class="search-item" data-search="108 umbrella rihanna">
+                <td class="track-number" data-label="No.">108</td>
+                <td data-label="Song"><strong>Umbrella</strong></td>
+                <td data-label="Artist">Rihanna</td>
+              </tr>
+              <tr class="search-item" data-search="109 does your mother know christine baranski &amp; philip michael">
+                <td class="track-number" data-label="No.">109</td>
+                <td data-label="Song"><strong>Does Your Mother Know</strong></td>
+                <td data-label="Artist">Christine Baranski &amp; Philip Michael</td>
+              </tr>
+              <tr class="search-item" data-search="110 mr. blue sky electric light orchestra">
+                <td class="track-number" data-label="No.">110</td>
+                <td data-label="Song"><strong>Mr. Blue Sky</strong></td>
+                <td data-label="Artist">Electric Light Orchestra</td>
+              </tr>
+              <tr class="search-item" data-search="111 uptown girl billy joel">
+                <td class="track-number" data-label="No.">111</td>
+                <td data-label="Song"><strong>Uptown Girl</strong></td>
+                <td data-label="Artist">Billy Joel</td>
+              </tr>
+              <tr class="search-item" data-search="112 i wanna dance with somebody (who loves me) whitney houston">
+                <td class="track-number" data-label="No.">112</td>
+                <td data-label="Song"><strong>I Wanna Dance with Somebody (Who Loves Me)</strong></td>
+                <td data-label="Artist">Whitney Houston</td>
+              </tr>
+              <tr class="search-item" data-search="113 sweet home alabama lynyrd skynyrd">
+                <td class="track-number" data-label="No.">113</td>
+                <td data-label="Song"><strong>Sweet Home Alabama</strong></td>
+                <td data-label="Artist">Lynyrd Skynyrd</td>
+              </tr>
+              <tr class="search-item" data-search="114 first cold war kids">
+                <td class="track-number" data-label="No.">114</td>
+                <td data-label="Song"><strong>First</strong></td>
+                <td data-label="Artist">Cold War Kids</td>
+              </tr>
+              <tr class="search-item" data-search="115 beautiful things benson boone">
+                <td class="track-number" data-label="No.">115</td>
+                <td data-label="Song"><strong>Beautiful Things</strong></td>
+                <td data-label="Artist">Benson Boone</td>
+              </tr>
+              <tr class="search-item" data-search="116 mystical magical benson boone">
+                <td class="track-number" data-label="No.">116</td>
+                <td data-label="Song"><strong>Mystical Magical</strong></td>
+                <td data-label="Artist">Benson Boone</td>
+              </tr>
+              <tr class="search-item" data-search="117 under pressure queen &amp; david bowie">
+                <td class="track-number" data-label="No.">117</td>
+                <td data-label="Song"><strong>Under Pressure</strong></td>
+                <td data-label="Artist">Queen &amp; David Bowie</td>
+              </tr>
+              <tr class="search-item" data-search="118 shivers ed sheeran">
+                <td class="track-number" data-label="No.">118</td>
+                <td data-label="Song"><strong>Shivers</strong></td>
+                <td data-label="Artist">Ed Sheeran</td>
+              </tr>
+              <tr class="search-item" data-search="119 colourful the parlotones">
+                <td class="track-number" data-label="No.">119</td>
+                <td data-label="Song"><strong>Colourful</strong></td>
+                <td data-label="Artist">The Parlotones</td>
+              </tr>
+              <tr class="search-item" data-search="120 stick season noah kahan">
+                <td class="track-number" data-label="No.">120</td>
+                <td data-label="Song"><strong>Stick Season</strong></td>
+                <td data-label="Artist">Noah Kahan</td>
+              </tr>
+              <tr class="search-item" data-search="121 hot n cold katy perry">
+                <td class="track-number" data-label="No.">121</td>
+                <td data-label="Song"><strong>Hot N Cold</strong></td>
+                <td data-label="Artist">Katy Perry</td>
+              </tr>
+              <tr class="search-item" data-search="122 crazy in love beyoncé feat. jay-z">
+                <td class="track-number" data-label="No.">122</td>
+                <td data-label="Song"><strong>Crazy in Love</strong></td>
+                <td data-label="Artist">Beyoncé feat. Jay-Z</td>
+              </tr>
+              <tr class="search-item" data-search="123 we are young fun. feat. janelle monáe">
+                <td class="track-number" data-label="No.">123</td>
+                <td data-label="Song"><strong>We Are Young</strong></td>
+                <td data-label="Artist">fun. feat. Janelle Monáe</td>
+              </tr>
+              <tr class="search-item" data-search="124 ordinary alex warren">
+                <td class="track-number" data-label="No.">124</td>
+                <td data-label="Song"><strong>Ordinary</strong></td>
+                <td data-label="Artist">Alex Warren</td>
+              </tr>
+              <tr class="search-item" data-search="125 sally, when the wine runs out role model">
+                <td class="track-number" data-label="No.">125</td>
+                <td data-label="Song"><strong>Sally, When the Wine Runs Out</strong></td>
+                <td data-label="Artist">Role Model</td>
+              </tr>
+              <tr class="search-item" data-search="126 forget you ceelo green">
+                <td class="track-number" data-label="No.">126</td>
+                <td data-label="Song"><strong>Forget You</strong></td>
+                <td data-label="Artist">CeeLo Green</td>
+              </tr>
+              <tr class="search-item" data-search="127 happy together the turtles">
+                <td class="track-number" data-label="No.">127</td>
+                <td data-label="Song"><strong>Happy Together</strong></td>
+                <td data-label="Artist">The Turtles</td>
+              </tr>
+              <tr class="search-item" data-search="128 titanium david guetta feat. sia">
+                <td class="track-number" data-label="No.">128</td>
+                <td data-label="Song"><strong>Titanium</strong></td>
+                <td data-label="Artist">David Guetta feat. Sia</td>
+              </tr>
+              <tr class="search-item" data-search="129 bikini weather shortstraw">
+                <td class="track-number" data-label="No.">129</td>
+                <td data-label="Song"><strong>Bikini Weather</strong></td>
+                <td data-label="Artist">Shortstraw</td>
+              </tr>
+              <tr class="search-item" data-search="130 angels robbie williams">
+                <td class="track-number" data-label="No.">130</td>
                 <td data-label="Song"><strong>Angels</strong></td>
                 <td data-label="Artist">Robbie Williams</td>
               </tr>
-              <tr class="search-item" data-search="108 iris goo goo dolls">
-                <td class="track-number" data-label="No.">108</td>
+              <tr class="search-item" data-search="131 iris goo goo dolls">
+                <td class="track-number" data-label="No.">131</td>
                 <td data-label="Song"><strong>Iris</strong></td>
                 <td data-label="Artist">Goo Goo Dolls</td>
               </tr>
-              <tr class="search-item" data-search="109 thinking out loud ed sheeran">
-                <td class="track-number" data-label="No.">109</td>
+              <tr class="search-item" data-search="132 thinking out loud ed sheeran">
+                <td class="track-number" data-label="No.">132</td>
                 <td data-label="Song"><strong>Thinking Out Loud</strong></td>
                 <td data-label="Artist">Ed Sheeran</td>
               </tr>
-              <tr class="search-item" data-search="110 home edith whiskers">
-                <td class="track-number" data-label="No.">110</td>
+              <tr class="search-item" data-search="133 home edith whiskers">
+                <td class="track-number" data-label="No.">133</td>
                 <td data-label="Song"><strong>Home</strong></td>
                 <td data-label="Artist">Edith Whiskers</td>
               </tr>
-              <tr class="search-item" data-search="111 closing time semisonic">
-                <td class="track-number" data-label="No.">111</td>
+              <tr class="search-item" data-search="134 closing time semisonic">
+                <td class="track-number" data-label="No.">134</td>
                 <td data-label="Song"><strong>Closing Time</strong></td>
                 <td data-label="Artist">Semisonic</td>
               </tr>
@@ -5763,6 +5992,9 @@
       const results = document.getElementById('results');
       const empty = document.getElementById('empty-state');
       const timeline = document.getElementById('timeline');
+      const keySongsTitle = document.getElementById('key-songs-title');
+      const keySongsDescription = document.getElementById('key-songs-description');
+      const keySongsCount = document.getElementById('key-songs-count');
       const sections = [...document.querySelectorAll('.playlist-section')];
       const buttons = [...document.querySelectorAll('.filter-btn')];
       let active = 'key-songs';
@@ -5772,12 +6004,14 @@
         let visibleTotal = 0;
 
         for (const section of sections) {
-          const categoryMatch = active === 'all' || section.dataset.section === active;
+          const ceremonyMode = active === 'ceremony';
+          const categoryMatch = active === 'all' || section.dataset.section === active || (ceremonyMode && section.dataset.section === 'key-songs');
           const items = [...section.querySelectorAll('.search-item')];
           let sectionVisible = 0;
 
           for (const item of items) {
-            const matches = categoryMatch && (!query || item.dataset.search.includes(query));
+            const ceremonyItem = Boolean(item.closest('.cue-group-ceremony, .cue-group-after-ceremony'));
+            const matches = categoryMatch && (!ceremonyMode || ceremonyItem) && (!query || item.dataset.search.includes(query));
             item.hidden = !matches;
             if (matches) sectionVisible += 1;
           }
@@ -5794,9 +6028,19 @@
           visibleTotal += sectionVisible;
         }
 
+        if (active === 'ceremony') {
+          keySongsTitle.textContent = 'Ceremony';
+          keySongsDescription.textContent = 'Aisle, ceremony ending and orchard cues.';
+          keySongsCount.textContent = '5 key cues';
+        } else {
+          keySongsTitle.textContent = 'Key Songs';
+          keySongsDescription.textContent = 'Ceremony, entrance, speech and dance cues.';
+          keySongsCount.textContent = '14 key cues';
+        }
+
         const label = query || active !== 'all'
           ? visibleTotal + ' ' + (visibleTotal === 1 ? 'match' : 'matches')
-          : 'Showing all 228 entries';
+          : 'Showing all 262 entries';
         results.textContent = label;
         empty.classList.toggle('visible', visibleTotal === 0);
         timeline.hidden = Boolean(query) || active !== 'all';
