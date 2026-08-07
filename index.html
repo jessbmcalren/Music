@@ -4404,10 +4404,26 @@
       }
       .timeline-phase li,
       .timeline-phase li:first-child {
+        display: block;
         padding: 16px;
         border-color: rgba(119, 118, 165, .13);
         background: rgba(255,255,255,.72);
       }
+      .timeline-item-heading {
+        display: grid;
+        grid-template-columns: 42px minmax(0, 1fr);
+        align-items: start;
+        gap: 14px;
+        margin-bottom: 14px;
+      }
+      .timeline-item-heading p { margin: 3px 0 0; }
+      .timeline-item-content {
+        min-width: 0;
+        padding-left: 56px;
+      }
+      .timeline-item-content > strong,
+      .timeline-item-content > span,
+      .timeline-item-content > small { display: block; }
       .timeline-phase small strong {
         display: inline;
         color: var(--g-ink);
@@ -4477,9 +4493,71 @@
       .timeline-phase-heading { display: block; }
       .timeline-location { margin-left: 48px; }
       .timeline-link { margin-top: 12px; }
-      .timeline-phase ol { grid-template-columns: 1fr; }
+      .timeline-phase ol {
+        grid-template-columns: 1fr;
+        gap: 12px;
+      }
+      .timeline-phase li,
+      .timeline-phase li:first-child {
+        padding: 20px;
+        border-radius: 18px;
+      }
+      .timeline-phase li.timeline-critical {
+        border-left-width: 1px;
+        border-top: 3px solid var(--g-rose);
+      }
+      .timeline-item-heading {
+        grid-template-columns: 32px minmax(0, 1fr);
+        gap: 12px;
+        margin-bottom: 16px;
+      }
+      .timeline-item-heading p { margin-top: 2px; line-height: 1.45; }
+      .timeline-item-content { padding-left: 0; }
+      .timeline-phase .timeline-number { font-size: 18px; line-height: 1.2; }
+      .timeline-phase .timeline-item-content > strong { font-size: 18px; line-height: 1.22; }
+      .timeline-phase .timeline-item-content > span { margin-top: 6px; font-size: 13px; }
+      .timeline-phase .timeline-item-content > small { margin-top: 12px; line-height: 1.6; }
+      .timeline-phase .timeline-time-label {
+        margin-bottom: 12px;
+        padding-bottom: 9px;
+        font-size: 14px;
+        letter-spacing: -.01em;
+        line-height: 1.25;
+      }
       .filters { gap: 8px; }
-      .cue-card:not(.is-critical) { padding: 24px; }
+      .cue-card,
+      .cue-card:nth-child(2n),
+      .cue-card:not(.is-critical),
+      .cue-card.is-critical {
+        padding: 20px;
+        border-radius: 20px;
+      }
+      .cue-top {
+        flex-direction: row;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 12px;
+      }
+      .cue-top .moment {
+        flex: 1 1 auto;
+        min-width: 0;
+        text-align: left;
+      }
+      .cue-card h3 {
+        margin-top: 28px;
+        font-size: 24px;
+        line-height: 1.12;
+      }
+      .cue-note {
+        margin-top: 20px;
+        padding-top: 16px;
+      }
+      .cue-card.is-critical .critical-cue { margin-top: 20px; }
+      .critical-cue { padding: 20px 0; }
+      .timed-cue {
+        margin-top: 20px;
+        padding: 18px 0;
+      }
       .cue-group-heading { margin-bottom: 16px; }
     }
 
@@ -4538,9 +4616,11 @@
         </div>
         <ol>
           <li>
-            <span class="timeline-number">01</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">01</span>
               <p>Guests arrive</p>
+            </div>
+            <div class="timeline-item-content">
 
               <strong>Pre-Ceremony playlist</strong>
               <span>Soft romantic music before the ceremony</span>
@@ -4559,9 +4639,11 @@
         </div>
         <ol>
           <li>
-            <span class="timeline-number">02</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">02</span>
               <p>Groomsmen walk down the aisle</p>
+            </div>
+            <div class="timeline-item-content">
 
               <strong>Live bagpipes</strong>
               <span>Matthew (bagpiper)</span>
@@ -4570,9 +4652,11 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">03</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">03</span>
               <p>Bridesmaids walk down the aisle</p>
+            </div>
+            <div class="timeline-item-content">
 
               <strong>We’ve Only Just Begun</strong>
               <span>The Carpenters</span>
@@ -4581,9 +4665,11 @@
             </div>
           </li>
           <li class="timeline-critical">
-            <span class="timeline-number">04</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">04</span>
               <p>Bride walks down the mountain aisle</p>
+            </div>
+            <div class="timeline-item-content">
               <em class="timeline-time-label timeline-critical-label">Start at approx. 0:42</em>
 
               <strong>Archie, Marry Me</strong>
@@ -4593,9 +4679,11 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">05</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">05</span>
               <p>Ceremony ends and everyone cheers</p>
+            </div>
+            <div class="timeline-item-content">
               <em class="timeline-time-label">Start at approx. 2:13</em>
 
               <strong>Lover</strong>
@@ -4605,9 +4693,11 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">06</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">06</span>
               <p>Orchard petal and confetti toss</p>
+            </div>
+            <div class="timeline-item-content">
 
               <strong>Live bagpipes</strong>
               <span>Matthew (bagpiper)</span>
@@ -4627,9 +4717,11 @@
         </div>
         <ol>
           <li>
-            <span class="timeline-number">07</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">07</span>
               <p>Bouquet ribbon ceremony</p>
+            </div>
+            <div class="timeline-item-content">
 
               <strong>Man! I Feel Like a Woman!</strong>
               <span>Shania Twain</span>
@@ -4649,9 +4741,11 @@
         </div>
         <ol>
           <li>
-            <span class="timeline-number">08</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">08</span>
               <p>Bridal party, groom and bride entrance</p>
+            </div>
+            <div class="timeline-item-content">
               <em class="timeline-time-label">Start at approx. 0:54</em>
 
               <strong>Gimme! Gimme! Gimme! (A Man After Midnight)</strong>
@@ -4661,9 +4755,11 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">09</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">09</span>
               <p>Dad’s speech entrance</p>
+            </div>
+            <div class="timeline-item-content">
               <em class="timeline-time-label">Start at approx. 2:20</em>
 
               <strong>The Best Day</strong>
@@ -4673,9 +4769,11 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">10</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">10</span>
               <p>Sister / maid of honour’s speech entrance</p>
+            </div>
+            <div class="timeline-item-content">
               <em class="timeline-time-label">Start at approx. 0:48</em>
 
               <strong>You’re My Best Friend</strong>
@@ -4685,9 +4783,11 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">11</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">11</span>
               <p>Groomsmen’s speech entrance</p>
+            </div>
+            <div class="timeline-item-content">
 
               <strong>Sister Bethina</strong>
               <span>Mgarimbe</span>
@@ -4696,9 +4796,11 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">12</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">12</span>
               <p>Groom’s speech entrance</p>
+            </div>
+            <div class="timeline-item-content">
               <em class="timeline-time-label">Start at approx. 0:34</em>
 
               <strong>Jessica</strong>
@@ -4719,9 +4821,11 @@
         </div>
         <ol>
           <li>
-            <span class="timeline-number">13</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">13</span>
               <p>Bride and groom first dance</p>
+            </div>
+            <div class="timeline-item-content">
 
               <strong>Wouldn’t It Be Nice</strong>
               <span>The Beach Boys</span>
@@ -4730,9 +4834,11 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">14</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">14</span>
               <p>Father and daughter dance</p>
+            </div>
+            <div class="timeline-item-content">
 
               <strong>(They Long to Be) Close to You</strong>
               <span>The Carpenters</span>
@@ -4741,9 +4847,11 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">15</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">15</span>
               <p>Dance floor opening, after the group photo</p>
+            </div>
+            <div class="timeline-item-content">
 
               <strong>Y.M.C.A.</strong>
               <span>Village People</span>
@@ -4752,9 +4860,11 @@
             </div>
           </li>
           <li>
-            <span class="timeline-number">16</span>
-            <div>
+            <div class="timeline-item-heading">
+              <span class="timeline-number">16</span>
               <p>Garter toss, later in the night</p>
+            </div>
+            <div class="timeline-item-content">
 
               <strong>You Sexy Thing</strong>
               <span>Hot Chocolate</span>
